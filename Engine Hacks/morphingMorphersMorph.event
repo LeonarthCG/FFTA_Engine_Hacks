@@ -1,0 +1,36 @@
+//This is an engine hack that makes morphers morph when morphing
+//In vanilla, morphers that morphed just waved their arms while sweating, for some reason
+//With this hacks morphers will morph when morphing: they will look like the monster they morphed into
+//Morphers will still use the same palette so player morphers will be blue or green monsters
+
+#define installMorphers 0
+
+PUSH; ORG $981F2; SHORT 0x46C0 0x2000; POP //remove the weird morphed status standing animation
+PUSH; ORG $975F2; SHORT 0x46C0; jumpToHack(checkIfMorphedSize); POP //change the size of the morpher's sprite if needed
+PUSH; ORG $C817C; jumpToHack(checkIfMorphed); POP //count as generic while morphed
+ALIGN 4
+checkIfMorphed: //if morphed units will be treated as generics
+#incbin "morphingMorphersMorph/checkIfMorphed.dmp"
+ALIGN 4
+checkIfMorphedSize: //get correct sprite size while morphed
+#incbin "morphingMorphersMorph/checkIfMorphedSize.dmp"
+POIN morphedTable
+ALIGN 4
+newGetAnimation: //when morphed units will look like monsters
+#incbin "morphingMorphersMorph/newGetAnimation.dmp"
+POIN morphedTable
+ALIGN 4
+newGetAnimationWater: //same but for water, since we are at it, we'll also return something if this is 0xFFFF
+#incbin "morphingMorphersMorph/newGetAnimationWater.dmp"
+POIN morphedTable
+ALIGN 4
+newGetMoving: //get the morphed movement style
+#incbin "morphingMorphersMorph/newGetMoving.dmp"
+POIN morphedTable
+ALIGN 4
+newGetStanding: //same but for standing
+#incbin "morphingMorphersMorph/newGetStanding.dmp"
+POIN morphedTable
+ALIGN 4
+morphedTable: //a table that determines which job to get the data from for each possible morph
+BYTE 0x2C 0x2E 0x31 0x33 0x36 0x38 0x3E 0x40 0x42

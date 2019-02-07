@@ -1,0 +1,118 @@
+#ifndef FreeSpace
+#define FreeSpace 0xA39920
+ORG FreeSpace
+#endif
+
+//#define fixSmall
+#define fixBig
+
+#ifndef dataOAMinstalled
+#define dataOAMinstalled 0
+#define square 0x0000
+#define rectangleH 0x4000
+#define rectangleV 0x8000
+#define flipH 0x1000
+#define flipV 0x2000
+#define flipVH 0x3000
+#define dataOAM(Y,X,Shape,Size,Tile) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14) 0|(Tile&0x3FF)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)"
+#endif
+
+#ifdef fixSmall
+	#include "llednar.event"
+	#include "doned.event"
+	#include "0x1d4.event"
+	#include "0x17a.event"
+	#include "0x10e.event"
+#endif
+
+#ifdef fixBig
+	#include "0x11fe.event"
+	#include "0x10fc.event"
+	#include "0x1046.event"
+	#include "0x1014.event"
+	#include "0xfe2.event"
+	#include "0xda6.event"
+	#include "0xd74.event"
+	#include "0xd42.event"
+	#include "0xd16.event"
+	#include "0xce4.event"
+	#include "0xcb2.event"
+	#include "0xc80.event"
+	#include "0xc4e.event"
+	#include "0xba4.event"
+	#include "0x944.event"
+	#include "0x918.event"
+	#include "0x8e6.event"
+	#include "0x8b4.event"
+	#include "0x84e.event"
+	#include "0x81c.event"
+	#include "0x7ea.event"
+	#include "0x7be.event"
+	#include "0x792.event"
+	#include "0x766.event"
+	#include "0x73a.event"
+	#include "0x70e.event"
+	#include "0x6e2.event"
+	#include "0x6b0.event"
+	#include "0x67e.event"
+	#include "0x652.event"
+#endif
+
+#ifndef animationSizeTable
+	#define animationSizeTable 0x391224
+#endif
+
+#ifdef fixSmall
+	#undef smallSize
+	#define smallSize 12
+#else
+	#undef smallSize
+	#define smallSize 16
+#endif
+
+#ifdef fixBig
+	#undef bigSize
+	#undef smallSize
+	#define bigSize 20
+	#define smallSize bigSize
+#else
+	#undef bigSize
+	#define bigSize 24
+#endif
+
+PUSH
+ORG $391224
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize bigSize bigSize bigSize bigSize bigSize bigSize
+SHORT bigSize bigSize bigSize bigSize bigSize bigSize bigSize bigSize
+SHORT bigSize bigSize bigSize bigSize bigSize bigSize bigSize bigSize
+SHORT bigSize bigSize bigSize bigSize bigSize bigSize bigSize bigSize
+SHORT bigSize bigSize bigSize bigSize bigSize bigSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize smallSize smallSize smallSize smallSize smallSize smallSize smallSize
+SHORT smallSize bigSize bigSize bigSize bigSize bigSize bigSize bigSize
+SHORT bigSize bigSize
+POP

@@ -1,0 +1,68 @@
+#ifndef FreeSpace
+	#define FreeSpace 0xA39920
+	ORG FreeSpace
+#endif
+
+PUSH
+//Make the undead revival counter happen for all units that are not exceptions
+ORG $09DC16; SHORT 0x2001 //Make the counter display
+ORG $09DBDE; SHORT 0x2001 //Make the counter display
+ORG $09DBA2; SHORT 0x2001 //Make the counter display
+ORG $09E7A8; SHORT 0x2001 //Make the counter tick down
+ORG $097458; SHORT 0x2001 //Make the counter tick down
+
+//Change the animation that plays
+ORG $09F154; jumpToHack(FFTdeath)
+ORG $09F570; jumpToHack(vanishFFTdeath)
+
+//Handle exception units (inanimate, bosses, judges and non-generics not controlled by the player)
+ORG $097454; jumpToHack(checkFFTdeath)
+ORG $09DC9C; jumpToHack(starsFFTdeath) //KO stars based on undead rise counter instead of being undead, but inanimate units don't get them
+
+//DEBUG
+//ORG $097460; SHORT 0x2101 //Countdown will be from 1
+//ORG $09F16A; SHORT 0x0000 //Units gain no hp
+//ORG $52D22B; BYTE 0x88 //Make the red goblin in the first mission undead
+//ORG $52D2EB; BYTE 0x88 //Make the fairy in the first mission undead
+//ORG $095A9A; SHORT 0x2000 //Avoid game getting stuck after animations
+
+//make it always game over, even for non-story missions
+ORG $122222; SHORT 0x2004; ORG $122240; SHORT 0x46C0; ORG $122258; SHORT 0x2001
+
+//remove judges
+ORG $CED86; SHORT 0x2000; ORG $BC7BE; SHORT 0x2000; ORG $BAC5A; SHORT 0x2000
+
+//always give game overs, even if it would normally be mission/battle failed
+ORG $9A8B1A; BYTE 0x19 0x21 0x1
+
+//remove vanilla jagd death
+ORG $123A1E; SHORT 0x46C0 0x46C0
+
+POP
+
+ALIGN 4
+FFTdeath:
+#incbin "FFTdeath.dmp"
+//MESSAGE currentoffset CHANCE OF UNDEAD POINTER
+WORD 50 //Chance for undead to NOT die when the timer ends
+
+ALIGN 4
+vanishFFTdeath:
+#incbin "vanishFFTdeath.dmp"
+
+ALIGN 4
+checkFFTdeath:
+#incbin "checkFFTdeath.dmp"
+POIN inanimateList
+
+ALIGN 4
+starsFFTdeath:
+#incbin "starsFFTdeath.dmp"
+POIN inanimateList
+
+ALIGN 4
+//MESSAGE currentoffset LIST OF INANIMATES
+inanimateList: //A list of jobs considered inanimate, which means they can't die
+BYTE 0x6D 0x6E 0x6F //(box, statue, sphere pedestal)
+BYTE 0x63 0x64 //(fire crystal totema, exodus fruit totema)
+BYTE 0x00 //terminator

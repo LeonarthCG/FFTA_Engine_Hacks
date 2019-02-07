@@ -1,0 +1,92 @@
+//This engine hack allows for manually sorting units in the party screen
+
+//User instructions:
+//when entering the party menu, a new icon will appear on the screen saying "Select: Manual Sorting"
+//press select while the cursor is on top of the unit you want to swap
+//the party will automatically be ordered according to number in ascending order
+//stars to both sides of the unit will indicate that it has been selected
+//if no stars show up this means the unit cannot be swapped (there are options for marche and montblanc being or not able to swap) 
+//move the cursor to the second unit and press select, if the unit can be swapped, they will be swapped
+//repeat until the party is ordered to your preference
+
+//if you are patching a modified rom, you will need to change this number
+//(unless FreeSpace has already been defined)
+#ifndef FreeSpace
+#define FreeSpace 0xA39920
+ORG FreeSpace
+#endif
+
+//these allow marche and montblanc to be swapped, it could cause bugs during normal play, it's untested
+//to forbid them from being swapped simply set them to 0
+#define marcheSwap 1
+#define montblancSwap 1
+
+#include "Extensions/Hack Installation.txt"
+
+//be warned, the bulk of this thing was written in a single day, there are barely any comments and the code is made of spaghetti and jello
+//it really was pretty much a 1 day job, leaving only polish (sounds mostly) for the second day
+	//about a week after that I went through this and patched up some bugs, made it a bit nicer
+
+ALIGN 4
+manualSortingTiles:
+#incext png2dmp "manualSorting/manualsorting.png"
+
+PUSH; ORG $736B2; SHORT 0xB408; jumpToHack(loadManualSortingTiles); POP //load the graphics, erase background to prevent errors
+ALIGN 4
+loadManualSortingTiles:
+#incbin "manualSorting/loadmanualsortingtiles.dmp"
+POIN manualSortingTiles
+
+PUSH; ORG $7472C; jumpToHack(drawManualSorting1); POP //draw the graphics to the screen when the bar changes positions and screen load
+ALIGN 4
+drawManualSorting1:
+#incbin "manualSorting/drawmanualsorting1.dmp"
+
+PUSH; ORG $72634; jumpToHack(drawManualSorting2); POP //draw the graphics to the screen (or erase them) when sorting method is changed and screen load
+ALIGN 4
+drawManualSorting2:
+#incbin "manualSorting/drawmanualsorting2.dmp"
+POIN starLocationsManualSorting
+
+PUSH; ORG $739B4; SHORT 0xB408 0x46C0; jumpToHack(eraseManualSorting); POP //erase the graphics when entering a different menu
+ALIGN 4
+eraseManualSorting:
+#incbin "manualSorting/erasemanualsorting.dmp"
+POIN starLocationsManualSorting
+
+PUSH; ORG $73C3E; SHORT 0xB408; jumpToHack(buttonManualSorting); POP //catch button pressed
+ALIGN 4
+buttonManualSorting:
+#incbin "manualSorting/buttonmanualsorting.dmp"
+POIN starLocationsManualSorting
+WORD marcheSwap
+WORD montblancSwap
+
+ALIGN 4
+//This is a list of the coords for the star on the left of each of the 24 unit numbers
+//The star on the right is calculated by simply adding to the one on the left
+starLocationsManualSorting:
+SHORT 0x000 0x00C 0x018 0x024
+SHORT 0x13A 0x146 0x152 0x15E
+SHORT 0x280 0x28C 0x298 0x2A4 
+SHORT 0x3BA 0x3C6 0x3D2 0x3DE
+SHORT 0x500 0x50C 0x518 0x524
+SHORT 0x63A 0x646 0x652 0x65E
+
+PUSH; ORG $73BAE; SHORT 0xB408; jumpToHack(RManualSorting); POP //clear selection when R is pressed
+ALIGN 4
+RManualSorting:
+#incbin "manualSorting/rmanualsorting.dmp"
+POIN starLocationsManualSorting
+
+PUSH; ORG $122630; jumpToHack(marchebug1); POP //make events not assume marche is the first character
+ALIGN 4
+marchebug1:
+#incbin "manualSorting/marchebug1.dmp"
+
+#ifndef genericSaveLevel
+	PUSH; ORG $13BB1C; jumpToHack(marchebug2); POP //when getting marche's level for saves, do not assume he is the first character
+	ALIGN 4
+	marchebug2:
+	#incbin "manualSorting/marchebug2.dmp"
+#endif

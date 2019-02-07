@@ -1,0 +1,16 @@
+PUSH; ORG 0x8c5350; WORD newExodusOam6-0x852E7C; POP
+
+ALIGN 4
+newExodusOam6:
+SHORT 6
+dataOAM(-32,-24,rectangleV,0,0)
+dataOAM(-32,-16,square,1,2)
+dataOAM(-32,0,square,1,6)
+dataOAM(-16,-24,rectangleV,0,10)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x1ac2c0+0x69B89C
+#incbin "sprites/exodus5.bin"
+POP

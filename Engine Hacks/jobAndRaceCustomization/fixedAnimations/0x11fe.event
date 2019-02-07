@@ -1,0 +1,23 @@
+PUSH; ORG $8c59e0; WORD newExodusOam2-0x852E7C; POP
+PUSH; ORG $8c5d50; WORD newExodusOam2-0x852E7C; POP
+
+ALIGN 4
+newExodusOam2:
+SHORT 12
+dataOAM(-40,-24,rectangleH,0,0)
+dataOAM(-40,0,rectangleH,0,2)
+dataOAM(-32,-16-8,rectangleH,0,4)
+dataOAM(-32,0-8,rectangleH,0,6)
+dataOAM(-24,-24,rectangleH,0,8)
+dataOAM(-24,-8,square,0,10)
+dataOAM(-24+1,8,square,0,11)
+dataOAM(-16,-16,rectangleH,0,12)
+dataOAM(-16,0,square,0,14)
+dataOAM(-8,-24,square,0,15)
+dataOAM(-8,-16,rectangleH,0,16)
+dataOAM(-8-3,0,rectangleH,0,18)
+
+PUSH
+ORG 0x1ae5c0+0x69B89C
+#incbin "sprites/exodus2.bin"
+POP

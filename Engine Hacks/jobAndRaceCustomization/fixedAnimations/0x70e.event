@@ -1,0 +1,101 @@
+PUSH; ORG 0x8b3d34; WORD newLamiaOam3-0x852E7C; POP
+PUSH; ORG 0x8b3888; WORD newLamiaOam3-0x852E7C; POP
+PUSH; ORG 0x8b389c; WORD newLamiaOam3-0x852E7C; POP
+
+PUSH; ORG 0x8e7ff4; WORD newLamiaOam4-0x852E7C; POP
+
+ALIGN 4
+newLamiaOam3:
+newLamiaOam4:
+SHORT 7
+dataOAM(-48,-16,square,1,0)
+dataOAM(-40,0,square,1,4)
+dataOAM(-32,-8,square,0,8)
+dataOAM(-24,-16+1,rectangleH,0,9)
+dataOAM(-24,0+1,square,0,11)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x1356a0+0x69B89C
+#incbin "sprites/lamia3.bin"
+ORG 0x1393a0+0x69B89C
+#incbin "sprites/lamia4.bin"
+POP
+
+PUSH; ORG 0x8ba58c; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba5a0; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba5b4; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba5dc; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba5f0; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba604; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba62c; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba640; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba654; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba960; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8ba9b0; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8baa00; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bada4; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8badf4; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bae44; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8baea8; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb180; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb1d0; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb220; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb30c; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb474; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb4c4; WORD newFloateyeOam8-0x852E7C; POP
+PUSH; ORG 0x8bb514; WORD newFloateyeOam8-0x852E7C; POP
+
+PUSH; ORG 0x8bb784; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8ba898; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bad18; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb0b8; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb3a4; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb528; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb53c; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb550; WORD newFloateyeOam9-0x852E7C; POP
+PUSH; ORG 0x8bb564; WORD newFloateyeOam9-0x852E7C; POP
+
+PUSH; ORG 0x8e9714; WORD newFloateyeOam10-0x852E7C; POP
+PUSH; ORG 0x8e9694; WORD newFloateyeOam10-0x852E7C; POP
+
+ALIGN 4
+newFloateyeOam8:
+newFloateyeOam9:
+newFloateyeOam10:
+SHORT 7
+dataOAM(-48,-16+3,rectangleH,0,0)
+dataOAM(-40,-16+3,rectangleH,0,2)
+dataOAM(-40,0+3,rectangleH,0,4)
+dataOAM(-32,-16+3,square,1,6)
+dataOAM(-32,0+3,square,1,10)
+dataOAM(-16,-16+3,square,1,14)
+dataOAM(-16,0+3,rectangleV,0,18)
+
+PUSH
+ORG 0x1608e0+0x69B89C
+#incbin "sprites/floateye8.bin"
+ORG 0x15f580+0x69B89C
+#incbin "sprites/floateye9.bin"
+ORG 0x163c40+0x69B89C
+#incbin "sprites/floateye10.bin"
+POP
+
+PUSH; ORG 0x8c4e58; WORD newUltimaOam3-0x852E7C; POP
+PUSH; ORG 0x8c4e6c; WORD newUltimaOam3-0x852E7C; POP
+
+ALIGN 4
+newUltimaOam3:
+SHORT 6
+dataOAM(-40-8,-16,rectangleH,0,0)
+dataOAM(-40-8,0,rectangleH,0,2)
+dataOAM(-32-8,-16,square,1,4)
+dataOAM(-32-8,0,square,1,8)
+dataOAM(-16-8,-16,square,1,12)
+dataOAM(-16-8,0,square,1,16)
+
+PUSH
+ORG 0x1aa620+0x69B89C
+#incbin "sprites/ultima3.bin"
+POP

@@ -1,0 +1,137 @@
+#include "Text Character Definitions.event"
+#include "Control Code Definitions.event"
+
+PUSH
+ORG $4979BC	//got exp popup
+BYTE 0x10 0x00
+_G _o _t space showexp space _E _X _P _slash _J _P _exclamation clearbox endstring
+BYTE 0x10 0x00
+POP
+
+newHelpTextBankEntrySpecial(0x650,0x2035610)
+newHelpTextBankEntry(0x651,notEnoughJP)
+
+ALIGN 4
+firstPartJP:
+SHORT 0x1828
+_L _e _a _r _n space _f _o _r space
+secondPartJP:
+space _J _P _questionmark newline choice2 _Y _e _s _slash endstring _N _o endstring endstring
+
+ALIGN 4
+notEnoughJP:
+SHORT 0x1828
+_Y _o _u space _d _o space _n _o _t space _h _a _v _e space _e _n _o _u _g _h newline
+_J _P space _t _o space _l _e _a _r _n space _t _h _i _s space _a _b _i _l _i _t _y _period waitbutton clearbox endstring
+
+#ifdef installMovementAbilities
+//change combo names and description
+PUSH; ORG $51BBBC; SHORT 0x701 0x701 0x01; BYTE 5 20 ;POP //soldier combo
+PUSH; ORG $51C02C; SHORT 0x701 0x701 0x01; BYTE 5 20 ;POP //warrior combo
+PUSH; ORG $51BC14; SHORT 0x702 0x702 0x02; BYTE 5 50 ;POP //paladin combo
+PUSH; ORG $51BC74; SHORT 0x703 0x703 0x03; BYTE 5 64 ;POP //fighter combo
+PUSH; ORG $51C07C; SHORT 0x704 0x704 0x04; BYTE 5 20 ;POP //dragoon combo
+PUSH; ORG $51C234; SHORT 0x705 0x705 0x05; BYTE 5 50 ;POP //templar combo
+PUSH; ORG $51C58C; SHORT 0x706 0x706 0x06; BYTE 5 64 ;POP //fencer combo
+PUSH; ORG $51C12C; SHORT 0x707 0x707 0x07; BYTE 5 64 ;POP //gladiator combo
+PUSH; ORG $51BD84; SHORT 0x708 0x708 0x08; BYTE 5 60 ;POP //black mage combo
+PUSH; ORG $51C294; SHORT 0x708 0x708 0x08; BYTE 5 60 ;POP //black mage combo
+PUSH; ORG $51C68C; SHORT 0x708 0x708 0x08; BYTE 5 60 ;POP //black mage combo
+PUSH; ORG $51BDE4; SHORT 0x709 0x709 0x09; BYTE 5 50 ;POP //white mage combo
+PUSH; ORG $51C2F4; SHORT 0x709 0x709 0x09; BYTE 5 50 ;POP //white mage combo
+PUSH; ORG $51CA44; SHORT 0x709 0x709 0x09; BYTE 5 50 ;POP //white mage combo
+
+newHelpTextBankEntry(0x701,move1desc)
+newHelpTextBankEntry(0x702,move2desc)
+newHelpTextBankEntry(0x703,move3desc)
+newHelpTextBankEntry(0x704,jump1desc)
+newHelpTextBankEntry(0x705,jump2desc)
+newHelpTextBankEntry(0x706,jump3desc)
+newHelpTextBankEntry(0x707,ignoreheightdesc)
+newHelpTextBankEntry(0x708,teleportdesc)
+newHelpTextBankEntry(0x709,levitatedesc)
+
+setOther(0x701,move1name)
+setOther(0x702,move2name)
+setOther(0x703,move3name)
+setOther(0x704,jump1name)
+setOther(0x705,jump2name)
+setOther(0x706,jump3name)
+setOther(0x707,ignoreheightname)
+setOther(0x708,teleportname)
+setOther(0x709,levitatename)
+
+move1name:
+_M _o _v _e space _plus _1 endstring
+
+move2name:
+_M _o _v _e space _plus _2 endstring
+
+move3name:
+_M _o _v _e space _plus _3 endstring
+
+jump1name:
+_J _u _m _p space _plus _1 endstring
+
+jump2name:
+_J _u _m _p space _plus _2 endstring
+
+jump3name:
+_J _u _m _p space _plus _3 endstring
+
+ignoreheightname:
+_I _g _n _o _r _e space _H _e _i _g _h _t endstring
+
+teleportname:
+_T _e _l _e _p  _o _r _t endstring
+
+levitatename:
+_L _e _v _i _t _a _t _e endstring
+
+ALIGN 4
+move1desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _m _o _v _e space _b _y space _1 _period waitbutton clearbox endstring
+
+ALIGN 4
+move2desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _m _o _v _e space _b _y space _2 _period waitbutton clearbox endstring
+
+ALIGN 4
+move3desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _m _o _v _e space _b _y space _3 _period waitbutton clearbox endstring
+
+ALIGN 4
+jump1desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _j _u _m _p space _b _y space _1 _period waitbutton clearbox endstring
+
+ALIGN 4
+jump2desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _j _u _m _p space _b _y space _2 _period waitbutton clearbox endstring
+
+ALIGN 4
+jump3desc:
+SHORT 0x1828
+_I _n _c _r _e _a _s _e _s space _j _u _m _p space _b _y space _3 _period waitbutton clearbox endstring
+
+ALIGN 4
+ignoreheightdesc:
+SHORT 0x1828
+_J _u _m _p space _t _o space _a _n _y space _h _e _i _g _h _t _comma space _i _g _n _o _r _i _n _g newline
+_j _u _m _p _i _n _g space _a _b _i _l _i _t _y _period waitbutton clearbox endstring
+
+ALIGN 4
+teleportdesc:
+SHORT 0x1828
+_I _n _s _t _a _n _t _l _y space _t _e _l _e _p _o _r _t space _t _o newline
+_t _h _e space _d _e _s _t _i _n _a _t _i _o _n _period waitbutton clearbox endstring
+
+ALIGN 4
+levitatedesc:
+SHORT 0x1828
+_L _e _v _i _t _a _t _e space _a _b _o _v _e space _t _h _e space _g _r _o _u _n _d _period waitbutton clearbox endstring
+#endif

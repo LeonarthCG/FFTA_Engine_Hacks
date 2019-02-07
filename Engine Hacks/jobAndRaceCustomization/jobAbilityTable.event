@@ -1,0 +1,173 @@
+//the structuer is Pointer list of abilities, Pointer extra unlock conditions, Pointer extra show conditions
+//if the ability list pointer is 0 then the regular vanilla list for the job will be used
+//the second pointer determines extra conditions for unlocking the job
+//the third pointer determines extra conditions to be able to see the job at all
+	//this is meant to be used for character exclusive jobs
+//the fourth pointer is the same as the third, but it only applies to job change
+	//this is meant to be used for jobs that can only be set as secondary command, such as magestorm and flair
+//neverShow is a routine that always returns false
+ALIGN 4
+newJobAbilityTable:
+/*0x00*/ POIN 0 neverShow neverShow neverShow
+/*0x01*/ POIN 0 neverShow neverShow neverShow
+/*0x02*/ POIN 0 0 0 0
+/*0x03*/ POIN 0 0 0 0
+/*0x04*/ POIN 0 0 0 0
+/*0x05*/ POIN 0 0 0 0
+/*0x06*/ POIN 0 0 0 0
+/*0x07*/ POIN 0 0 0 0
+/*0x08*/ POIN 0 0 0 0
+/*0x09*/ POIN 0 0 0 0
+/*0x0A*/ POIN 0 0 0 0
+/*0x0B*/ POIN 0 0 0 0
+/*0x0C*/ POIN 0 0 0 0
+/*0x0D*/ POIN 0 0 0 0
+/*0x0E*/ POIN 0 0 0 0
+/*0x0F*/ POIN 0 0 0 0
+/*0x10*/ POIN 0 0 0 0
+/*0x11*/ POIN 0 0 0 0
+/*0x12*/ POIN 0 0 0 0
+/*0x13*/ POIN 0 0 0 0
+/*0x14*/ POIN 0 0 0 0
+/*0x15*/ POIN 0 0 0 0
+/*0x16*/ POIN 0 0 0 0
+/*0x17*/ POIN 0 0 0 0
+/*0x18*/ POIN 0 0 0 0
+/*0x19*/ POIN 0 0 0 0
+/*0x1A*/ POIN 0 0 0 0
+/*0x1B*/ POIN 0 0 0 0
+/*0x1C*/ POIN 0 0 0 0
+/*0x1D*/ POIN 0 0 0 0
+#ifdef fixRedMages
+/*0x1E*/ POIN vieraRedMageAbilities 0 0 0
+#else
+/*0x1E*/ POIN 0 0 0 0
+#endif
+/*0x1F*/ POIN 0 0 0 0
+/*0x20*/ POIN 0 0 0 0
+/*0x21*/ POIN 0 0 0 0
+/*0x22*/ POIN 0 0 0 0
+/*0x23*/ POIN 0 0 0 0
+/*0x24*/ POIN 0 0 0 0
+/*0x25*/ POIN 0 0 0 0
+/*0x26*/ POIN 0 0 0 0
+/*0x27*/ POIN 0 0 0 0
+/*0x28*/ POIN 0 0 0 0
+/*0x29*/ POIN 0 0 0 0
+/*0x2A*/ POIN 0 0 0 0
+/*0x2B*/ POIN 0 0 0 0
+/*0x2C*/ POIN 0 neverShow neverShow neverShow
+/*0x2D*/ POIN 0 neverShow neverShow neverShow
+/*0x2E*/ POIN 0 neverShow neverShow neverShow
+/*0x2F*/ POIN 0 neverShow neverShow neverShow
+/*0x30*/ POIN 0 neverShow neverShow neverShow
+/*0x31*/ POIN 0 neverShow neverShow neverShow
+/*0x32*/ POIN 0 neverShow neverShow neverShow
+/*0x33*/ POIN 0 neverShow neverShow neverShow
+/*0x34*/ POIN 0 neverShow neverShow neverShow
+/*0x35*/ POIN 0 neverShow neverShow neverShow
+/*0x36*/ POIN 0 neverShow neverShow neverShow
+/*0x37*/ POIN 0 neverShow neverShow neverShow
+/*0x38*/ POIN 0 neverShow neverShow neverShow
+/*0x39*/ POIN 0 neverShow neverShow neverShow
+/*0x3A*/ POIN 0 neverShow neverShow neverShow
+/*0x3B*/ POIN 0 neverShow neverShow neverShow
+/*0x3C*/ POIN 0 neverShow neverShow neverShow
+/*0x3D*/ POIN 0 neverShow neverShow neverShow
+/*0x3E*/ POIN 0 neverShow neverShow neverShow
+/*0x3F*/ POIN 0 neverShow neverShow neverShow
+/*0x40*/ POIN 0 neverShow neverShow neverShow
+/*0x41*/ POIN 0 neverShow neverShow neverShow
+/*0x42*/ POIN 0 neverShow neverShow neverShow
+/*0x43*/ POIN 0 neverShow neverShow neverShow
+/*0x44*/ POIN 0 neverShow neverShow neverShow
+/*0x45*/ POIN 0 neverShow neverShow neverShow
+/*0x46*/ POIN 0 neverShow neverShow neverShow
+/*0x47*/ POIN 0 neverShow neverShow neverShow
+/*0x48*/ POIN 0 neverShow neverShow neverShow
+/*0x49*/ POIN 0 neverShow neverShow neverShow
+/*0x4A*/ POIN 0 neverShow neverShow neverShow
+/*0x4B*/ POIN 0 neverShow neverShow neverShow
+/*0x4C*/ POIN 0 neverShow neverShow neverShow
+/*0x4D*/ POIN 0 isEquippedOfficial isEquippedOfficial neverShow
+/*0x4E*/ POIN 0 neverShow neverShow neverShow
+/*0x4F*/ POIN 0 neverShow neverShow neverShow
+/*0x50*/ POIN 0 neverShow neverShow neverShow
+/*0x51*/ POIN 0 neverShow neverShow neverShow
+/*0x52*/ POIN 0 neverShow neverShow neverShow
+/*0x53*/ POIN 0 isBabus isBabus isBabus
+/*0x54*/ POIN 0 isEzel isEzel isEzel
+/*0x55*/ POIN 0 neverShow neverShow neverShow
+/*0x56*/ POIN 0 isLlednar isLlednar isLlednar
+/*0x57*/ POIN 0 isLlednar isLlednar neverShow
+/*0x58*/ POIN 0 isQueen isQueen isQueen
+/*0x59*/ POIN 0 isQueen isQueen neverShow
+/*0x5A*/ POIN 0 neverShow neverShow neverShow
+/*0x5B*/ POIN 0 neverShow neverShow neverShow
+/*0x5C*/ POIN 0 neverShow neverShow neverShow
+/*0x5D*/ POIN 0 neverShow neverShow neverShow
+/*0x5E*/ POIN 0 neverShow neverShow neverShow
+/*0x5F*/ POIN 0 neverShow neverShow neverShow
+/*0x60*/ POIN 0 neverShow neverShow neverShow
+/*0x61*/ POIN 0 neverShow neverShow neverShow
+/*0x62*/ POIN 0 neverShow neverShow neverShow
+/*0x63*/ POIN 0 neverShow neverShow neverShow
+/*0x64*/ POIN 0 neverShow neverShow neverShow
+/*0x65*/ POIN 0 neverShow neverShow neverShow
+/*0x66*/ POIN 0 isEquippedMagestorm isEquippedMagestorm neverShow
+/*0x67*/ POIN 0 neverShow neverShow neverShow
+/*0x68*/ POIN 0 neverShow neverShow neverShow
+/*0x69*/ POIN 0 neverShow neverShow neverShow
+/*0x6A*/ POIN 0 neverShow neverShow neverShow
+/*0x6B*/ POIN 0 neverShow neverShow neverShow
+/*0x6C*/ POIN 0 neverShow neverShow neverShow
+/*0x6D*/ POIN 0 neverShow neverShow neverShow
+/*0x6E*/ POIN 0 neverShow neverShow neverShow
+/*0x6F*/ POIN 0 neverShow neverShow neverShow
+/*0x70*/ POIN 0 neverShow neverShow neverShow
+/*0x71*/ POIN 0 neverShow neverShow neverShow
+/*0x72*/ POIN 0 neverShow neverShow neverShow
+/*0x73*/ POIN 0 IsCid IsCid IsCid
+
+#define isCharacter(characterID) "SHORT 0x7900 (0x2800+characterID) 0xD001 0x2000 0x4770 0x2001 0x4770"
+#define isEquipped(jobID) "SHORT 0x79C1 (0x2900+jobID) 0xD004 0x7A01 (0x2900+jobID) 0xD001 0x2000 0x4770 0x2001 0x4770"
+
+ALIGN 4
+neverShow:
+SHORT 0x2000 0x4770 //this is meant for monsters, to prevent them from changing jobs
+
+ALIGN 4
+isBabus:
+isCharacter(0x09)
+
+ALIGN 4
+isEzel:
+isCharacter(0x0A)
+
+ALIGN 4
+IsCid:
+isCharacter(0x5E)
+
+ALIGN 4
+isLlednar:
+isCharacter(0xD)
+
+ALIGN 4
+isQueen:
+isCharacter(0xE)
+
+ALIGN 4
+isEquippedOfficial:
+isEquipped(0x4D)
+
+ALIGN 4
+isEquippedMagestorm:
+isEquipped(0x66)
+
+
+#ifdef fixRedMages
+PUSH; ORG $52051F; BYTE 0x21; POP //make fleuret teach a different id for cure (the same as for white mage)
+
+vieraRedMageAbilities:
+BYTE 0x16 0x17 0x18 0x19 0x21 0x1B 0x1C 0x1D 0x1E 0x1F 0x20 0 //replace the red mage cure with the white mage cure
+#endif

@@ -1,0 +1,91 @@
+//graphics for the job icons
+
+ALIGN 4
+monsterIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/monster.png"
+
+ALIGN 4
+undeadIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/undead.png"
+
+ALIGN 4
+expertIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/expert.png"
+
+ALIGN 4
+officialIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/official.png"
+
+ALIGN 4
+runeseekerIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/runeseeker.png"
+
+ALIGN 4
+hermeticIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/hermetic.png"
+
+ALIGN 4
+biskmatarIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/biskmatar.png"
+
+ALIGN 4
+darkmagicIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/darkmagic.png"
+
+ALIGN 4
+flairIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/flair.png"
+
+ALIGN 4
+ligrimIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/ligrim.png"
+
+ALIGN 4
+genesisIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/genesis.png"
+
+ALIGN 4
+wiccaIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/wicca.png"
+
+ALIGN 4
+totemaIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/totema.png"
+
+ALIGN 4
+expulseIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/expulse.png"
+
+ALIGN 4
+magestormIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/magestorm.png"
+
+ALIGN 4
+battlequeenIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/battlequeen.png"
+
+ALIGN 4
+judgeIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/judge.png"
+
+ALIGN 4
+judgemasterIcon:
+SHORT 0xFFFF 64
+#incext png2dmp "icon/judgemaster.png"

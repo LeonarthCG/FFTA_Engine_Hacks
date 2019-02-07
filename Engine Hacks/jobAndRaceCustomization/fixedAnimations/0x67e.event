@@ -1,0 +1,88 @@
+PUSH; ORG 0x8b27fc; WORD newDragonOam1-0x852E7C; POP
+PUSH; ORG 0x8b2810; WORD newDragonOam1-0x852E7C; POP
+PUSH; ORG 0x8b2824; WORD newDragonOam1-0x852E7C; POP
+PUSH; ORG 0x8b2a8c; WORD newDragonOam1-0x852E7C; POP
+PUSH; ORG 0x8b2aa0; WORD newDragonOam1-0x852E7C; POP
+
+ALIGN 4
+newDragonOam1:
+SHORT 8
+dataOAM(-40-1,-8-2,rectangleH,0,0)
+dataOAM(-40-1,8-2,square,0,2)
+dataOAM(-32-1,-16-2,square,1,3)
+dataOAM(-32-1,0-2,square,1,7)
+dataOAM(-24-1,-24-2,square,0,11)
+dataOAM(-16-1,-24-2,rectangleH,0,12)
+dataOAM(-16-1,-8-2,rectangleV,0,14)
+dataOAM(-16-1,0-2,square,1,16)
+
+PUSH
+ORG 0x12db20+0x69B89C
+#incbin "sprites/dragon1.bin"
+POP
+
+PUSH; ORG 0x8b878c; WORD newPantherOam3-0x852E7C; POP
+PUSH; ORG 0x8b87a0; WORD newPantherOam3-0x852E7C; POP
+PUSH; ORG 0x8b87b4; WORD newPantherOam3-0x852E7C; POP
+PUSH; ORG 0x8b87f0; WORD newPantherOam3-0x852E7C; POP
+PUSH; ORG 0x8b8804; WORD newPantherOam3-0x852E7C; POP
+PUSH; ORG 0x8b8818; WORD newPantherOam3-0x852E7C; POP
+
+ALIGN 4
+newPantherOam3:
+SHORT 7
+dataOAM(-40,8,square,0,0)
+dataOAM(-32,-24,square,1,1)
+dataOAM(-32,-8,square,1,5)
+dataOAM(-32,8,rectangleV,0,9)
+dataOAM(-16,-24,square,0,11)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x1541e0+0x69B89C
+#incbin "sprites/panther3.bin"
+POP
+
+PUSH; ORG 0x8b9470; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9484; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9498; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9acc; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9ae0; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9af4; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9b08; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9d68; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9d7c; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9d90; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9de0; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9df4; WORD newMalboroOam1-0x852E7C; POP
+PUSH; ORG 0x8b9e08; WORD newMalboroOam1-0x852E7C; POP
+
+ALIGN 4
+newMalboroOam1:
+SHORT 6
+dataOAM(-40,-16-2,rectangleH,0,0)
+dataOAM(-40,0-2,rectangleH,0,2)
+dataOAM(-32,-16-2,square,1,4)
+dataOAM(-32,0-2,square,1,8)
+dataOAM(-16,-16-2,square,1,12)
+dataOAM(-16,0-2,square,1,16)
+
+PUSH
+ORG 0x15a900+0x69B89C
+#incbin "sprites/malboro1.bin"
+POP
+
+PUSH
+ORG 0x67e+0x852E7C
+SHORT 6
+dataOAM(-40,-16-8,rectangleH,0,0)
+dataOAM(-40,0-8,rectangleH,0,2)
+dataOAM(-32,-16-8,square,1,4)
+dataOAM(-32,0-8,square,1,8)
+dataOAM(-16,-16-8,square,1,12)
+dataOAM(-16,0-8,square,1,16)
+
+ORG 0x1685c0+0x69B89C
+#incbin "sprites/zombie2.bin"
+POP

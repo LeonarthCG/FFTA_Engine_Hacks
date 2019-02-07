@@ -1,0 +1,203 @@
+/////////////////////////////////////////////////////////
+//                                                     //
+//               Master Hack Installer                 //
+//                                                     //
+/////////////////////////////////////////////////////////
+
+#include "Extensions/Hack Installation.txt"
+
+////////////////////////////////FIXES & CHANGES
+
+PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
+
+#ifdef quickStart
+PUSH; ORG $43E28; SHORT 0x46C0 0x2001; POP //start with clan option
+PUSH; ORG $97A0; jumpToHack(quickStartFlags); POP //set some flags so the game works properly
+PUSH; ORG $9A5E4C; WORD quickStartEvent-0x9A5E4C; POP //change the events
+ALIGN 4
+quickStartFlags:
+#incbin "ASM/quickStartFlags.dmp"
+quickStartEvent:
+BYTE 0x53 0x01 0x00 0x0C 0x00 0x48 0x01 0x4E 0x20 0x0F 0x53 0x00 0x01 0x4B 0x16 0x4D
+BYTE 0x64 0x01 0x00 0x01 0x47 0x98 0x00 0x00 0x00 0x01 0x00 0x06 0x13 0x3C 0x64
+BYTE 0x18 0x0A 0x18 0x0B 0x06 0x31 0x3C 0x00 0x17 0x05
+#endif
+
+PUSH; ORG $41E; SHORT 0xD104 0xDF02 0xE7F9; POP //replace busy loop with Halt syscall by endrift
+
+PUSH; ORG $51BA50; BYTE 2; POP //change default color mode to TV
+
+#ifdef noMovementUndoing
+PUSH; ORG $93EAE; SHORT 0x2000; POP  //make it impossible to undo movements, might improve it in the future by letting the player undo movements if nothing happened (no healing ability etc), I guess it can be a status bit or similar?? that equals unable to undo movement
+PUSH; ORG $925AA; SHORT 0x2001 0x46C0; POP  //make it so units always need to confirm their movement (choose a facing direction), even if it isn't the end of their turn
+PUSH; ORG $95664; SHORT 0x46C0 0x46C0; ORG $9566C; SHORT 0x46C0 0x46C0; POP //makes wait (and confirmation) not set some flags we need intact, which are going to be unset anyway on the same frame
+PUSH; ORG $95650; jumpToHack(checkIfWait1); POP //here we check if the turn should end or not, also set flags only when we want to
+PUSH; ORG $9300C; jumpToHack(checkIfWait2); POP //this checks if it was a confirmation or not thanks to the check before
+PUSH; ORG $925B4; jumpToHack(checkIfWait3); POP //turn only ends if both movement and action have been made, also sets a flag to solve a portrait bug
+PUSH; ORG $9560C; jumpToHack(checkIfWait4); POP //check for the portrait flag so the portrait animation happens if it was confirmation
+PUSH; ORG $968CE; SHORT 0x46C0; jumpToHack(checkIfWait5); POP //set movement to 0xFF when we need to confirm
+PUSH; ORG $9633E; SHORT 0x46C0; jumpToHack(checkIfWait6); POP //unset the previous thing if we cancel out
+ALIGN 4
+checkIfWait1:
+#incbin "ASM/checkifwait1.dmp"
+ALIGN 4
+checkIfWait2:
+#incbin "ASM/checkifwait2.dmp"
+ALIGN 4
+checkIfWait3:
+#incbin "ASM/checkifwait3.dmp"
+ALIGN 4
+checkIfWait4:
+#incbin "ASM/checkifwait4.dmp"
+ALIGN 4
+checkIfWait5:
+#incbin "ASM/checkifwait5.dmp"
+ALIGN 4
+checkIfWait6:
+#incbin "ASM/checkifwait6.dmp"
+#endif
+
+#ifdef noJudges
+PUSH; ORG $CED86; SHORT 0x2000; ORG $BC7BE; SHORT 0x2000; ORG $BAC5A; SHORT 0x2000; POP //default judges = none for all maps
+PUSH; ORG $27C50; jumpToHack(noLawFlee); POP //allow retreat on maps that originally had judges
+
+PUSH; ORG $757AE; SHORT 0x46C0 0x46C0; ORG $757CC; SHORT 0x46C0 0x46C0; POP //don't draw yellow or red card ammount on status menu
+PUSH; ORG $7548A; SHORT 0x46C0 0x46C0; ORG $754A4; SHORT 0x46C0 0x46C0; ORG $754BE; SHORT 0x46C0 0x46C0; ORG $754D8; SHORT 0x46C0 0x46C0; POP //and don't draw the cards
+
+PUSH; ORG $3287E; SHORT 0xE008; POP //remove overworld Law button functionality
+PUSH; ORG $31408; jumpToHack(noLawGraphicsOverworld); POP //remove overworld Law button graphics
+PUSH; ORG $1343C8; SHORT 0x2000 0x4770; POP //make laws not work
+PUSH; ORG $27BDA; SHORT 0x2100; POP //law/law cards option never works
+
+ALIGN 4
+noLawFlee:
+#incbin "ASM/noLawFlee.dmp"
+
+ALIGN 4
+noLawGraphicsOverworld:
+#incbin "ASM/noLawGraphicsOverworld.dmp"
+#endif
+
+//allow shoes to be stolen with steal: accessory
+#ifdef stealShoes
+PUSH; ORG $12D540; SHORT 0x2203; POP //3 types of items to steal
+PUSH; ORG $12D548; POIN StealAccessoryList; POP
+StealAccessoryList:
+SHORT 0x1D 0x1C 0x1B
+PUSH; ORG $133038
+#incbin "ASM/stealshoes.dmp"
+POP
+#endif
+
+#ifdef installMorphingMorphersMorph
+	#include "morphingMorphersMorph.event" //makes morphers change aspect after morphing
+#endif
+
+#include "jobAndRaceCustomization.event" //many changes to how jobs, races and ability mastering work
+
+#ifdef installJPLearn
+	#include "jpLearn.event" //removes all original functionality of jp and makes it be used to purchase abilities instead
+#endif
+
+#include "newAbilities.event" //installs a loop that modifies job base stats and other things, allowing for some new abilities and morphing morphers
+
+#ifdef installManualSorting
+	#include "manualSorting.event" //allows for units to be swapped around for custom party orders
+#endif
+
+#ifdef noStatVariance
+	#include "newLevelUp.event" //makes units always spawn with the same stats
+#endif
+
+#ifdef installFFTDeath
+	#include "Ironman/FFT Death.event"
+#endif
+
+#ifdef installIronman
+	#include "Ironman/Ironman.event"
+#endif
+
+////////////////////////////////TEXT CHANGES
+
+ALIGN 4
+PUSH; ORG $13EA2; SHORT 0xB408; jumpToHack(customTextLoop); POP //makes the game read pointers instead of shorts
+customTextLoop:
+#incbin "ASM\customTextLoop.dmp"
+POIN CustomTextTableFunctions
+CustomTextTableFunctions:
+POIN customHelpTextBankLoader
+POIN 0 //terminator
+
+#include "customHelpTextBank.event" //makes it possible to add new help text ids
+
+#include "customOthers.event" //repoint the others table to allow for more ability command, menu options, etc entries
+
+////////////////////////////////GRAPHIC CHANGES
+
+PUSH; ORG $588C; jumpToHack(uncompressedLength); POP //correctly load the size of uncompressed images
+ALIGN 4
+uncompressedLength:
+#incbin "ASM\uncompressedlength.dmp"
+
+PUSH; ORG $5448; jumpToHack(uncompressedLoader); POP //make the game able to load uncompressed portraits and other stuff
+ALIGN 4
+uncompressedLoader:
+#incbin "ASM\uncompressedloader.dmp"
+
+#ifdef install1bitAbilities
+#inctext PFinder "../FFTA_clean.gba" 0x83AD5F8 newJP
+
+ALIGN 4
+newJP:
+SHORT 0xFFFF 792
+#incext png2dmp "Images/jpreward1.png"
+
+#inctext PFinder "../FFTA_clean.gba" 0x83B4214 newMenu
+PUSH; ORG $6EAB4; POIN 0x83B4214; POP
+
+ALIGN 4
+newMenu:
+SHORT 0xFFFF 1600
+#incext png2dmp "Images\menumove1.png"
+
+ALIGN 4
+JPIconShop:
+#incext png2dmp "Images\JPIconShop.png"
+#endif
+
+ALIGN 4
+movementButton:
+BYTE 0xFF
+#incext png2dmp "Images\movementButton1.png"
+BYTE 0xFF
+#incext png2dmp "Images\movementButton2.png"
+BYTE 0xFF
+#incext png2dmp "Images\movementButton3.png"
+
+ALIGN 4
+movementButtonShop:
+#incext png2dmp "Images\movementButton4.png"
+
+PUSH; ORG $6E96C; jumpToHack(movementButtonShopLoad); POP //load the movement button for the shop
+
+ALIGN 4
+movementButtonShopLoad:
+#incbin "ASM\movementbuttonshopload.dmp"
+POIN movementButtonShop
+#ifdef install1bitAbilities
+POIN JPIconShop
+#else
+WORD 0
+#endif
+
+PUSH; ORG $539E; SHORT 0xB408; jumpToHack(loadAbilityButtons); POP //load whatever palette we want for portraits
+ALIGN 4
+loadAbilityButtons:
+#incbin "ASM/loadAbilityButtons.dmp"
+WORD 0
+POIN AbilityButtons //a pointer to a table that has the location of the little button things that show on the side in the learnt abilities tab
+AbilityButtons:
+POIN $3C575C //action
+POIN $3C589F //reaction
+POIN $3C59E2 //support
+POIN movementButton //$3C5B25 //combo

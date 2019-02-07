@@ -1,0 +1,77 @@
+//change data about unused jobs
+#ifndef jobTable 
+	#define jobTable 0x521A14
+#endif
+#ifndef removeUnusedFF
+	#define removeUnusedFF(jobID) "PUSH; ORG jobTable+(jobID*0x34)+5; BYTE 0; POP"
+#endif
+removeUnusedFF(0x50)
+removeUnusedFF(0x51)
+removeUnusedFF(0x52)
+removeUnusedFF(0x55)
+
+//prepare loop routine
+PUSH; ORG $C857C; SHORT 0xB500; POP
+PUSH; ORG $C8A1E; SHORT 0x46C0; POP
+PUSH; ORG $C8570; SHORT 0x46C0 0xB408; jumpToHack(jobDataRoutinesLoop); POP //a loop to load routines that modify stats
+
+ALIGN 4
+jobDataRoutinesLoop:
+#incbin "Abilities\jobdataroutines.dmp"
+POIN jobDataRoutines
+jobDataRoutines:
+#ifdef installMorphers
+	POIN newGetAnimation
+	POIN newGetAnimationWater
+	POIN newGetMoving
+	POIN newGetStanding
+#endif
+#ifdef installMovementAbilities
+	POIN abilityMovePlusOneRoutine
+	POIN abilityMovePlusTwoRoutine
+	POIN abilityMovePlusThreeRoutine
+	POIN abilityJumpPlusOneRoutine
+	POIN abilityJumpPlusTwoRoutine
+	POIN abilityJumpPlusThreeRoutine
+	POIN abilityTeleportRoutine
+	POIN abilityLevitateRoutine
+#endif
+WORD 0	//terminator
+
+#ifdef installMovementAbilities
+	PUSH; ORG $CA304; jumpToHack(abilityIgnoreHeightRoutine); POP
+#endif
+
+#ifdef installMovementAbilities
+	ALIGN 4
+	abilityMovePlusOneRoutine:
+	#incbin	"Abilities\moveplusone.dmp"
+	ALIGN 4
+	abilityMovePlusTwoRoutine:
+	#incbin	"Abilities\moveplustwo.dmp"
+	ALIGN 4
+	abilityMovePlusThreeRoutine:
+	#incbin	"Abilities\moveplusthree.dmp"
+	
+	ALIGN 4
+	abilityJumpPlusOneRoutine:
+	#incbin	"Abilities\jumpplusone.dmp"
+	ALIGN 4
+	abilityJumpPlusTwoRoutine:
+	#incbin	"Abilities\jumpplustwo.dmp"
+	ALIGN 4
+	abilityJumpPlusThreeRoutine:
+	#incbin	"Abilities\jumpplusthree.dmp"
+	
+	ALIGN 4
+	abilityIgnoreHeightRoutine:
+	#incbin	"Abilities\ignoreheight.dmp"
+	
+	ALIGN 4
+	abilityTeleportRoutine:
+	#incbin	"Abilities\teleport.dmp"
+	
+	ALIGN 4
+	abilityLevitateRoutine:
+	#incbin	"Abilities\levitate.dmp"
+#endif

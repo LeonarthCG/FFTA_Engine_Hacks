@@ -1,0 +1,17 @@
+//comment this out if you don't want to use the new can equip menu
+//the new menu has a page for each race, which you can swap between with L and R
+//it also only shows jobs that have been unlocked
+	//I just think it's a nice change
+	//it will also hide character specific jobs until unlocked which I think makes a lot of sense
+//each page can have up to 42 icons, I have no plans on increasing that
+#define newCanEquipDisplay 0
+
+//this changes red mage's cure to be the same index as white mage's
+//it changes the index of fleuret's cure too
+#define fixRedMages 0
+
+//this changes undead monster icons from Monster to Undead, as well as Expert icons to a specific different one for each expert job
+#define newUndeadAndExpertIcons 0
+
+//this defines what the highest animation ID is, used for macros and similar stuff
+#define highestAnimation 0xF7

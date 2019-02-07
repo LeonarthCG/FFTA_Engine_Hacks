@@ -1,0 +1,61 @@
+PUSH; ORG 0x8bc174; WORD newZombieOam5-0x852E7C; POP
+PUSH; ORG 0x8bc188; WORD newZombieOam5-0x852E7C; POP
+PUSH; ORG 0x8bc19c; WORD newZombieOam5-0x852E7C; POP
+PUSH; ORG 0x8bc500; WORD newZombieOam5-0x852E7C; POP
+PUSH; ORG 0x8bc514; WORD newZombieOam5-0x852E7C; POP
+
+ALIGN 4
+newZombieOam5:
+SHORT 6
+dataOAM(-48,-16,square,1,0)
+dataOAM(-48,0,rectangleV,0,4)
+dataOAM(-32,-16,square,1,6)
+dataOAM(-32,0,rectangleV,0,10)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,rectangleV,0,16)
+
+PUSH
+ORG 0x167b80+0x69B89C
+#incbin "sprites/zombie5.bin"
+POP
+
+PUSH; ORG 0x8c1014; WORD newMateusOam1-0x852E7C; POP
+PUSH; ORG 0x8c1028; WORD newMateusOam1-0x852E7C; POP
+PUSH; ORG 0x8c15a4; WORD newMateusOam1-0x852E7C; POP
+PUSH; ORG 0x8c15b8; WORD newMateusOam1-0x852E7C; POP
+PUSH; ORG 0x8c15cc; WORD newMateusOam1-0x852E7C; POP
+
+ALIGN 4
+newMateusOam1:
+SHORT 6
+dataOAM(-40,-16,rectangleH,0,0)
+dataOAM(-40,0,rectangleH,0,2)
+dataOAM(-32,-16,square,1,4)
+dataOAM(-32,0,square,1,8)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x1923c0+0x69B89C
+#incbin "sprites/mateus1.bin"
+POP
+
+PUSH; ORG 0x8c2254; WORD newAdrammelechOam8-0x852E7C; POP
+
+ALIGN 4
+newAdrammelechOam8:
+SHORT 9
+dataOAM(-48,0-1,square,0,0)
+dataOAM(-40+1,-16,rectangleV,0,1)
+dataOAM(-40,-8,square,1,3)
+dataOAM(-40,8,rectangleV,0,7)
+dataOAM(-24+1,-16,rectangleV,0,9)
+dataOAM(-24,-8,square,1,11)
+dataOAM(-24,8,rectangleV,0,15)
+dataOAM(-8,-8,rectangleH,0,17)
+dataOAM(-8,8,square,0,19)
+
+PUSH
+ORG 0x1964a0+0x69B89C
+#incbin "sprites/adrammelech8.bin"
+POP

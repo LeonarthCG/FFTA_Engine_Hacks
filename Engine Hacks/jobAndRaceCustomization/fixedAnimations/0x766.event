@@ -1,0 +1,135 @@
+PUSH; ORG 0x8b3874; WORD newLamiaOam2-0x852E7C; POP
+PUSH; ORG 0x8b3a08; WORD newLamiaOam2-0x852E7C; POP
+PUSH; ORG 0x8b3a1c; WORD newLamiaOam2-0x852E7C; POP
+
+ALIGN 4
+newLamiaOam2:
+SHORT 7
+dataOAM(-40,-16,square,1,0)
+dataOAM(-32,0,rectangleH,0,4)
+dataOAM(-24,-24,rectangleV,0,6)
+dataOAM(-24,-16,square,1,8)
+dataOAM(-24,0,square,1,12)
+dataOAM(-8,-16,rectangleH,0,16)
+dataOAM(-8,0,rectangleH,0,18)
+
+PUSH
+ORG 0x135c20+0x69B89C
+#incbin "sprites/lamia2.bin"
+POP
+
+PUSH; ORG 0x8bc0d8; WORD newZombieOam3-0x852E7C; POP
+PUSH; ORG 0x8bc0ec; WORD newZombieOam3-0x852E7C; POP
+PUSH; ORG 0x8bc3d0; WORD newZombieOam3-0x852E7C; POP
+PUSH; ORG 0x8bc3e4; WORD newZombieOam3-0x852E7C; POP
+PUSH; ORG 0x8bc3f8; WORD newZombieOam3-0x852E7C; POP
+
+ALIGN 4
+newZombieOam3:
+SHORT 6
+dataOAM(-40,-16-8,rectangleH,0,0)
+dataOAM(-40,0-8,rectangleH,0,2)
+dataOAM(-32,-16-8,square,1,4)
+dataOAM(-32,0-8,square,1,8)
+dataOAM(-16,-16-8,square,1,12)
+dataOAM(-16,0-8,square,1,16)
+
+PUSH
+ORG 0x1678c0+0x69B89C
+#incbin "sprites/zombie3.bin"
+POP
+
+PUSH; ORG 0x8c2144; WORD newAdrammelechOam6-0x852E7C; POP
+PUSH; ORG 0x8c2158; WORD newAdrammelechOam6-0x852E7C; POP
+PUSH; ORG 0x8c216c; WORD newAdrammelechOam6-0x852E7C; POP
+PUSH; ORG 0x8c2404; WORD newAdrammelechOam6-0x852E7C; POP
+PUSH; ORG 0x8c2418; WORD newAdrammelechOam6-0x852E7C; POP
+PUSH; ORG 0x8c242c; WORD newAdrammelechOam6-0x852E7C; POP
+
+ALIGN 4
+newAdrammelechOam6:
+SHORT 8
+dataOAM(-40,0+1-4,rectangleH,0,0)
+dataOAM(-32-4,-16+1,square,1,2)
+dataOAM(-32,0+1,rectangleV,0,6)
+dataOAM(-32-2,8+1,rectangleV,0,8)
+dataOAM(-24-4,-24+1,rectangleV,0,10)
+dataOAM(-16-4,-16+1,square,1,12)
+dataOAM(-16,0+1,rectangleH,0,16)
+dataOAM(-8,0+1-5,rectangleH,0,18)
+
+PUSH
+ORG 0x197b60+0x69B89C
+#incbin "sprites/adrammelech6.bin"
+POP
+
+PUSH; ORG 0x8c2c60; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2c74; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2c88; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2c9c; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2f04; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2f18; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2f2c; WORD newFamfritOam8-0x852E7C; POP
+PUSH; ORG 0x8c2f40; WORD newFamfritOam8-0x852E7C; POP
+
+ALIGN 4
+newFamfritOam8:
+SHORT 9
+dataOAM(-40,-8-2-1,rectangleH,0,0)
+dataOAM(-40,8-2-1,square,0,2)
+dataOAM(-32,-16-2,rectangleH,0,3)
+dataOAM(-32,0-2,rectangleH,0,5)
+dataOAM(-24,-24-2,square,1,7)
+dataOAM(-24,-8-2,square,1,11)
+dataOAM(-24,8-2,rectangleV,0,15)
+dataOAM(-8,-8-2,square,0,17)
+dataOAM(-8,0-2,rectangleH,0,18)
+
+PUSH
+ORG 0x19d1c0+0x69B89C
+#incbin "sprites/famfrit8.bin"
+POP
+
+PUSH; ORG 0x8c2d34; WORD newFamfritOam9-0x852E7C; POP
+PUSH; ORG 0x8c2d48; WORD newFamfritOam9-0x852E7C; POP
+PUSH; ORG 0x8c2fd4; WORD newFamfritOam9-0x852E7C; POP
+PUSH; ORG 0x8c2fe8; WORD newFamfritOam9-0x852E7C; POP
+PUSH; ORG 0x8c2ffc; WORD newFamfritOam9-0x852E7C; POP
+
+ALIGN 4
+newFamfritOam9:
+SHORT 9
+dataOAM(-40-1,-16+2,square,1,0)
+dataOAM(-40-1,0+2,square,1,4)
+dataOAM(-24-1,-24+2,rectangleH,0,8)
+dataOAM(-24-1,-8+2,rectangleH,0,10)
+dataOAM(-16-1,-24+3-3,rectangleH,0,12)
+dataOAM(-16-1,-8+3-3,rectangleH,0,14)
+dataOAM(-16-1,8+3-3,square,0,16)
+dataOAM(-8-1,-16+3,rectangleH,0,17)
+dataOAM(-8-1,0+3,square,0,19)
+
+PUSH
+ORG 0x19c980+0x69B89C
+#incbin "sprites/famfrit9.bin"
+POP
+
+PUSH; ORG 0x8c3234; WORD newFamfritOam10-0x852E7C; POP
+PUSH; ORG 0x8c3248; WORD newFamfritOam10-0x852E7C; POP
+
+ALIGN 4
+newFamfritOam10:
+SHORT 8
+dataOAM(-40,-16,rectangleH,0,0)
+dataOAM(-40,0,square,0,2)
+dataOAM(-32,-16,rectangleV,0,3)
+dataOAM(-32,-8,square,1,5)
+dataOAM(-24,-24,rectangleV,0,9)
+dataOAM(-24,8,square,0,11)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x19da80+0x69B89C
+#incbin "sprites/famfrit10.bin"
+POP

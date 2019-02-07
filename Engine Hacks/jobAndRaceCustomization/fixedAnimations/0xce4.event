@@ -1,0 +1,34 @@
+PUSH; ORG $8c1f64; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c27e0; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c27f4; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2808; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2514; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2528; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c253c; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2550; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2564; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2578; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c258c; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c2514; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c25a0; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c25b4; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c25c8; WORD newAdrammelechOam2-0x852E7C; POP
+PUSH; ORG $8c25dc; WORD newAdrammelechOam2-0x852E7C; POP
+
+ALIGN 4
+newAdrammelechOam2:
+SHORT 9
+dataOAM(-40-1,-8,rectangleV,1,0)
+dataOAM(-40-2,0,rectangleV,1,4)
+dataOAM(-40,+8,rectangleV,1,8)
+dataOAM(-32,-24,square,1,12)
+dataOAM(-40,-16,square,0,16)
+dataOAM(-8-6,-8-2,square,0,17)
+dataOAM(-8,0+1,square,0,17)
+dataOAM(-8-2,0,square,0,18)
+dataOAM(-8,+8,square,0,19)
+
+PUSH
+ORG 0x198960+0x69B89C
+#incbin "sprites/adrammelech2.bin"
+POP

@@ -1,0 +1,23 @@
+//make it always game over, even for non-story missions
+PUSH; ORG $122222; SHORT 0x2004; ORG $122240; SHORT 0; ORG $122258; SHORT 0x2001; POP
+
+//remove judges
+PUSH; ORG $CED86; SHORT 0x2000; ORG $BC7BE; SHORT 0x2000; ORG $BAC5A; SHORT 0x2000; POP
+
+//always give game overs, even if it would normally be mission/battle failed
+PUSH; ORG $9A8B1A; BYTE 0x19 0x21 0x1; POP
+
+//make game overs happen if marche is dead or montblanc is dead before the first jagd
+PUSH; ORG $123B7C; jumpToHack(checkDeath); POP
+
+PUSH
+ORG $9A8B20 //placing this over unused events, unused until 9A8C3E
+ALIGN 4
+checkDeath:
+#incbin "checkDeath.dmp"
+POIN gameOverEvent
+
+gameOverEvent:
+BYTE 0x51 0x15 0x14 0x4D 0x64 0x01 0x00 0x0F 0x4D 0x00 0x3C 0x00 0x0F 0x15 0x3C 0x18
+BYTE 0x07 0x18 0x09 0x60 0x17 0x05 0x0F 0xF8 0x5E 0xA4 0x57 0x59 0x5E 0x5A 0x31 0x5B
+POP

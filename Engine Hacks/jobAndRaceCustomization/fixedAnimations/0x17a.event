@@ -1,0 +1,23 @@
+//fixing punching animations of blue mage, nu mou black mage and some other ezel animation too
+
+//change the oam data
+PUSH
+ORG 0x0017A+0x852E7C
+SHORT 4
+SHORT 0x00F0-1 0x41F0 0x0000
+SHORT 0x80F0-1 0x0000 0x0004
+SHORT 0x00E0-1 0x41F0 0x0006
+SHORT 0x80E0-1 0x0000 0x000A
+
+//blue mage
+ORG 0x270E0+0x69B89C
+#incbin "sprites/bluemage.bin"
+
+//nu mou black mage
+ORG 0x58F00+0x69B89C
+#incbin "sprites/numoublackmage.bin"
+
+//ezel
+ORG 0xEBE20+0x69B89C
+#incbin "sprites/ezel.bin"
+POP

@@ -1,0 +1,15 @@
+PUSH
+ORG 0x6b0+0x852E7C
+SHORT 8
+dataOAM(-40,-8-1,rectangleH,0,0)
+dataOAM(-32,-24-1,rectangleH,0,2)
+dataOAM(-32,-8-1,rectangleH,0,4)
+dataOAM(-32,8-1,rectangleV,0,6)
+dataOAM(-24,-24-1,square,1,8)
+dataOAM(-24,-8-1,square,1,12)
+dataOAM(-16,8-1,rectangleV,0,16)
+dataOAM(-8,-8-1,rectangleH,0,18)
+
+ORG 0x134c00+0x69B89C
+#incbin "sprites/lamia1.bin"
+POP

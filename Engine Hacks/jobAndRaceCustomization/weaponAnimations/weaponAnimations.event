@@ -1,0 +1,8 @@
+ALIGN 4
+weaponAnimationTable:
+ORG currentoffset+(4*highestAnimation)
+
+#define newWeaponAnimationsInstalled 0
+#define newWeaponAnimationEntry(animationID,label) "PUSH; ORG weaponAnimationTable+(4*animationID); POIN label; POP"
+
+#include "animations.txt"

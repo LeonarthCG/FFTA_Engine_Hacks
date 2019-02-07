@@ -1,0 +1,24 @@
+PUSH
+ORG 0x8e6+0x852E7C
+SHORT 8
+dataOAM(-40,-24,square,1,0)
+dataOAM(-40,-8,rectangleV,0,4)
+dataOAM(-32,0,rectangleH,0,6)
+dataOAM(-24,-16,rectangleV,0,8)
+dataOAM(-24,-8,square,1,10)
+dataOAM(-24,8,rectangleH,0,14)
+dataOAM(-16,8,rectangleV,0,16)
+dataOAM(-8,-8,rectangleH,0,18)
+
+ORG 0x15dbe0+0x69B89C
+#incbin "sprites/floateye4.bin"
+
+ORG 0x15f840+0x69B89C
+#incbin "sprites/floateye5.bin"
+
+ORG 0x15fe20+0x69B89C
+#incbin "sprites/floateye6.bin"
+
+ORG 0x161da0+0x69B89C
+#incbin "sprites/floateye7.bin"
+POP

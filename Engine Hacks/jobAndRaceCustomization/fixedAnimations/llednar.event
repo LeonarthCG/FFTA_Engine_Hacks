@@ -1,0 +1,26 @@
+//changes llednar's death animation to only take up 12 tiles
+
+PUSH
+ORG $8A8A64
+aFrame(newLlednarSprite+0x180,newLlednarOam,1,1,0,0,8,0,0)
+POP
+
+PUSH
+ORG $8A8F1C
+WORD 1
+aFrame(newLlednarSprite,newLlednarOam,1,1,0,0,8,0,0)
+POP
+
+ALIGN 4
+newLlednarSprite:
+#incbin "sprites/llednar.bin"
+
+ALIGN 4
+newLlednarOam:
+SHORT 6
+SHORT 0x40E8 0x01F0 0x0000
+SHORT 0x40E8 0x0200 0x0002
+SHORT 0x40F0 0x01F0 0x0004
+SHORT 0x40F0 0x0200 0x0006
+SHORT 0x40F8 0x01F0 0x0008
+SHORT 0x40F8 0x0200 0x000A

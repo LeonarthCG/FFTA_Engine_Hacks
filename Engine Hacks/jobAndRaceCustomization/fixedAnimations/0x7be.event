@@ -1,0 +1,22 @@
+PUSH; ORG 0x8b4660; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b47fc; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b4810; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b4960; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b4974; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b4988; WORD newSpiderOam1-0x852E7C; POP
+PUSH; ORG 0x8b499c; WORD newSpiderOam1-0x852E7C; POP
+
+ALIGN 4
+newSpiderOam1:
+SHORT 6
+dataOAM(-32,-24,rectangleV,0,0)
+dataOAM(-32,-16,square,1,2)
+dataOAM(-32,0,square,1,6)
+dataOAM(-16,-24,rectangleV,0,10)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x13d000+0x69B89C
+#incbin "sprites/spider1.bin"
+POP

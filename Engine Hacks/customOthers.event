@@ -1,0 +1,15 @@
+#inctext PFinder "../FFTA_clean.gba" 0x85567F0 customOthers
+
+//Options:
+	//this is the max new entries you can get, but feel free to lower it for space
+	#define newOtherEntries "0x7FFF-767"
+	
+//Macros:
+	//this macro is used to define new other text ids, all you need to do is make sure customOthers gave space to it
+	//!! new help text bank entries should be bigger than 0x2FF and can't be bigger than 0x7FFF
+	#define setOther(id,pointer) "PUSH; ORG customOthers+(4*id); POIN pointer; POP"
+	
+ALIGN 4 //our now table of pointers, with the originals intact
+customOthers:
+#incbin "ASM/otherstable.bin"
+ORG currentOffset + (newOtherEntries*4) //this gives space to the new entries

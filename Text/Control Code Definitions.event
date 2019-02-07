@@ -1,0 +1,35 @@
+// ends the string
+#define endstring "BYTE 0;"
+
+// switch text to one byte mode, used for text that doesn't have space or other control codes
+// while in 1 byte mode only character with values between 0x8000 and 0x80FF can be used
+// character are also shifted by one, so 0x80CA (a) is 0xCB instead (withouth the 80, hence 1 byte)
+// this was most likely done to save space, which was probably needed dor the european multi-5 version
+// there is no real need to use it for a hack, two bytes per character works perfectly fine for everything.
+#define _1bytemode "BYTE 1;"
+
+// 0x40 seems to be used for text control codes, or at least a series of them
+
+// wait for button press
+#define waitbutton "BYTE 0x40 0x61;"
+
+// clear textbox (the text inside it, not the box itself)
+#define clearbox "BYTE 0x40 0x63;"
+
+// newline
+#define newline "BYTE 0x40 0x6E;"
+
+// show "next" arrow at the bottom and wait for button press
+#define shownext "BYTE 0x40 0x70;"
+
+// space
+#define space "BYTE 0x40 0x73;"
+
+// show number from ram
+#define showexp "BYTE 0x40 0x25 0x40;"
+
+//choice
+#define choice "BYTE 0x40 0x53 0x10;"	//choice, cursor starts on the first option
+#define choice1 "BYTE 0x40 0x53 0x10;"	//choice, cursor starts on the first option
+#define choice2 "BYTE 0x40 0x53 0x11;"	//choice, cursor starts on the second option
+	//usage: choice (string) endstring (string) endstring endstring

@@ -1,0 +1,20 @@
+PUSH; ORG 0x8c0d74; WORD newMateusOam2-0x852E7C; POP
+PUSH; ORG 0x8c0d88; WORD newMateusOam2-0x852E7C; POP
+PUSH; ORG 0x8c1334; WORD newMateusOam2-0x852E7C; POP
+PUSH; ORG 0x8c1348; WORD newMateusOam2-0x852E7C; POP
+PUSH; ORG 0x8c135c; WORD newMateusOam2-0x852E7C; POP
+
+ALIGN 4
+newMateusOam2:
+SHORT 6
+dataOAM(-40,-16,rectangleH,0,0)
+dataOAM(-40,0,rectangleH,0,2)
+dataOAM(-32,-16,square,1,4)
+dataOAM(-32,0,square,1,8)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x192680+0x69B89C
+#incbin "sprites/mateus2.bin"
+POP

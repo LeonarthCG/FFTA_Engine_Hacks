@@ -1,0 +1,84 @@
+#include "Extensions/Hack Installation.txt"
+//This hack makes spawned units always have the same (average) stats, there are also a few extra options
+
+//change the FreeSpace definition if you are not using a vanilla rom
+#ifndef FreeSpace
+	#define FreeSpace 0xA39920
+	ORG FreeSpace
+#endif
+
+//max level, levels above 99 will show as 99
+#ifndef	newMaxLevel
+	#define newMaxLevel 99
+#endif
+
+//max stat, stats above 999 will either show the last 3 numbers only or show as 0
+#ifndef	newMaxStat
+	#define newMaxStat  999
+#endif
+
+//if true, units will be healed when leveling up, set to 0 to deactivate it
+//they will heal by the same ammount that their hp and mp went up by, like in other rpgs
+#ifndef	newLevelHeal
+	#define newLevelHeal 1
+#endif
+
+//this removes base stat variance, comment out if you wish to keep base stat variance
+#ifndef	noStatVariance
+	#define noStatVariance 1
+#endif
+
+//this makes it so level ups are NOT affected, comment out if you wish them to be affected
+//if you comment this out level ups will no longer be random, they will instead be based on current level
+//it's easier to see with an example:
+//When a Ninja (HP growth 5.8) goes form level 12 to 13, they will gain 6 points in HP (0,8*12 < 0,8*13, dropping decimals)
+//When a Ninja (HP growth 5.8) goes form level 4 to 5, they will gain 5 points in HP (0,8*4 = 0,8*5, dropping decimals)
+//this can cause units to lose on several stat points if they keep changing jobs and leveling up
+//it could also lead to people calculating very specific sequences of level ups on different jobs for optimal stats
+//I think both of these cases are worse than vanilla level ups so I personally recommend setting it to 1
+#define levelUpUnaffected 1
+
+//remove base stat variance
+#ifdef noStatVariance
+	PUSH; ORG $C98A6; SHORT 0x837E; POP //max hp
+	PUSH; ORG $C98AC; SHORT 0x833E; POP //current hp
+	PUSH; ORG $C98EE; SHORT 0x83FE; POP //max mp
+	PUSH; ORG $C98F8; SHORT 0x83BE; POP //current mp
+	PUSH; ORG $C9930; SHORT 0x843E; POP //attack
+	PUSH; ORG $C9968; SHORT 0x847E; POP //defense
+	PUSH; ORG $C99A0; SHORT 0x84BE; POP //magic
+	PUSH; ORG $C99D8; SHORT 0x84FE; POP //resistance
+	PUSH; ORG $C9A12; SHORT 0x8016; POP //speed
+#endif
+
+//set max hp to at least 1 after spawning
+PUSH; ORG $C9A98; jumpToHack(newLevelsMin1HP); POP
+ALIGN 4
+newLevelsMin1HP:
+#incbin "ASM/newlevelsmin1hp.dmp"
+
+#ifndef levelUpUnaffected
+PUSH; ORG $C9B8C
+#incbin "ASM/newspawning.dmp"
+WORD newMaxLevel
+WORD newMaxStat
+WORD newLevelHeal
+POP
+#endif
+
+#ifdef levelUpUnaffected
+PUSH; ORG $C9B8C //only affected if r0 = r7
+SHORT 0xB500 0x46C0
+jumpToHack(newLevels)
+POP
+ALIGN 4
+newLevels:
+#incbin "ASM/newspawningnolevelup.dmp"
+POIN newSpawning
+ALIGN 4
+newSpawning:
+#incbin "ASM/newspawning.dmp"
+WORD newMaxLevel
+WORD newMaxStat
+WORD 1
+#endif

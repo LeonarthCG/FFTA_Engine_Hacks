@@ -1,0 +1,13 @@
+PUSH
+ORG 0x00FE2+0x852E7C
+SHORT 6
+dataOAM(-40,-16-1,rectangleH,0,0)
+dataOAM(-40,0-1,rectangleH,0,2)
+dataOAM(-32,-16-1,square,1,4)
+dataOAM(-32,0-1,square,1,8)
+dataOAM(-16,-16-1,square,1,12)
+dataOAM(-16,0-1,square,1,16)
+
+ORG 0x1abd00+0x69B89C
+#incbin "sprites/exodus1.bin"
+POP

@@ -1,0 +1,41 @@
+//fixing punching animations of hume black mage, dragoon, red mage, marche, llednar and cid
+
+//change the oam data
+PUSH
+ORG 0x0010E+0x852E7C
+SHORT 4
+SHORT 0x00F0-4 0x41F0 0x0000
+SHORT 0x80F0-4 0x0000 0x0004
+SHORT 0x00E0-4 0x41F0 0x0006
+SHORT 0x80E0-4 0x0000 0x000A
+
+ORG 0x1db80+0x69B89C
+#incbin "sprites/humeblackmage.bin"
+
+ORG 0x39920+0x69B89C
+#incbin "sprites/dragoon.bin"
+
+ORG 0x838c0+0x69B89C
+#incbin "sprites/redmage1.bin"
+
+ORG 0x83a80+0x69B89C
+#incbin "sprites/redmage2.bin"
+
+ORG 0xc3400+0x69B89C
+#incbin "sprites/marche1.bin"
+
+ORG 0xc35c0+0x69B89C
+#incbin "sprites/marche2.bin"
+
+ORG 0xf6a80+0x69B89C
+#incbin "sprites/llednar1.bin"
+
+ORG 0xf6c40+0x69B89C
+#incbin "sprites/llednar2.bin"
+
+ORG 0x113ce0+0x69B89C
+#incbin "sprites/cid1.bin"
+
+ORG 0x113ea0+0x69B89C
+#incbin "sprites/cid2.bin"
+POP

@@ -1,0 +1,8 @@
+ALIGN 4
+specialAnimationTable:
+ORG currentoffset+(4*highestAnimation)
+
+#define newSpecialAnimationsInstalled 0
+#define newSpecialAnimationEntry(animationID,label) "PUSH; ORG specialAnimationTable+(4*animationID); POIN label; POP"
+
+#include "animations.txt"

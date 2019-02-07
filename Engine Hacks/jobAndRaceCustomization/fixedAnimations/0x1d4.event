@@ -1,0 +1,23 @@
+//fixing punching animations of archer and moogle time mage
+
+//change the oam data
+PUSH
+ORG 0x001D4+0x852E7C
+SHORT 4
+SHORT 0x00F0-1 0x41F0 0x0000
+SHORT 0x80F0-1 0x0000 0x0004
+SHORT 0x00E0-1 0x41F0 0x0006
+SHORT 0x80E0-1 0x0000 0x000A
+
+//now the archer
+ORG 0x2BCC0+0x69B89C
+#incbin "sprites/archer1.bin"
+
+//more archer
+ORG 0x2BE60+0x69B89C
+#incbin "sprites/archer2.bin"
+
+//and now time mage
+ORG 0xBCF40+0x69B89C
+#incbin "sprites/moogletimemage.png"
+POP

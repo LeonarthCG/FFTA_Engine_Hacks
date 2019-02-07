@@ -1,0 +1,46 @@
+#ifndef FreeSpace
+#define FreeSpace 0xA39920
+ORG FreeSpace
+#endif
+#include "Extensions/Hack Installation.txt"
+
+// -- Options --
+
+#define installJPLearn 0 //you can comment this out to remove the whole jp learning if you want
+
+#define installMovementAbilities 0 //replace combos with movement abilities, this does NOT add back combo functionality
+
+#define install1bitAbilities 0 //comment out to remove AP and make abilities take up 1 bit, freeing up save space and increasing the limit to 0xFF abilities
+#ifndef installJPLearn
+	#undef install1bitAbilities //turns itself off if jp learn is not defined
+#endif
+
+#define installMorphingMorphersMorph 0 //morphers change aspect after morphing
+
+#define installManualSorting 0 //allows the player to switch party member's unit numbers around
+
+#define quickStart 0 //makes the game start at the world map, skipping the snowball and lizard fights
+
+//#define installFFTDeath 0 //units die after 3 turns of being KOed, undead have a chance to revive, should be able to be combined with Ironman
+
+//#define installIronman 0 //all maps have jagd death, should be able to be combined with FFT-like Death
+
+//#define noMovementUndoing 0 //makes movement impossible to be undone by pressing b after moving, it can still be undone while selecting a facing, and now units will select a facing direction as confirmation after moving even if it isn't the end of their turn
+
+//#define noStatVariance 0 //makes units always spawn with the same stats, look at "Engine Hacks/newLevelup.event" for more options
+
+//#define stealShoes 0 //allow shows to be stolen by the steal accessory ability
+
+//#define noJudges 0 //remove judges from the game, which also removes laws, this does NOT turn on permadeath
+
+//#define genericSaveLevel //makes the file's level be based on the first unit instead of marche
+
+//Engine Hacks
+#include "Engine Hacks/_MasterHackInstaller.event"
+MESSAGE "Used hax space ends at" currentOffset
+
+//Text
+#include "Text/_MasterTextInstaller.event"
+MESSAGE "Used text space ends at" currentOffset
+
+MESSAGE "Used free space ends at" currentOffset

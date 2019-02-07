@@ -1,0 +1,698 @@
+#include "Extensions/Hack Installation.txt"
+#include "jobAndRaceCustomization/Graphics Helpers.event"
+#include "jobAndRaceCustomization/options.event" //turn things on or off
+
+#ifndef FreeSpace
+	#define FreeSpace
+	ORG FreeSpace 0xA39920
+#endif
+
+//reduce tile count of vanilla animations to 20
+#include "jobAndRaceCustomization/fixedAnimations/fixedAnimations.event"
+
+//give playable jobs animations for all weapons
+#include "jobAndRaceCustomization/weaponAnimations/weaponAnimations.event"
+
+//give playable jobs animations for all abilities
+#include "jobAndRaceCustomization/specialAnimations/specialAnimations.event"
+
+//include new battle animations
+#include "jobAndRaceCustomization/battleAnimations/battleAnimationsInstaller.event"
+
+//graphics installers
+#include "jobAndRaceCustomization/Graphics/Job Icon Installer.event" //graphics for job icons
+#include "jobAndRaceCustomization/Graphics/Job Party Image Installer.event" //graphics for party and job change sprites
+//both the portrait and the portrait palette tables can be extended to up to 0xFFFF if desired, just add more entries
+
+//these are the files you should be looking at for customization
+#include "jobAndRaceCustomization/data.event" //set up data for customization
+//tables, so more data, but I consider splitting these into individual files makes more sense
+#include "jobAndRaceCustomization/jobAbilityTable.event" //data for ability lists and unlock conditions
+#ifdef newUndeadAndExpertIcons
+	#include "jobAndRaceCustomization/jobIconTable.event" //data for job icons
+#else
+	#include "jobAndRaceCustomization/jobIconTableVanilla.event" //data for job icons if the option for the new ones is not set
+#endif
+#include "jobAndRaceCustomization/jobDeathSoundTable.event" //data for death sounds
+#include "jobAndRaceCustomization/jobAndCharacterPartyTable.event" //data for party and job change sprites
+#include "jobAndRaceCustomization/jobPortraitTable.event" //data for portraits
+#include "jobAndRaceCustomization/jobPortraitPaletteTable.event" //data for portrait palettes
+
+//stuff below this is just the asm, it shouldn't need to be edited unless you know what you are doing
+
+//removing some stuff so special characters always get to talk
+//this will often result in incorrect text so it's meant for people that want to edit the events only!
+//PUSH; ORG $122680; SHORT 0xE00F; POP //opcode 0x13's first argument is treated as 0xFF if 0xFE (allow special characters to talk)
+//PUSH; ORG $122AAA; SHORT 0x46C0; POP //opcode 0x70 never works (never skip events if only special characters present)
+
+//viera looked funky during jump
+
+//setting up special animations
+PUSH; ORG $F496A; SHORT 0x22EC; ORG $100592; SHORT 0x21EC; POP //0xEC Talking (advice, wyrmtamer, parley)
+PUSH; ORG $9764C; SHORT 0x25ED; POP //0xED Morphed idle
+PUSH; ORG $101500; SHORT 0x21EE; ORG $102724; SHORT 0x21EE; ORG $103078; SHORT 0x21EE; POP //0xEE Raised arm (stunts, conceal)
+	/*might be incomplete*/
+	PUSH; ORG $F4F26; SHORT 0x22EF; ORG $F595A; SHORT 0x22EF; ORG $FA6AA; SHORT 0x22EF; ORG $F7C34; SHORT 0x24EF; POP //0xEF Swing (saint cross, tremor, lancet, far fist)
+PUSH; ORG $1030B6; SHORT 0x21F0; POP //0xF0 Conceal (yes, it uses two animations)
+	/*might be incomplete*/
+	PUSH; ORG $F621E; SHORT 0x22F1; ORG $F6AE8; SHORT 0x22F1; ORG $F87B0; SHORT 0x22F1; ORG $FC1FC; SHORT 0x22F1; POP //0xF1 Spin (whirlwind, mow down, wild swing, swallowtail)
+PUSH; ORG $FE4A8; SHORT 0x21F2; ORG $1027DE; SHORT 0x22F2; POP //0xF2 Throw (throw, hurl)
+PUSH; ORG $FAE7A; SHORT 0x22F3; ORG $1087C4; SHORT 0x26F3; POP //0xF3 Yell (bangaa cry and breaths)
+PUSH; ORG $E0F36; SHORT 0x21F4; POP //0xF4 Prayer (summon, spirit magic)
+PUSH; ORG $E140E; SHORT 0x21F5; POP //0xF5 Ninjutsu
+	/*might be incomplete*/
+	PUSH; ORG $E0F4E; SHORT 0x21F6; POP //0xF6 Charged Punch (revive, exorcise, holy sign)
+PUSH; ORG $F3616; SHORT 0x22F7; POP //0xF7 Provoke
+PUSH; ORG $F9CB2; SHORT 0x21F8; POP //0xF8 Jump (taking off)
+PUSH; ORG $F9F2E; SHORT 0x22F9; POP //0xF9 Jump (landing)
+
+//fixing the jump animation somewhat
+PUSH; ORG $DC386; SHORT 0x46C0; jumpToHack(fixJumpAnimation); POP
+ALIGN 4
+fixJumpAnimation:
+#incbin "jobAndRaceCustomization/ASM/fixJumpAnimation.dmp"
+
+//check more pointers when trying to find animations, allowing for story and weapon animations to share slots
+PUSH; ORG $988B0; jumpToHack(newWeaponAnimationGetter1); POP
+ALIGN 4
+newWeaponAnimationGetter1:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAnimationGetter1.dmp"
+PUSH; ORG $21004; jumpToHack(newWeaponAnimationGetter2); POP
+ALIGN 4
+newWeaponAnimationGetter2:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAnimationGetter2.dmp"
+POIN weaponAnimationTable
+POIN specialAnimationTable
+//some math with the ability animations to squeeze more ids out of the byte
+PUSH; ORG $9767C; jumpToHack(newSpecialAnimationGetter1); POP
+ALIGN 4
+newSpecialAnimationGetter1:
+#incbin "jobAndRaceCustomization/ASM/newSpecialAnimationGetter1.dmp"
+PUSH; ORG $9773C; jumpToHack(newSpecialAnimationGetter2); POP
+ALIGN 4
+newSpecialAnimationGetter2:
+#incbin "jobAndRaceCustomization/ASM/newSpecialAnimationGetter2.dmp"
+
+//never register as special character for the original dismiss message routine
+PUSH; ORG $86A6E; SHORT 0x42B6; POP
+PUSH; ORG $86AE6; SHORT 0x42BF; POP
+PUSH; ORG $86B50; SHORT 0x42B6; POP
+PUSH; ORG $86BB4; SHORT 0x42BF; POP
+PUSH; ORG $86C18; SHORT 0x42B6; POP
+PUSH; ORG $86C72; SHORT 0x2001; POP
+
+//changing routines so the only units prevented from leaving the clan are marche and montblanc
+PUSH; ORG $76A94; SHORT 0x2802 0xD028 0x2808 0xD026 0xE036; POP
+PUSH; ORG $74FC0; SHORT 0x2802 0xD020 0x2808 0xD01E 0xE024; POP
+
+//get the dismiss message id on our own
+PUSH; ORG $86CF4; SHORT 0x6808 0x46C0; jumpToHack(dismissMessage); POP
+ALIGN 4
+dismissMessage:
+#incbin "jobAndRaceCustomization/ASM/dismissMessage.dmp"
+POIN dismissTextRace
+POIN dismissTextCharacter
+
+//figure out which entry in which table to use for after-battle messages
+ALIGN 4
+getMissionTextListOffset:
+#incbin "jobAndRaceCustomization/ASM/getMissionTextListOffset.dmp"
+POIN afterBattleTextRace
+POIN afterBattleTextCharacter
+
+//get the mission won message with bonus id on our own
+PUSH; ORG $47A34; jumpToHack(missionWonBonusMessage); POP
+ALIGN 4
+missionWonBonusMessage:
+#incbin "jobAndRaceCustomization/ASM/missionWonBonusMessage.dmp"
+POIN getMissionTextListOffset
+
+//get the mission won message id on our own
+PUSH; ORG $47A14; jumpToHack(missionWonMessage); POP
+ALIGN 4
+missionWonMessage:
+#incbin "jobAndRaceCustomization/ASM/missionWonMessage.dmp"
+POIN getMissionTextListOffset
+
+//get the mission failed message id on our own
+PUSH; ORG $481F4; jumpToHack(missionFailedMessage); POP
+ALIGN 4
+missionFailedMessage:
+#incbin "jobAndRaceCustomization/ASM/missionFailedMessage.dmp"
+POIN getMissionTextListOffset
+
+//get the clan battle won message id on our own
+PUSH; ORG $47C4C; jumpToHack(clanWonMessage); POP
+ALIGN 4
+clanWonMessage:
+#incbin "jobAndRaceCustomization/ASM/clanWonMessage.dmp"
+POIN getMissionTextListOffset
+
+//get the clan battle failed message id on our own
+PUSH; ORG $47D00; jumpToHack(clanFailedMessage); POP
+ALIGN 4
+clanFailedMessage:
+#incbin "jobAndRaceCustomization/ASM/clanFailedMessage.dmp"
+POIN getMissionTextListOffset
+
+PUSH; ORG $1259B8; jumpToHack(missionTextIndex); POP //make the game use our new indexes for mission text
+ALIGN 4
+missionTextIndex:
+#incbin "jobAndRaceCustomization/ASM/missionTextIndex.dmp"
+POIN missionTextRace
+POIN missionTextCharacter
+
+//load combo ability
+PUSH; ORG $CA04C; jumpToHack(loadComboAbility); POP
+ALIGN 4
+loadComboAbility:
+#incbin "jobAndRaceCustomization/ASM/loadComboAbility.dmp"
+
+//set new random name limit
+PUSH; ORG $0CA116; SHORT (0x2500|highestName) (0x2D|(highestNamePower<<6)); POP
+PUSH; ORG $0CA180; SHORT (0x2000|highestName) (0x00|(highestNamePower<<6)); POP
+PUSH; ORG $13B0AE; SHORT (0x2400|highestName) (0x24|(highestNamePower<<6)); POP
+
+PUSH; ORG $0C9708; SHORT 0x7858; POP //remove default display job by character id, I don't even know why that was a thing, I don't think it breaks anything
+PUSH; ORG $0C8C36; SHORT 0x46C0; POP //same as above but for job change
+PUSH; ORG $12E5C2; SHORT 0xE033; POP //allow any unit to gain exp, skipping the anticheat check
+PUSH; ORG $0CAD5C; SHORT 0xE014; POP //allow any unit to equip shields if they are set to be able to, instead of having stupid hardcoded checks
+
+PUSH; ORG $C9E38; jumpToHack(newNameIndexes); POP //make the game use our new indexes for names
+ALIGN 4
+newNameIndexes:
+#incbin "jobAndRaceCustomization/ASM/newNameIndexes.dmp"
+POIN nameIndexes
+
+PUSH; ORG $DF660; jumpToHack(newDeathSounds); POP //make the game use whatever death sound we want
+ALIGN 4
+newDeathSounds:
+#incbin "jobAndRaceCustomization/ASM/newDeathSounds.dmp"
+POIN newJobDeathSoundTable
+
+PUSH; ORG $87B88; jumpToHack(loadPartySprite); POP //load whatever sprite we want for the party menu
+ALIGN 4
+loadPartySprite:
+#incbin "jobAndRaceCustomization/ASM/loadPartySprite.dmp"
+POIN newPartySpriteTable //custom party sprite table
+
+//load whatever sprite we want for job change
+PUSH; ORG $87D06; SHORT 0x21FF; POP
+PUSH; ORG $87D50; jumpToHack(loadPartySpriteJobChange); POP
+ALIGN 4
+loadPartySpriteJobChange:
+#incbin "jobAndRaceCustomization/ASM/loadPartySpriteJobChange.dmp"
+POIN newPartySpriteTable //custom party sprite table
+
+#ifdef install1bitAbilities
+//prevent items from setting any bits when equipped
+PUSH; ORG $CB042; SHORT 0x46C0; POP
+PUSH; ORG $CCF8A; SHORT 0x46C0; POP
+PUSH; ORG $CD544; SHORT 0x4770; POP
+//make the max index for all jobs 0xFF
+PUSH; ORG $C9ED8; SHORT 0x20FF 0x4770; POP
+//load 1 bit abilities, additionally, load up to 0xFF abilities
+PUSH; ORG $C9FF8; jumpToHack(loadAbilities1bit); POP
+ALIGN 4
+loadAbilities1bit:
+#incbin "jobAndRaceCustomization/ASM/loadAbilities1bit.dmp"
+#endif
+
+#ifndef install1bitAbilities
+ALIGN 4
+checkAbility:
+#incbin "jobAndRaceCustomization/ASM/checkAbility.dmp"
+ALIGN 4
+removeAbility:
+#incbin "jobAndRaceCustomization/ASM/removeAbility.dmp"
+ALIGN 4
+masterAbility:
+#incbin "jobAndRaceCustomization/ASM/masterAbility.dmp"
+#else
+ALIGN 4
+checkAbility:
+#incbin "jobAndRaceCustomization/ASM/checkAbility1bit.dmp"
+POIN checkInventoryAbility
+ALIGN 4
+removeAbility:
+#incbin "jobAndRaceCustomization/ASM/removeAbility1bit.dmp"
+ALIGN 4
+masterAbility:
+#incbin "jobAndRaceCustomization/ASM/masterAbility1bit.dmp"
+#endif
+
+//make the game not unlock jobs the vanilla way, for safety
+PUSH; ORG $97AE; SHORT 0x46C0 0x46C0; POP //no default job unlock at bootup
+PUSH; ORG $C8B02; SHORT 0x46C0 0x46C0; POP //no job unlock at job change
+PUSH; ORG $C8BCA; SHORT 0x46C0 0x46C0; POP //also no job unlock at job change
+
+//makes the game use job ids instead of commands ids when switching secondary commands
+PUSH; ORG $8479A; SHORT 0x6840; ORG $847A0; SHORT 0x6008; POP
+PUSH; ORG $7DFD2; SHORT 0x884A 0x7202 0x8809 0x3036 0x7001 0x1C08 0x46C0 0x46C0; POP
+PUSH; ORG $7DFE8; SHORT 0x46C0; POP
+
+//checks if any item in the equip inventory is giving an ability
+ALIGN 4
+checkInventoryAbility:
+#incbin "jobAndRaceCustomization/ASM/checkInventoryAbility.dmp"
+
+//check if this unit has jobs available to enable the Change Jobs option
+PUSH; ORG $750E2; SHORT 0x46C0; jumpToHack(checkJobChange1); POP
+ALIGN 4
+checkJobChange1:
+#incbin "jobAndRaceCustomization/ASM/checkJobChange1.dmp"
+WORD highestJob
+POIN checkJobShowWheel2
+POIN checkForJobUnlocks
+POIN newNoItemEquipJobs
+POIN newItemJobs
+
+//same check but when A is pressed on the Change Jobs option
+PUSH; ORG $76A68; jumpToHack(checkJobChange2); POP
+ALIGN 4
+checkJobChange2:
+#incbin "jobAndRaceCustomization/ASM/checkJobChange2.dmp"
+WORD highestJob
+POIN checkJobShowWheel2
+POIN checkForJobUnlocks
+
+PUSH; ORG $C8D00; SHORT 0x46C0 0x46C0; POP //alchemists don't get Item the vanilla way
+
+//check if the unit is on the newItemJobs list or the newNoItemEquipJobs list
+PUSH; ORG $C8228; jumpToHack(checkItemSpawn); POP
+ALIGN 4
+checkItemSpawn:
+#incbin "jobAndRaceCustomization/ASM/checkItemSpawn.dmp"
+POIN newNoItemEquipJobs
+POIN newItemJobs
+
+//check if job is masterd
+PUSH; ORG $CD2C4; jumpToHack(checkJobMastered); POP
+ALIGN 4
+checkJobMastered:
+#incbin "jobAndRaceCustomization/ASM/checkJobMastered.dmp"
+POIN newJobAbilityTable
+POIN checkAbility
+
+//make a list of available abilities/action commands to equip and return total
+PUSH; ORG $7D96C; SHORT 0xB500 0xB408; jumpToHack(checkAbilitiesList); POP
+ALIGN 4
+checkAbilitiesList:
+#incbin "jobAndRaceCustomization/ASM/checkAbilitiesList.dmp"
+POIN checkAbility
+WORD highestJob
+POIN newNoItemEquipJobs
+POIN checkAbilityCount
+POIN checkJobShow
+POIN newJobAbilityTable
+POIN newItemJobs
+
+//unlock default + current jobs when entering party menu, also check for job unlocking
+PUSH; ORG $72C44; SHORT 0x46C0 0xB408; jumpToHack(unlockJobsPartyMenu); POP
+ALIGN 4
+unlockJobsPartyMenu:
+#incbin "jobAndRaceCustomization/ASM/unlockJobsPartyMenu.dmp"
+POIN checkForJobUnlocks
+
+//check all the party for new unlocked jobs
+ALIGN 4
+checkForJobUnlocks:
+#incbin "jobAndRaceCustomization/ASM/checkForJobUnlocks.dmp"
+WORD highestJob
+POIN checkJobAvailability
+POIN newDefaultJobs
+POIN newJobAbilityTable
+POIN neverShow
+
+ALIGN 4
+checkJobAvailability:
+#incbin "jobAndRaceCustomization/ASM/checkJobAvailability.dmp"
+POIN newJobAbilityTable
+POIN checkAbilityCount
+
+ALIGN 4
+checkJobShow:
+#incbin "jobAndRaceCustomization/ASM/checkJobShow.dmp"
+POIN newJobAbilityTable
+POIN checkJobAvailability
+POIN neverShow
+POIN checkAbilityCountAny
+
+ALIGN 4
+checkAbilityCount:
+#incbin "jobAndRaceCustomization/ASM/checkAbilityCount.dmp"
+POIN newJobAbilityTable
+POIN checkAbility
+
+ALIGN 4
+checkAbilityCountAny:
+#incbin "jobAndRaceCustomization/ASM/checkAbilityCountAny.dmp"
+POIN newJobAbilityTable
+POIN checkAbility
+
+PUSH; ORG $7C4C8; SHORT 0x8066; POP //make the game store ability ids on the ability list so we don't need to break our head open
+PUSH; ORG $7C470; SHORT 0x2311 0x224C 0x435A 0x466B 0x589C 0x1C1A; jumpToHack(showAbilitiesNewLists); POP //check if the list should be made the vanilla way or the new way
+ALIGN 4
+showAbilitiesNewLists:
+#incbin "jobAndRaceCustomization/ASM/showabilitiesnewlists.dmp"
+POIN newJobAbilityTable
+POIN checkAbility
+PUSH; ORG $7C4A2; SHORT 0xB408; jumpToHack(showAbilities); POP //always show all abilities in abilities tab while out of combat
+ALIGN 4
+showAbilities:
+#incbin "jobAndRaceCustomization/ASM/showAbilities.dmp"
+POIN invisibleAbilityList
+POIN checkAbility
+
+ALIGN 4
+checkJobCount:
+#incbin "jobAndRaceCustomization/ASM/checkJobCount.dmp"
+WORD highestJob
+POIN checkJobShow
+POIN newItemJobs
+POIN newNoItemEquipJobs
+
+//make the game show all the unlocked jobs in the known abilities list
+PUSH; ORG $7C2F6; SHORT 0x46C0; jumpToHack(makeJobListAbilities); POP
+PUSH; ORG $7C432; SHORT 0x46C0; POP //prevent the game from deciding when the item abilities should appear
+PUSH; ORG $7C43C; SHORT 0x46C0 0x7A00; POP //load job directly instead of command name id
+PUSH; ORG $7E2E6; SHORT 0x46C0; ORG $7C992; SHORT 0x46C0; ORG $7CA34; SHORT 0x46C0; POP //don't reset index on load
+ALIGN 4
+makeJobListAbilities:
+#incbin "jobAndRaceCustomization/ASM/makeJobListAbilities.dmp"
+WORD highestJob
+POIN checkJobShowList
+POIN newItemJobs
+POIN newNoItemEquipJobs
+
+//stop the game from messing our stuff up
+PUSH; ORG $7C6C4; SHORT 0x46C0; ORG $7C7A6; SHORT 0x46C0; POP
+PUSH; ORG $CD0EC; jumpToHack(checkAbilitiesListOther); POP
+ALIGN 4
+checkAbilitiesListOther:
+#incbin "jobAndRaceCustomization/ASM/checkAbilitiesListOther.dmp"
+POIN checkAbility
+#ifdef install1bitAbilities
+	WORD 1
+#else
+	WORD 0
+#endif
+POIN checkJobShowList
+WORD highestJob
+POIN newJobAbilityTable
+
+ALIGN 4
+checkJobUnit:
+#incbin "jobAndRaceCustomization/ASM/checkJobUnit.dmp"
+POIN newJobAbilityTable
+POIN checkAbilityCount
+
+ALIGN 4
+checkJobShowList:
+#incbin "jobAndRaceCustomization/ASM/checkJobShowList.dmp"
+POIN newJobAbilityTable
+POIN checkJobUnit
+POIN neverShow
+POIN checkAbilityCountAny
+
+PUSH; ORG $85CAC; jumpToHack(makeJobWheel); POP //this is just after it gets done setting up everything
+ALIGN 4
+makeJobWheel:
+#incbin "jobAndRaceCustomization/ASM/makeJobWheel.dmp"
+WORD highestJob
+POIN checkJobShowWheel1
+POIN checkJobShowWheel2
+
+PUSH; ORG $8616E; SHORT 0xB408; jumpToHack(switchJobWheel); POP
+ALIGN 4
+switchJobWheel:
+#incbin "jobAndRaceCustomization/ASM/switchJobWheel.dmp"
+
+ALIGN 4
+checkJobShowWheel1:
+#incbin "jobAndRaceCustomization/ASM/checkJobShowWheel1.dmp"
+POIN newJobAbilityTable
+POIN checkJobAvailability
+POIN neverShow
+POIN checkAbilityCountAny
+
+ALIGN 4
+checkJobShowWheel2:
+#incbin "jobAndRaceCustomization/ASM/checkJobShowWheel2.dmp"
+POIN newJobAbilityTable
+POIN checkJobAvailability
+POIN neverShow
+POIN checkAbilityCount
+
+PUSH; ORG $85D06; SHORT 0x46C0; ORG $85C5A; SHORT 0x46C0; ORG $85CD8; SHORT 0x46C0; POP //don't let the game handle the palette for the sprites on the wheel
+PUSH; ORG $85C50; SHORT 0x46C0; POP //this used to set a value for the "changes are irreversible" message
+
+PUSH; ORG $CB9E0; jumpToHack(loadJobIcon); POP //get and load the new icons
+ALIGN 4
+loadJobIcon:
+#incbin "jobAndRaceCustomization/ASM/loadJobIcon.dmp"
+POIN newJobIconTable
+
+PUSH; ORG $CBA14; jumpToHack(getJobIconPalette); POP //get the new icon palette
+ALIGN 4
+getJobIconPalette:
+#incbin "jobAndRaceCustomization/ASM/getJobIconPalette.dmp"
+POIN newJobIconTable
+
+#ifdef newCanEquipDisplay
+ALIGN 4
+equipLR:
+SHORT 0xFFFF 96
+#incext png2dmp "jobAndRaceCustomization/Graphics/LR.png"
+
+ALIGN 4
+equipDraw:
+#incbin "jobAndRaceCustomization/ASM/equipDraw.dmp"
+WORD highestJob
+POIN newJobIconTable
+
+PUSH; ORG $8E516; SHORT 0x46C0 0x46C0; POP //don't draw icons the vanilla way
+
+PUSH; ORG $8E488; jumpToHack(equipPrepareParty); POP //prepare index for can equip in party menu
+ALIGN 4
+equipPrepareParty:
+#incbin "jobAndRaceCustomization/ASM/equipPrepareParty.dmp"
+
+PUSH; ORG $8E578; jumpToHack(equipButtonsParty); POP //draw and check for buttons
+ALIGN 4
+equipButtonsParty:
+#incbin "jobAndRaceCustomization/ASM/equipButtonsParty.dmp"
+POIN equipRaces
+POIN equipLR
+POIN equipDraw
+
+PUSH; ORG $6AF20; SHORT 0x46C0 0x46C0; POP //don't draw icons the vanilla way
+
+PUSH; ORG $6AED0; jumpToHack(equipPrepareShop); POP //prepare index for can equip in the shop
+ALIGN 4
+equipPrepareShop:
+#incbin "jobAndRaceCustomization/ASM/equipPrepareShop.dmp"
+
+
+PUSH; ORG $6AFB8; jumpToHack(equipButtonsShop); POP //draw and check for buttons
+ALIGN 4
+equipButtonsShop:
+#incbin "jobAndRaceCustomization/ASM/equipButtonsShop.dmp"
+POIN equipRaces
+POIN equipLR
+POIN equipDraw
+#endif
+
+PUSH; ORG $25FDC  //new check for job command usability
+#incbin "jobAndRaceCustomization/ASM/battleCheckJobCommand.dmp"
+POIN checkAbilityCount; POP
+
+PUSH; ORG $26D70; jumpToHack(battleCheckPlayerAbility1); POP //new routine to build the ability list
+ALIGN 4
+battleCheckPlayerAbility1:
+#incbin "jobAndRaceCustomization/ASM/battleCheckPlayerAbility1.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $26F6C; jumpToHack(battleCheckPlayerAbility2); POP //new routine to build the ability list
+ALIGN 4
+battleCheckPlayerAbility2:
+#incbin "jobAndRaceCustomization/ASM/battleCheckPlayerAbility2.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $133FEC; jumpToHack(battleCheckEnemyAbility1); POP //new routine to build the ability list
+ALIGN 4
+battleCheckEnemyAbility1:
+#incbin "jobAndRaceCustomization/ASM/battleCheckEnemyAbility1.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $13406E; SHORT 0x46C0; jumpToHack(battleCheckEnemyAbility2); POP //new routine to build the ability list
+ALIGN 4
+battleCheckEnemyAbility2:
+#incbin "jobAndRaceCustomization/ASM/battleCheckEnemyAbility2.dmp"
+POIN newJobAbilityTable
+
+#ifndef install1bitAbilities
+PUSH; ORG $132DE8; SHORT 0x2590; POP //set max ability to highest possible for steal ability
+#endif
+
+#ifdef install1bitAbilities
+PUSH; ORG $132DE8; SHORT 0x25FF; POP //set max ability to highest possible for steal ability
+#endif
+
+PUSH; ORG $CD560 //replacing an ability checking routine with our own
+SHORT 0xB500	//push	{lr}
+SHORT 0x2200	//mov	r2,#0
+SHORT 0x4B02	//ldr	r3,checkAbility
+SHORT 0x469E	//mov	lr,r3
+SHORT 0x2301	//mov	r3,#1
+SHORT 0xF800	//bl	lr
+SHORT 0xBC02	//pop	{r1}
+SHORT 0x4708	//bx	r1
+POIN checkAbility
+POP
+
+PUSH; ORG $133D30 //use the new ability checking routine to get number of abilities available for steal: ability
+SHORT 0x1C30	//mov	r0,r6
+SHORT 0x4641	//mov	r1,r8
+SHORT 0x2200	//mov	r2,#0
+SHORT 0x4B03	//ldr	r3,checkAbility
+SHORT 0x469E	//mov	lr,r3
+SHORT 0x2300	//mov	r3,#0
+SHORT 0xF800	//bl	lr
+SHORT 0x2800	//cmp	r0,#0
+SHORT 0xD103	//bne	0x8133D4A
+SHORT 0xE007	//b	0x8133D54
+POIN checkAbility
+POP
+
+PUSH; ORG $132E62 //use the new ability checking routine to get the specific ability being stolen
+SHORT 0x4640	//mov	r0,r8
+SHORT 0x1C29	//mov	r1,r5
+SHORT 0x2200	//mov	r2,#0
+SHORT 0x4B03	//ldr	r3,checkAbility
+SHORT 0x469E	//mov	lr,r3
+SHORT 0x2300	//mov	r3,#0
+SHORT 0xF800	//bl	lr
+SHORT 0x46C0	//nop
+SHORT 0x2800	//cmp	r0,#0
+SHORT 0xD108	//bne	0x8132E88
+SHORT 0xE003	//b	0x8132E80
+POIN checkAbility
+POP
+
+PUSH; ORG $132FC2 //master stolen ability
+SHORT 0x6830	//ldr	r0,[r6]
+SHORT 0x1C21	//mov	r1,r4
+SHORT 0x2500	//mov	r5,#0
+SHORT 0x4B01	//ldr	r3,masterAbility
+SHORT 0x469E	//mov	lr,r3
+SHORT 0xF800	//bl	lr
+SHORT 0xE002	//b	0x8132E80
+POIN masterAbility
+SHORT 0x46C0	//nop
+SHORT 0x6830	//ldr	r0,[r6]
+SHORT 0x1C21	//mov	r1,r4
+POP
+
+PUSH; ORG $132FF4 //remove ability from target
+SHORT 0x1C01	//mov	r1,r0
+SHORT 0x68B0	//ldr	r0,[r6,#8]
+SHORT 0x4B01	//ldr	r3,removeAbility
+SHORT 0x469E	//mov	lr,r3
+SHORT 0xF800	//bl	lr
+SHORT 0xE002	//b	0x8133006
+POIN removeAbility
+SHORT 0x46C0	//nop
+SHORT 0x68B0	//ldr	r0,[r6,#8]
+SHORT 0x1C21	//mov	r1,r4
+POP
+
+PUSH; ORG $1341EC; jumpToHack(checkDoublecast); POP //check if the enemy has doublecast
+ALIGN 4
+checkDoublecast:
+#incbin "jobAndRaceCustomization/ASM/checkDoublecast.dmp"
+POIN newJobAbilityTable
+POIN checkAbility
+
+PUSH; ORG $CD45E; SHORT 0x7034; ORG $CD464; SHORT 0x703C; POP //make morpher lists save the job id instead of the starting and ending abilities
+
+PUSH; ORG $270E4; jumpToHack(checkMorpherAbility1); POP //new routine to build the ability list for morphers
+ALIGN 4
+checkMorpherAbility1:
+#incbin "jobAndRaceCustomization/ASM/checkMorpherAbility1.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $271D4; jumpToHack(checkMorpherAbility2); POP
+ALIGN 4
+checkMorpherAbility2:
+#incbin "jobAndRaceCustomization/ASM/checkMorpherAbility2.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $27312; SHORT 0x46C0; jumpToHack(getBeastmasterJob); POP //store the job instead of starting ability index
+ALIGN 4
+getBeastmasterJob:
+#incbin "jobAndRaceCustomization/ASM/getBeastmasterJob.dmp"
+
+PUSH; ORG $26FB4; jumpToHack(checkBeastmasterAbility1); POP //new routine to build the ability list for morphers
+ALIGN 4
+checkBeastmasterAbility1:
+#incbin "jobAndRaceCustomization/ASM/checkBeastmasterAbility1.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $2709C; jumpToHack(checkBeastmasterAbility2); POP
+ALIGN 4
+checkBeastmasterAbility2:
+#incbin "jobAndRaceCustomization/ASM/checkBeastmasterAbility2.dmp"
+POIN newJobAbilityTable
+
+PUSH; ORG $417F8A; SHORT 0xFFFF; POP //remove portrait table size limit
+PUSH; ORG $71A8; jumpToHack(loadPortraitTiles); POP //load whatever portrait we want
+ALIGN 4
+loadPortraitTiles:
+#incbin "jobAndRaceCustomization/ASM/loadportraittiles.dmp"
+POIN newPortraitTable //custom portraits table
+
+PUSH; ORG $CB958; jumpToHack(loadPortraitOAM); POP //load whatever portrait oam we want
+ALIGN 4
+loadPortraitOAM:
+#incbin "jobAndRaceCustomization/ASM/loadportraitoam.dmp"
+POIN newPortraitTable //custom portraits table
+
+PUSH; ORG $3DD362; SHORT 0xFFFF; POP //remove portrait palette table size limit
+PUSH; ORG $CB908; jumpToHack(loadPortraitPalette); POP //load whatever portrait oam we want
+ALIGN 4
+loadPortraitPalette:
+#incbin "jobAndRaceCustomization/ASM/loadportraitpalette.dmp"
+POIN newPortraitPaletteTable //custom portrait palettes table
+
+//changing the window that shows which items teach which abilities
+//making the original routine not drawn certain things
+PUSH; ORG $8C758; SHORT 0x46C0 0x46C0; POP //don't draw ability name
+PUSH; ORG $8C7E6; SHORT 0x46C0 0x46C0; POP //don't draw job icon
+PUSH; ORG $8C87C; SHORT 0x46C0 0x46C0; POP //don't AP/JP icon
+PUSH; ORG $8C8A4; SHORT 0x46C0 0x46C0; POP //don't AP/JP cost
+PUSH; ORG $8C630; jumpToHack(newWeaponAbilityWindow1); POP //erase some stuff
+ALIGN 4
+newWeaponAbilityWindow1:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAbilityWindow1.dmp"
+PUSH; ORG $8CB20; jumpToHack(newWeaponAbilityWindow2); POP //and draw our own way
+ALIGN 4
+newWeaponAbilityWindow2:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAbilityWindow2.dmp"
+
+//same as above but for the shop menu
+PUSH; ORG $6FB28; SHORT 0x46C0 0x46C0; POP //don't draw ability name
+PUSH; ORG $6FA3E; SHORT 0x46C0 0x46C0; POP //don't draw job icon
+PUSH; ORG $6FCCA; SHORT 0x46C0 0x46C0; POP //don't AP/JP icon
+PUSH; ORG $6FCE6; SHORT 0x46C0 0x46C0; POP //don't AP/JP cost
+//changing some behaviour
+PUSH; ORG $6FA9A; SHORT 0x46C0; POP //stop loop when drawing, I loop on my new routine
+PUSH; ORG $6F9E0; SHORT 0x46C0; POP //draw even when no abilities
+PUSH; ORG $6FA68; jumpToHack(newWeaponAbilityWindow3); POP //draw our own way
+ALIGN 4
+newWeaponAbilityWindow3:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAbilityWindow3.dmp"
+PUSH; ORG $6F5FC; jumpToHack(newWeaponAbilityWindow4); POP //update ability type icon
+ALIGN 4
+newWeaponAbilityWindow4:
+#incbin "jobAndRaceCustomization/ASM/newWeaponAbilityWindow4.dmp"

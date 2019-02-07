@@ -1,0 +1,69 @@
+//graphics for the party menu
+
+ALIGN 4
+goblinparty:
+#incext png2dmp "party/goblinparty.png"
+
+ALIGN 4
+flanparty:
+#incext png2dmp "party/flanparty.png"
+
+ALIGN 4
+bombparty:
+#incext png2dmp "party/bombparty.png"
+
+ALIGN 4
+dragonparty:
+#incext png2dmp "party/dragonparty.png"
+
+ALIGN 4
+lamiaparty:
+#incext png2dmp "party/lamiaparty.png"
+
+ALIGN 4
+spiderparty:
+#incext png2dmp "party/spiderparty.png"
+
+ALIGN 4
+turtleparty:
+#incext png2dmp "party/turtleparty.png"
+
+ALIGN 4
+fishparty:
+#incext png2dmp "party/fishparty.png"
+
+ALIGN 4
+catparty:
+#incext png2dmp "party/catparty.png"
+
+ALIGN 4
+malboroparty:
+#incext png2dmp "party/malboroparty.png"
+
+ALIGN 4
+eyeparty:
+#incext png2dmp "party/eyeparty.png"
+
+ALIGN 4
+zombieparty:
+#incext png2dmp "party/zombieparty.png"
+
+ALIGN 4
+vampireparty:
+#incext png2dmp "party/vampireparty.png"
+
+ALIGN 4
+fairyparty:
+#incext png2dmp "party/fairyparty.png"
+
+ALIGN 4
+llednarparty:
+#incext png2dmp "party/llednarparty.png"
+
+ALIGN 4
+queenparty:
+#incext png2dmp "party/queenparty.png"
+
+ALIGN 4
+judgeparty:
+#incext png2dmp "party/judgeparty.png"

@@ -1,0 +1,15 @@
+PUSH
+ORG 0xC80+0x852E7C
+SHORT 8
+dataOAM(-40,-16,rectangleH,0,0)
+dataOAM(-40,0,square,0,2)
+dataOAM(-32+4,-24,rectangleV,0,3)
+dataOAM(-16+4,-24,square,0,5)
+dataOAM(-32,-16,square,1,6)
+dataOAM(-32,0,square,1,10)
+dataOAM(-16,-16,rectangleH,1,14)
+dataOAM(-8,-8+1,rectangleH,0,18)
+
+ORG 0x198380+0x69B89C
+#incbin "sprites/adrammelech1.bin"
+POP

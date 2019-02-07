@@ -1,0 +1,32 @@
+PUSH; ORG $8c2e24; WORD newFamfritOam5-0x852E7C; POP
+
+ALIGN 4
+newFamfritOam5:
+SHORT 7
+dataOAM(-40-1,-16+2,square,1,0)
+dataOAM(-40,0+2,rectangleV,1,4)
+dataOAM(-40-1,8,rectangleV,1,8)
+dataOAM(-24-1,-16+2,square,1,12)
+dataOAM(-8-1,-16+2,rectangleH,0,16)
+dataOAM(-8,0+2,square,0,18)
+dataOAM(-8-1,8,square,0,19)
+
+PUSH
+ORG 0x19b2a0+0x69B89C
+#incbin "sprites/famfrit5.bin"
+POP
+
+PUSH; ORG $8c4e94; WORD newUltimaOam1-0x852E7C; POP
+
+PUSH
+ORG 0x1aabc0+0x69B89C
+#incbin "sprites/ultima1.bin"
+POP
+
+ALIGN 4
+newUltimaOam1:
+SHORT 4
+dataOAM(-48,-8,rectangleH,0,0)
+dataOAM(-48+1,8,rectangleV,0,2)
+dataOAM(-40,-8,square,1,4)
+dataOAM(-24,-8,square,1,8)

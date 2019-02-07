@@ -1,0 +1,187 @@
+#include "Extensions/Hack Installation.txt"
+
+//if you are patching a modified rom, you will need to change this number
+//(unless FreeSpace has already been defined)
+#ifndef FreeSpace
+#define FreeSpace 0xA39920
+ORG FreeSpace
+#endif
+
+#ifndef ForbiddenList //this is a list of abilities that can't be purchased, these will also not show learning progress (meant for blue magic)
+#define ForbiddenList 0
+purchaseForbiddenList: //format is BYTE race abilityNumber
+BYTE 1 0x5C 1 0x5D 1 0x5E 1 0x5F //blue magic
+BYTE 1 0x60 1 0x61 1 0x62 1 0x63 1 0x64 1 0x65 1 0x66 1 0x67 1 0x68 1 0x69 1 0x60 1 0x6A 1 0x6B 1 0x6C 1 0x6D 1 0x6E 1 0x6F //more blue magic
+BYTE 1 0x70 1 0x71 //even more blue magic
+BYTE 3 0x34 //item, from alchemist
+BYTE 5 0x33 //mythril, from juggler
+BYTE 0 0 //terminator
+#endif
+
+//please note that this is also defined in jobAndRaceCustomization.event
+//if you want to modify this you'll have to do it there
+#ifndef InvisibleList //this is a list of abilities that will never appear on the ability lists
+#define InvisibleList 0
+invisibleAbilityList: //format is BYTE race abilityNumber
+BYTE 3 0x34 //item, from alchemist
+BYTE 5 0x33 //mythril, from juggler
+BYTE 0 0 //terminator
+#endif
+
+//Steal: JP will deal damage between stealJPAmmount-stealJPVarianceDown and stealJPAmmount+stealJPVarianceUp
+//It will never do 0 if it hits (min 1) and will never steal more JP than the enemy has so don't worry about that
+#ifndef JPnumbers
+#define JPnumbers 0
+#define stealJPAmmount 20 //change steal:JP "damage"
+#define stealJPVarianceUp 10
+#define stealJPVarianceDown 10
+#define steal2JPAmmount 50 //change "damage" of the bishop Judge and Judge Sword abilities
+#define steal2JPVarianceUp 10
+#define steal2JPVarianceDown 10
+#define judgeReward 20 //change judge JP reward, Hunting skill will be this * 10
+#endif
+
+#ifdef install1bitAbilities
+PUSH; ORG $4909A; SHORT 0x46C0 0x46C0; POP //remove AP reward for completing a mission
+PUSH; ORG $4904C; SHORT 0xE025; POP //remove ability learnt messages
+PUSH; ORG $8C900; SHORT 0xD14C; POP //change AP icon palette so that the JP that replaced it is green
+PUSH; ORG $6FCC6; SHORT 0x220D; POP //same thing except the game has a differnt routine for the shop for some reason
+#endif
+
+// reworking what jp is used for
+// changing the looks first
+PUSH; ORG $2C296; SHORT 0x46C0 0x46C0; ORG $3BDBF4; WORD 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0; POP //remove JP display from targeted unit
+PUSH; ORG $75DE8; SHORT 0x2000; POP //stop the JP star from showing up
+PUSH; ORG $C8088; SHORT 0x2000; POP //disable combos and totema summoning
+PUSH; ORG $75768; SHORT 0x2104; POP //draw 4 digits for jp
+	PUSH; ORG $75E12; SHORT 0x46C0; POP //prevent the game from erasing one of the digits
+	PUSH; ORG $75750; jumpToHack(jpMax1); POP //max at 9999 in status screen
+PUSH; ORG $2CD4C; jumpToHack(jpMax2); SHORT 0xF7FF 0xFBF4; POP //draw 4 digits for jp in battle screen
+PUSH; ORG $744D0; jumpToHack(jpMax3); POP //draw 4 digits for jp in party screen
+PUSH; ORG $72B34; jumpToHack(jpSort); POP //during sorting, move jp to the right only when it's over 99 so it behaves like hp and mp, additionally, support 4 digits
+
+ALIGN 4
+jpSort:
+#incbin "jpLearn\jpsort.dmp"
+
+ALIGN 4
+jpMax1:
+#incbin "jpLearn\jpmax1.dmp"
+
+ALIGN 4
+jpMax2:
+#incbin "jpLearn\jpmax2.dmp"
+
+ALIGN 4
+jpMax3:
+#incbin "jpLearn\jpmax3.dmp"
+
+//changing what they do
+PUSH; ORG $83CA4; SHORT 0x46C0 0xB408; jumpToHack(learnAbilityMakePrompt); POP //make the prompt appear when selecting an unlearnt ability
+ALIGN 4
+learnAbilityMakePrompt:
+#incbin "jpLearn\learnabilitymakeprompt.dmp"
+POIN firstPartJP
+POIN secondPartJP
+POIN checkJobUnit
+POIN purchaseForbiddenList
+POIN checkAbility
+#ifdef install1bitAbilities
+WORD 1
+#else
+WORD 0
+#endif
+PUSH; ORG $84524; jumpToHack(learnAbilityFromPrompt); POP //check if "yes" was selected and do the learning if so
+ALIGN 4
+learnAbilityFromPrompt:
+#incbin "jpLearn\learnabilityfromprompt.dmp"
+POIN unlockJobsSkillPurchase
+POIN masterAbility
+#ifdef install1bitAbilities
+WORD 1
+#else
+WORD 0
+#endif
+
+PUSH; ORG $A7198; jumpToHack(grantJP); POP //when granting the exp, also grant JP
+ALIGN 4
+grantJP:
+#incbin "jpLearn\grantjp.dmp"
+
+PUSH; ORG $83760; SHORT 0x46C0 0x46C0; POP //don't draw current ap for ability
+PUSH; ORG $83BBC; SHORT 0x46C0 0x46C0; POP //don't draw current ap for ability
+PUSH; ORG $83B06; SHORT 0x2700; POP //never let the vanilla routine draw MASTERED!
+PUSH; ORG $836AA; SHORT 0x2700; POP //never let the vanilla routine draw MASTERED! 2
+PUSH; ORG $836E4; SHORT 0x46C0; ORG $836EA; SHORT 0xE029; ORG $8376E; SHORT 0x9905; jumpToHack(drawCostJP); POP //don't draw current ap for ability, use our own drawing function (scrolling)
+PUSH; ORG $83B40; SHORT 0x46C0; ORG $83B46; SHORT 0xE029; ORG $83BCA; SHORT 0x9905; jumpToHack(drawCostJP); POP //don't draw current ap for ability, use our own drawing function (refreshing)
+PUSH; ORG $83922; SHORT 0xB408; jumpToHack(resetDrawCostJPCounter); POP //handles small lists
+ALIGN 4
+drawCostJP:
+#incbin "jpLearn\drawcostjp.dmp"
+POIN purchaseForbiddenList
+POIN checkAbility
+#ifdef install1bitAbilities
+WORD 1
+#else
+WORD 0
+#endif
+ALIGN 4
+resetDrawCostJPCounter:
+#incbin "jpLearn\resetdrawcostjpcounter.dmp"
+
+#ifdef install1bitAbilities
+//handle white names when 1 bit
+PUSH; ORG $7C4D8; jumpToHack(isWhite1bit); POP
+ALIGN 4
+isWhite1bit:
+#incbin "jpLearn\isWhite1bit.dmp"
+POIN checkAbility
+#endif
+
+PUSH; ORG $83B9E; SHORT 0x46C0 0x46C0 0x46C0; POP //fix numbers getting cut off on screen refresh
+
+PUSH; ORG $134A74; SHORT 0x46C0; POP //do not reset JP when law is broken
+
+PUSH; ORG $BBB2A; SHORT 0xB408; jumpToHack(judgeFix); POP //making judges not cap jp at 10
+ALIGN 4
+judgeFix:
+#incbin "jpLearn\judgefix.dmp"
+WORD judgeReward
+
+#ifdef install1bitAbilities
+PUSH; ORG $48FE6; SHORT 0xB408; jumpToHack(jpReward); POP //mission completion gives JP instead of AP
+ALIGN 4
+jpReward:
+#incbin "jpLearn\jpreward.dmp"
+#endif
+
+PUSH; ORG $12D57A; SHORT 0x30D6 0x8800; POP //fix steal: jp check
+PUSH; ORG $13156C; jumpToHack(stealJPDamage); POP
+ALIGN 4
+stealJPDamage:
+#incbin "jpLearn\stealjpdamage.dmp"
+WORD stealJPAmmount
+WORD stealJPVarianceUp
+WORD stealJPVarianceDown
+PUSH; ORG $1330E8; jumpToHack(stealJPStore); POP //store the attacker's jp after steal, checking if it went over 9999
+ALIGN 4
+stealJPStore:
+#incbin "jpLearn\stealjpstore.dmp"
+
+PUSH; ORG $131EB2; SHORT 0x46C0; POP //fix steal: jp check
+PUSH; ORG $1314B0; SHORT 0x6828 0x6869; jumpToHack(steal2JPDamage); POP
+ALIGN 4
+steal2JPDamage:
+#incbin "jpLearn\steal2jpdamage.dmp"
+WORD steal2JPAmmount
+WORD steal2JPVarianceUp
+WORD steal2JPVarianceDown
+
+ALIGN 4
+unlockJobsSkillPurchase:
+#incbin "jpLearn/unlockJobsSkillPurchase.dmp"
+WORD highestJob
+POIN checkJobAvailability
+POIN newDefaultJobs
+POIN newJobAbilityTable
+POIN neverShow

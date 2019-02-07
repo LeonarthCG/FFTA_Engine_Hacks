@@ -1,0 +1,36 @@
+#ifndef animationTable
+	#define animationTable 0x390E44
+#endif
+
+#ifndef animationSizeTable
+	#define animationSizeTable 0x391224
+#endif
+
+#ifndef dataOAMinstalled
+#define dataOAMinstalled 0
+#define square 0x0000
+#define rectangleH 0x4000
+#define rectangleV 0x8000
+#define flipH 0x1000
+#define flipV 0x2000
+#define flipVH 0x3000
+#define 4bppMode 0x0000
+#define 8bppMode 0x2000
+#define dataOAM(Y,X,Shape,Size,Tile) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14) 0|(Tile&0x3FF)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority,ColorMode) "SHORT 0|(Y&0xFF)|(Shape)|(ColorMode) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
+#endif
+
+#define setAnimation(ID,location) "PUSH; ORG (animationTable+(ID*4)); POIN location; POP"
+#define setAnimationSize(ID,size) "PUSH; ORG (animationSizeTable+(ID*2)); SHORT size; POP"
+
+#define oam16 0+0x852E7C
+#define oam32 0x61E+0x852E7C
+#define aFrame(tiles,oam,duration) "WORD (tiles-0x69b89c) (oam-0x852e7c); BYTE duration 1; SHORT 0 0 8 0 0"
+#define aFrame(tiles,oam,duration,something) "WORD (tiles-0x69b89c) (oam-0x852e7c); BYTE duration something; SHORT 0 0 8 0 0"
+#define aFrame(tiles,oam,duration,something,short1,short2,short3,short4,short5) "WORD (tiles-0x69b89c) (oam-0x852e7c); BYTE duration something; SHORT short1 short2 short3 short4 short5"
+
+#define aFrameV(tiles,oam,duration) "WORD tiles oam; BYTE duration 1; SHORT 0 0 8 0 0"
+#define aFrameV(tiles,oam,duration,something) "WORD tiles oam; BYTE duration something; SHORT 0 0 8 0 0"
+#define aFrameV(tiles,oam,duration,something,short1,short2,short3,short4,short5) "WORD tiles oam; BYTE duration something; SHORT short1 short2 short3 short4 short5"

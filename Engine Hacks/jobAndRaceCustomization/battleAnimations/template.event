@@ -1,0 +1,1161 @@
+/* -- Battle Animation Template --*/
+//Be sure to define TEMPLATEID!
+//Include this anywhere in your buildfile, making sure it can find the sprite_sheet
+
+//I recommend to just make a folder for each animation and name them after ther ID
+
+#undef	TEMPLATEID
+#define TEMPLATEID x //switch x for your desired battle animation ID value!
+
+{
+
+ALIGN 4
+sprite_sheet:
+#incbin "template.bin" //feel free to change the path or name of the .bin file
+
+//unless you want to further customize your animation, you are done here!
+
+#ifndef animationTable
+	ERROR "Graphics Helpers.event was never included!"
+#endif
+
+#ifndef newWeaponAnimationsInstalled
+	ERROR "Templates must be included after weaponAnimations.event!"
+#endif
+
+setAnimation(TEMPLATEID,animationList)
+setAnimationSize(TEMPLATEID,20)
+
+ALIGN 4
+animationList:
+POIN idle_front_pointer; WORD 0 0
+POIN idle_back_pointer; WORD 0 0
+POIN walk_front_pointer; WORD 0 0
+POIN walk_back_pointer; WORD 0 0
+POIN hit_front_pointer; WORD 0 0
+POIN hit_back_pointer; WORD 0 0
+POIN critical_front_pointer; WORD 0 0
+POIN critical_back_pointer; WORD 0 0
+	WORD 0 0 0 //unknown
+	WORD 0 0 0 //unknown
+POIN downed_front_pointer; WORD 0 0
+POIN downed_back_pointer; WORD 0 0
+POIN jump_front_pointer_1; WORD 0 0
+POIN jump_back_pointer_1; WORD 0 0
+POIN jump_front_pointer_2; WORD 0 0
+POIN jump_back_pointer_2; WORD 0 0
+POIN jump_front_pointer_3; WORD 0 0
+POIN jump_back_pointer_3; WORD 0 0
+POIN jump_front_pointer_4; WORD 0 0
+POIN jump_back_pointer_4; WORD 0 0
+POIN punch_front_pointer; WORD 0 0
+POIN punch_back_pointer; WORD 0 0
+POIN spin_counterclockwise_pointer; WORD 0 0
+POIN spin_clockwise_pointer; WORD 0 0
+POIN high_unarmed_attack_front_pointer; WORD 0 0
+POIN high_unarmed_attack_back_pointer; WORD 0 0
+POIN unarmed_attack_front_pointer; WORD 0 0
+POIN unarmed_attack_back_pointer; WORD 0 0
+POIN low_unarmed_attack_front_pointer; WORD 0 0
+POIN low_unarmed_attack_back_pointer; WORD 0 0
+POIN jump_front_pointer_2; WORD 0 0
+POIN jump_back_pointer_2; WORD 0 0
+POIN fly_front_pointer; WORD 0 0
+POIN fly_back_pointer; WORD 0 0
+POIN jump_front_pointer_4; WORD 0 0
+POIN jump_back_pointer_4; WORD 0 0
+POIN jump_front_pointer_5; WORD 0 0
+POIN jump_back_pointer_5; WORD 0 0
+POIN critical_fall_front_pointer; WORD 0 0
+POIN critical_fall_back_pointer; WORD 0 0
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //slash, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //rapier/lance, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //bow, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+	WORD 0 0 0 //blunt, handled down below, feel free to put custom story animations here
+POIN jump_front_pointer_4; WORD 0 0
+POIN jump_back_pointer_4; WORD 0 0
+POIN sad_front_pointer; WORD 0 0
+POIN sad_back_pointer; WORD 0 0
+POIN shake_head_front_pointer; WORD 0 0
+POIN shake_head_back_pointer; WORD 0 0
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+	WORD 0 0 0 //race specific, unsuported yet
+
+#undef  idle_front_0_shadow
+#define idle_front_0_shadow sprite_sheet+(640*0)
+#undef  walk_front_0_shadow
+#define walk_front_0_shadow sprite_sheet+(640*1)
+#undef  walk_front_1_shadow
+#define walk_front_1_shadow sprite_sheet+(640*2)
+#undef  idle_back_0_shadow
+#define idle_back_0_shadow sprite_sheet+(640*3)
+#undef  walk_back_0_shadow
+#define walk_back_0_shadow sprite_sheet+(640*4)
+#undef  walk_back_1_shadow
+#define walk_back_1_shadow sprite_sheet+(640*5)
+#undef  idle_front_0
+#define idle_front_0 sprite_sheet+(640*6)
+#undef  walk_front_0
+#define walk_front_0 sprite_sheet+(640*7)
+#undef  walk_front_1
+#define walk_front_1 sprite_sheet+(640*8)
+#undef  idle_back_0
+#define idle_back_0 sprite_sheet+(640*9)
+#undef  walk_back_0
+#define walk_back_0 sprite_sheet+(640*10)
+#undef  walk_back_1
+#define walk_back_1 sprite_sheet+(640*11)
+#undef  idle_front_1
+#define idle_front_1 sprite_sheet+(640*12)
+#undef  idle_back_1
+#define idle_back_1 sprite_sheet+(640*13)
+#undef  hurt_front_0
+#define hurt_front_0 sprite_sheet+(640*14)
+#undef  hurt_back_0
+#define hurt_back_0 sprite_sheet+(640*15)
+#undef  critical_front_0_shadow
+#define critical_front_0_shadow sprite_sheet+(640*16)
+#undef  critical_back_0_shadow
+#define critical_back_0_shadow sprite_sheet+(640*17)
+#undef  critical_front_1_shadow
+#define critical_front_1_shadow sprite_sheet+(640*18)
+#undef  critical_back_1_shadow
+#define critical_back_1_shadow sprite_sheet+(640*19)
+#undef  downed_front_0_shadow
+#define downed_front_0_shadow sprite_sheet+(640*20)
+#undef  downed_back_0_shadow
+#define downed_back_0_shadow sprite_sheet+(640*21)
+#undef  downed_front_1_shadow
+#define downed_front_1_shadow sprite_sheet+(640*22)
+#undef  downed_back_1_shadow
+#define downed_back_1_shadow sprite_sheet+(640*23)
+#undef  jump_front_0
+#define jump_front_0 sprite_sheet+(640*24)
+#undef  jump_back_0
+#define jump_back_0 sprite_sheet+(640*25)
+#undef  react_front_0
+#define react_front_0 sprite_sheet+(640*26)
+#undef  react_back_0
+#define react_back_0 sprite_sheet+(640*27)
+#undef  wave_front_0
+#define wave_front_0 sprite_sheet+(640*28)
+#undef  wave_back_0
+#define wave_back_0 sprite_sheet+(640*29)
+#undef  attack_front_0
+#define attack_front_0 sprite_sheet+(640*30)
+#undef  attack_front_1
+#define attack_front_1 sprite_sheet+(640*31)
+#undef  attack_front_2
+#define attack_front_2 sprite_sheet+(640*32)
+#undef  attack_back_0
+#define attack_back_0 sprite_sheet+(640*33)
+#undef  attack_back_1
+#define attack_back_1 sprite_sheet+(640*34)
+#undef  attack_back_2
+#define attack_back_2 sprite_sheet+(640*35)
+#undef  shake_front_0
+#define shake_front_0 sprite_sheet+(640*36)
+#undef  shake_front_1
+#define shake_front_1 sprite_sheet+(640*37)
+#undef  shake_front_2
+#define shake_front_2 sprite_sheet+(640*38)
+#undef  shake_back_0
+#define shake_back_0 sprite_sheet+(640*39)
+#undef  shake_back_1
+#define shake_back_1 sprite_sheet+(640*40)
+#undef  shake_back_2
+#define shake_back_2 sprite_sheet+(640*41)
+#undef  react_front_0_shadow
+#define react_front_0_shadow sprite_sheet+(640*42)
+#undef  react_back_0_shadow
+#define react_back_0_shadow sprite_sheet+(640*43)
+#undef  ninjutsu_front_0
+#define ninjutsu_front_0 sprite_sheet+(640*44)
+#undef  ninjutsu_back_0
+#define ninjutsu_back_0 sprite_sheet+(640*45)
+#undef  provoke_front_0
+#define provoke_front_0 sprite_sheet+(640*46)
+#undef  provoke_back_0
+#define provoke_back_0 sprite_sheet+(640*47)
+#undef  talk_front_0
+#define talk_front_0 sprite_sheet+(640*48)
+#undef  talk_back_0
+#define talk_back_0 sprite_sheet+(640*49)
+#undef  breath_front_0
+#define breath_front_0 sprite_sheet+(640*50)
+#undef  breath_back_0
+#define breath_back_0 sprite_sheet+(640*51)
+#undef  morphed_front_0
+#define morphed_front_0 sprite_sheet+(640*52)
+#undef  morphed_front_1
+#define morphed_front_1 sprite_sheet+(640*53)
+#undef  morphed_back_0
+#define morphed_back_0 sprite_sheet+(640*54)
+#undef  morphed_back_1
+#define morphed_back_1 sprite_sheet+(640*55)
+#undef  summon_front_0
+#define summon_front_0 sprite_sheet+(640*56)
+#undef  summon_back_0
+#define summon_back_0 sprite_sheet+(640*57)
+#undef  wave_front_0_shadow
+#define wave_front_0_shadow sprite_sheet+(640*58)
+#undef  wave_back_0_shadow
+#define wave_back_0_shadow sprite_sheet+(640*59)
+#undef  fly_front_0
+#define fly_front_0 sprite_sheet+(640*60)
+#undef  fly_front_1
+#define fly_front_1 sprite_sheet+(640*61)
+#undef  fly_front_2
+#define fly_front_2 sprite_sheet+(640*62)
+#undef  fly_back_0
+#define fly_back_0 sprite_sheet+(640*63)
+#undef  fly_back_1
+#define fly_back_1 sprite_sheet+(640*64)
+#undef  fly_back_2
+#define fly_back_2 sprite_sheet+(640*65)
+
+ALIGN 4
+idle_front_pointer:
+WORD 4
+aFrame(walk_front_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_front_0_shadow,oam32,08,1,0,0,8,0x000,0)
+aFrame(walk_front_1_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_front_0_shadow,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+idle_back_pointer:
+WORD 4
+aFrame(walk_back_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_back_0_shadow,oam32,08,1,0,0,8,0x000,0)
+aFrame(walk_back_1_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_back_0_shadow,oam32,08,1,0,0,8,0x000,0)
+ALIGN 4
+
+walk_front_pointer:
+WORD 4
+aFrame(walk_front_0,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_front_0,oam32,08,1,0,0,8,0x000,0)
+aFrame(walk_front_1,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_front_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+walk_back_pointer:
+WORD 4
+aFrame(walk_back_0,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_back_0,oam32,08,1,0,0,8,0x000,0)
+aFrame(walk_back_1,oam32,16,1,0,0,8,0x000,0)
+aFrame(idle_back_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+hit_front_pointer:
+WORD 9
+aFrame(hurt_front_0,oam32,03,1,0,0,8,0x000,0)
+aFrame(hurt_front_0,oam32,03,2,0,1,7,0x0FF,0)
+aFrame(hurt_front_0,oam32,03,2,0,0,8,0x000,0)
+aFrame(hurt_front_0,oam32,03,2,0,1,7,0x0FF,0)
+aFrame(hurt_front_0,oam32,03,2,0,0,8,0x000,0)
+aFrame(hurt_front_0,oam32,03,2,0,1,7,0x0FF,0)
+aFrame(hurt_front_0,oam32,04,2,0,0,8,0x000,0)
+aFrame(hurt_front_0,oam32,01,8,2,0,8,0x001,0)
+aFrame(idle_front_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+hit_back_pointer:
+WORD 9
+aFrame(hurt_back_0,oam32,03,1,0,0,8,0x000,0)
+aFrame(hurt_back_0,oam32,03,2,0,1,9,0x001,0)
+aFrame(hurt_back_0,oam32,03,2,0,0,8,0x000,0)
+aFrame(hurt_back_0,oam32,03,2,0,1,9,0x001,0)
+aFrame(hurt_back_0,oam32,03,2,0,0,8,0x000,0)
+aFrame(hurt_back_0,oam32,03,2,0,1,9,0x001,0)
+aFrame(hurt_back_0,oam32,04,2,0,0,8,0x000,0)
+aFrame(hurt_back_0,oam32,01,8,2,0,8,0x001,0)
+aFrame(idle_back_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+critical_front_pointer:
+WORD 2
+aFrame(critical_front_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(critical_front_1_shadow,oam32,16,1,0,0,8,0x000,0)
+
+ALIGN 4
+critical_back_pointer:
+WORD 2
+aFrame(critical_back_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(critical_back_1_shadow,oam32,16,1,0,0,8,0x000,0)
+
+ALIGN 4
+downed_front_pointer:
+WORD 2
+aFrame(downed_front_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(downed_front_1_shadow,oam32,16,1,0,0,8,0x000,0)
+
+ALIGN 4
+downed_back_pointer:
+WORD 2
+aFrame(downed_back_0_shadow,oam32,16,1,0,0,8,0x000,0)
+aFrame(downed_back_1_shadow,oam32,16,1,0,0,8,0x000,0)
+
+ALIGN 4
+jump_front_pointer_1:
+WORD 15
+ aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+aFrame(react_front_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_front_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_front_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_front_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_front_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_front_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_front_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_front_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_front_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_front_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_front_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_front_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_front_0,oam32,8,1,0,0,8,0,0)
+ aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+jump_back_pointer_1:
+WORD 15
+ aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+aFrame(react_back_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_back_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_back_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_back_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_back_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_back_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_back_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_back_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_back_0,oam32,6,1,0,0,8,0,0)
+ aFrame(jump_back_0,oam32,4,1,0,0,7,0,0)
+ aFrame(jump_back_0,oam32,12,2,0,0,4,0xFC,0)
+ aFrame(jump_back_0,oam32,4,2,0,0,8,0,0)
+aFrame(react_back_0,oam32,8,1,0,0,8,0,0)
+ aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+jump_front_pointer_2:
+WORD 6
+aFrame(react_front_0,oam32,6,1,0,0,8,0,0)
+ aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+ aFrame(jump_front_0,oam32,1,1,0,0,8,0,0)
+ aFrame(jump_front_0,oam32,1,8,2,0,8,1,0)
+ aFrame(jump_front_0,oam32,1,8,3,0,8,1,0)
+ aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+jump_back_pointer_2:
+WORD 6
+aFrame(react_back_0,oam32,6,1,0,0,8,0,0)
+ aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+ aFrame(jump_back_0,oam32,1,1,0,0,8,0,0)
+ aFrame(jump_back_0,oam32,1,8,2,0,8,1,0)
+ aFrame(jump_back_0,oam32,1,8,3,0,8,1,0)
+ aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+jump_front_pointer_3:
+WORD 2
+aFrame(jump_front_0,oam32,44,1,0,0,8,0x000,0)
+aFrame(idle_front_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+jump_back_pointer_3:
+WORD 2
+aFrame(jump_back_0,oam32,44,1,0,0,8,0x000,0)
+aFrame(idle_back_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+jump_front_pointer_4:
+WORD 1
+aFrame(react_front_0,oam32,01,1,0,0,8,0x000,0)
+
+ALIGN 4
+jump_back_pointer_4:
+WORD 1
+aFrame(react_back_0,oam32,01,1,0,0,8,0x000,0)
+
+ALIGN 4
+punch_front_pointer:
+WORD 9
+aFrame(react_front_0,oam32,8,1,0,0,8,0,0)
+aFrame(attack_front_0,oam32,30,1,0,4,6,0,0)
+aFrame(attack_front_0,oam32,1,8,2,4,6,1,0)
+aFrame(attack_front_2,oam32,1,1,0,0xFFF8,12,0,0)
+aFrame(attack_front_2,oam32,1,8,1,0xFFF8,12,1,0)
+aFrame(attack_front_2,oam32,1,8,0,0xFFF8,12,1,0)
+aFrame(attack_front_2,oam32,1,8,3,0xFFF8,12,1,0)
+aFrame(attack_front_2,oam32,4,1,0,0xFFFC,10,0,0)
+aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+punch_back_pointer:
+WORD 9
+aFrame(react_back_0,oam32,8,1,0,0,8,0,0)
+aFrame(attack_back_0,oam32,30,1,0,4,10,0,0)
+aFrame(attack_back_0,oam32,1,8,2,4,10,1,0)
+aFrame(attack_back_2,oam32,1,1,0,0xFFF8,4,0,0)
+aFrame(attack_back_2,oam32,1,8,1,0xFFF8,4,1,0)
+aFrame(attack_back_2,oam32,1,8,0,0xFFF8,4,1,0)
+aFrame(attack_back_2,oam32,1,8,3,0xFFF8,4,1,0)
+aFrame(attack_back_2,oam32,4,1,0,0xFFFC,6,0,0)
+aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+spin_counterclockwise_pointer:
+WORD 4
+aFrame(idle_front_0,oam32,4,1,0,0,8,0,0)
+aFrame(idle_front_0,oam32,4,1,0,0,8,1,0)
+ aFrame(idle_back_0,oam32,4,1,0,0,8,1,0)
+ aFrame(idle_back_0,oam32,4,1,0,0,8,0,0)
+
+ALIGN 4
+spin_clockwise_pointer:
+WORD 4
+ aFrame(idle_back_0,oam32,4,1,0,0,8,0,0)
+ aFrame(idle_back_0,oam32,4,1,0,0,8,1,0)
+aFrame(idle_front_0,oam32,4,1,0,0,8,1,0)
+aFrame(idle_front_0,oam32,4,1,0,0,8,0,0)
+
+ALIGN 4
+high_unarmed_attack_front_pointer:
+WORD 13
+ aFrame(react_front_0,oam32,6,1,0,0,8,0,0)
+aFrame(attack_front_0,oam32,2,1,0,2,9,0,0)
+aFrame(attack_front_0,oam32,12,1,0,4,9,0,0)
+  aFrame(wave_front_0,oam32,2,1,0,0xFFFF,8,0,0)
+  aFrame(wave_front_0,oam32,1,8,2,0xFFFF,8,1,0)
+aFrame(attack_front_1,oam32,1,1,0,0xFFFA,8,0,0)
+aFrame(attack_front_1,oam32,1,8,1,0xFFFA,8,1,0)
+aFrame(attack_front_1,oam32,1,8,0,0xFFFA,8,1,0)
+aFrame(attack_front_2,oam32,24,1,0,0xFFFC,7,0,0)
+aFrame(attack_front_2,oam32,1,8,3,0xFFFC,7,1,0)
+ aFrame(react_front_0,oam32,6,1,0,0xFFFE,7,0,0)
+ aFrame(react_front_0,oam32,9,1,0,0,8,0,0)
+  aFrame(idle_front_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+high_unarmed_attack_back_pointer:
+WORD 13
+ aFrame(react_back_0,oam32,6,1,0,0,8,0,0)
+aFrame(attack_back_0,oam32,2,1,0,2,9,0,0)
+aFrame(attack_back_0,oam32,12,1,0,4,10,0,0)
+  aFrame(wave_back_0,oam32,2,1,0,1,7,0,0)
+  aFrame(wave_back_0,oam32,1,8,2,1,7,1,0)
+aFrame(attack_back_1,oam32,1,1,0,0xFFFE,6,0,0)
+aFrame(attack_back_1,oam32,1,8,1,0xFFFE,6,1,0)
+aFrame(attack_back_1,oam32,1,8,0,0xFFFE,6,1,0)
+aFrame(attack_back_2,oam32,24,1,0,0xFFFE,6,0,0)
+aFrame(attack_back_2,oam32,1,8,3,0xFFFE,6,1,0)
+ aFrame(react_back_0,oam32,6,1,0,0xFFFE,7,0,0)
+ aFrame(react_back_0,oam32,9,1,0,0,8,0,0)
+  aFrame(idle_back_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+unarmed_attack_front_pointer:
+WORD 12
+ aFrame(react_front_0,oam32,06,1,0,0x0000,08,0,0)
+aFrame(attack_front_0,oam32,02,1,0,0x0002,07,0,0)
+aFrame(attack_front_0,oam32,16,1,0,0x0004,06,0,0)
+aFrame(attack_front_0,oam32,01,8,2,0x0004,06,1,0)
+aFrame(attack_front_1,oam32,01,1,0,0xFFFA,11,0,0)
+aFrame(attack_front_1,oam32,01,8,1,0xFFFA,11,1,0)
+aFrame(attack_front_1,oam32,01,8,0,0xFFFA,11,1,0)
+aFrame(attack_front_2,oam32,24,1,0,0xFFFC,10,0,0)
+aFrame(attack_front_2,oam32,01,8,3,0xFFFC,10,1,0)
+ aFrame(react_front_0,oam32,06,1,0,0xFFFE,09,0,0)
+ aFrame(react_front_0,oam32,09,1,0,0x0000,08,0,0)
+  aFrame(idle_front_0,oam32,08,1,0,0x0000,08,0,0)
+
+ALIGN 4
+unarmed_attack_back_pointer:
+WORD 12
+ aFrame(react_back_0,oam32,06,1,0,0x0000,08,0,0)
+aFrame(attack_back_0,oam32,02,1,0,0x0002,09,0,0)
+aFrame(attack_back_0,oam32,16,1,0,0x0004,10,0,0)
+aFrame(attack_back_0,oam32,01,8,2,0x0004,10,1,0)
+aFrame(attack_back_1,oam32,01,1,0,0xFFFA,05,0,0)
+aFrame(attack_back_1,oam32,01,8,1,0xFFFA,05,1,0)
+aFrame(attack_back_1,oam32,01,8,0,0xFFFA,05,1,0)
+aFrame(attack_back_2,oam32,24,1,0,0xFFFC,06,0,0)
+aFrame(attack_back_2,oam32,01,8,3,0xFFFC,06,1,0)
+ aFrame(react_back_0,oam32,06,1,0,0xFFFE,07,0,0)
+ aFrame(react_back_0,oam32,09,1,0,0x0000,08,0,0)
+  aFrame(idle_back_0,oam32,08,1,0,0x0000,08,0,0)
+
+ALIGN 4
+low_unarmed_attack_front_pointer:
+WORD 12
+ aFrame(react_front_0,oam32,06,1,0,0x0000,08,0,0)
+aFrame(attack_front_0,oam32,02,1,0,0x0002,07,0,0)
+aFrame(attack_front_0,oam32,16,1,0,0x0004,06,0,0)
+aFrame(attack_front_0,oam32,01,8,2,0x0004,06,1,0)
+aFrame(attack_front_2,oam32,01,1,0,0xFFFA,13,0,0)
+aFrame(attack_front_2,oam32,01,8,1,0xFFFA,13,1,0)
+aFrame(attack_front_2,oam32,01,8,0,0xFFFA,13,1,0)
+aFrame(attack_front_2,oam32,24,1,0,0xFFFC,10,0,0)
+aFrame(attack_front_2,oam32,01,8,3,0xFFFC,10,1,0)
+ aFrame(react_front_0,oam32,06,1,0,0xFFFE,09,0,0)
+ aFrame(react_front_0,oam32,09,1,0,0x0000,08,0,0)
+  aFrame(idle_front_0,oam32,08,1,0,0x0000,08,0,0)
+
+ALIGN 4
+low_unarmed_attack_back_pointer:
+WORD 12
+ aFrame(react_back_0,oam32,06,1,0,0x0000,08,0,0)
+aFrame(attack_back_0,oam32,02,1,0,0x0002,09,0,0)
+aFrame(attack_back_0,oam32,16,1,0,0x0004,10,0,0)
+aFrame(attack_back_0,oam32,01,8,2,0x0004,10,1,0)
+aFrame(attack_back_2,oam32,01,1,0,0xFFFA,07,0,0)
+aFrame(attack_back_2,oam32,01,8,1,0xFFFA,07,1,0)
+aFrame(attack_back_2,oam32,01,8,0,0xFFFA,07,1,0)
+aFrame(attack_back_2,oam32,24,1,0,0xFFFC,08,0,0)
+aFrame(attack_back_2,oam32,01,8,3,0xFFFC,08,1,0)
+ aFrame(react_back_0,oam32,06,1,0,0xFFFE,07,0,0)
+ aFrame(react_back_0,oam32,09,1,0,0x0000,08,0,0)
+  aFrame(idle_back_0,oam32,08,1,0,0x0000,08,0,0)
+
+ALIGN 4
+fly_front_pointer:
+WORD 4
+aFrame(fly_front_1,oam32,16,1,0,0xFFFC,10,0,0)
+aFrame(fly_front_0,oam32,8,1,0,0,8,0,0)
+aFrame(fly_front_2,oam32,16,1,0,4,6,0,0)
+aFrame(fly_front_0,oam32,8,0,0,0,8,0,0)
+
+ALIGN 4
+fly_back_pointer:
+WORD 4
+aFrame(fly_back_1,oam32,16,1,0,0xFFFF,10,0,0)
+aFrame(fly_back_0,oam32,8,1,0,0,8,0,0)
+aFrame(fly_back_2,oam32,16,1,0,0xFFFF,10,0,0)
+aFrame(fly_back_0,oam32,8,1,0,0,8,0,0)
+
+ALIGN 4
+jump_front_pointer_5:
+WORD 1
+aFrame(jump_front_0,oam32,1,1,0,0,08,0,0)
+
+ALIGN 4
+jump_back_pointer_5:
+WORD 1
+aFrame(jump_back_0,oam32,1,1,0,0,08,0,0)
+
+ALIGN 4
+critical_fall_front_pointer:
+WORD 2
+aFrame(critical_front_0_shadow,oam32,06,1,0,0,8,0x000,0)
+           aFrame(idle_front_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+critical_fall_back_pointer:
+WORD 2
+aFrame(critical_back_0_shadow,oam32,06,1,0,0,8,0x000,0)
+           aFrame(idle_back_0,oam32,08,1,0,0,8,0x000,0)
+
+ALIGN 4
+sad_front_pointer:
+WORD 1
+aFrame(shake_front_0,oam32,1,1,0,0,8,0,0)
+
+ALIGN 4
+sad_back_pointer:
+WORD 1
+aFrame(shake_back_0,oam32,1,1,0,0,8,0,0)
+
+ALIGN 4
+shake_head_front_pointer:
+WORD 6
+aFrame(shake_front_1,oam32,12)
+aFrame(shake_front_0,oam32,8)
+aFrame(shake_front_2,oam32,12)
+aFrame(shake_front_0,oam32,8)
+aFrame(shake_front_1,oam32,12)
+aFrame(shake_front_0,oam32,8)
+
+ALIGN 4
+shake_head_back_pointer:
+WORD 6
+aFrame(shake_back_1,oam32,12)
+aFrame(shake_back_0,oam32,8)
+aFrame(shake_back_2,oam32,12)
+aFrame(shake_back_0,oam32,8)
+aFrame(shake_back_1,oam32,12)
+aFrame(shake_back_0,oam32,8)
+
+//weapon animations
+newWeaponAnimationEntry(TEMPLATEID,WEAPONANIMATIONTABLETEMPLATE)
+ALIGN 4
+WEAPONANIMATIONTABLETEMPLATE:
+POIN newWeaponAnimationTableAnimationNumber0 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber1 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber2 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber3 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber4 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber5 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber6 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber7 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber8 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber9 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber10 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber11 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber12 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber13 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber14 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber15 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber16 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber17 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber18 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber19 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber20 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber21 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber22 ;WORD 0 0
+POIN newWeaponAnimationTableAnimationNumber23 ;WORD 0 0
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber0:
+newWeaponAnimationTableAnimationNumber2:
+newWeaponAnimationTableAnimationNumber4:
+WORD 12
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x16,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0002,0x0007,0x0001,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0001,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_2,oam32,0x19,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber1:
+newWeaponAnimationTableAnimationNumber3:
+newWeaponAnimationTableAnimationNumber5:
+WORD 14
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x14,0x01,0x0000,0x0001,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0001,0x0009,0x0001,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0001,0x0009,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_2,oam32,0x17,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x08,0x0003,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber6:
+WORD 13
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_front_0,oam32,0x04,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x12,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0004,0x0006,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFC,0x000A,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0001,0xFFFC,0x000A,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFC,0x000A,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber7:
+WORD 13
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_back_0,oam32,0x04,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x10,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0004,0x000A,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0006,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0006,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0xFFFC,0x0006,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0007,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber8:
+WORD 13
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_front_0,oam32,0x04,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x12,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0004,0x0006,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFC,0x000A,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0001,0xFFFC,0x000A,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFC,0x000A,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber9:
+WORD 13
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_back_0,oam32,0x04,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x10,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0004,0x000A,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0006,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0006,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0xFFFC,0x0006,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0007,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber10:
+WORD 13
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_front_0,oam32,0x04,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x02,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x12,0x02,0x0000,0x0004,0x0006,0x00FE,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0004,0x0006,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFC,0x000C,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0001,0xFFFC,0x000C,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFC,0x000C,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x000B,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0xFFFE,0x000B,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber11:
+WORD 13
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(walk_back_0,oam32,0x04,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x12,0x02,0x0000,0x0004,0x000A,0x0002,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0004,0x000A,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0008,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0xFFFC,0x0008,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0008,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber12:
+newWeaponAnimationTableAnimationNumber14:
+newWeaponAnimationTableAnimationNumber16:
+WORD 10
+aFrame(attack_front_2,oam32,0x02,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x08,0x01,0x0000,0xFFFE,0x0008,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x04,0x01,0x0000,0x0001,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x18,0x01,0x0000,0x0003,0x0008,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0002,0x0003,0x0008,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0x0003,0x0008,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x27,0x01,0x0000,0x0003,0x0008,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0x0003,0x0008,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber13:
+newWeaponAnimationTableAnimationNumber15:
+newWeaponAnimationTableAnimationNumber17:
+WORD 9
+aFrame(attack_back_0,oam32,0x08,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x04,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x18,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0002,0x0002,0x0009,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0x0002,0x0009,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x27,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0003,0x0002,0x0009,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber18:
+newWeaponAnimationTableAnimationNumber20:
+WORD 12
+aFrame(react_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x14,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0002,0x0007,0x0001,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0001,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber19:
+newWeaponAnimationTableAnimationNumber21:
+WORD 13
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x14,0x01,0x0000,0x0001,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0001,0x0008,0x0001,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0001,0x0008,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0000,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x1B,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0003,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber22:
+WORD 12
+aFrame(react_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x14,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0002,0x0002,0x0007,0x0001,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x01,0x08,0x0001,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0000,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x1B,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_1,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newWeaponAnimationTableAnimationNumber23:
+WORD 14
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x14,0x01,0x0000,0x0001,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x01,0x08,0x0002,0x0001,0x0009,0x0001,0x0000)
+aFrame(attack_back_0,oam32,0x02,0x01,0x0000,0x0001,0x0009,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x01,0x08,0x0001,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_2,oam32,0x02,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x08,0x0000,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(attack_back_2,oam32,0x17,0x01,0x0000,0xFFFC,0x0007,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x08,0x0003,0xFFFC,0x0007,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+//ability animations
+newSpecialAnimationEntry(TEMPLATEID,ABILITYANIMATIONTABLETEMPLATE)
+ALIGN 4
+ABILITYANIMATIONTABLETEMPLATE:
+POIN newSpecialAnimationTalkFront; WORD 0 0
+POIN newSpecialAnimationTalkBack; WORD 0 0
+POIN newSpecialAnimationMorphedFront; WORD 0 0
+POIN newSpecialAnimationMorphedBack; WORD 0 0
+POIN newSpecialAnimationStuntFront; WORD 0 0
+POIN newSpecialAnimationStuntBack; WORD 0 0
+POIN newSpecialAnimationSwingFront; WORD 0 0
+POIN newSpecialAnimationSwingBack; WORD 0 0
+POIN newSpecialAnimationConcealFront; WORD 0 0
+POIN newSpecialAnimationConcealBack; WORD 0 0
+POIN newSpecialAnimationSpinFront; WORD 0 0
+POIN newSpecialAnimationSpinBack; WORD 0 0
+POIN newSpecialAnimationThrowFront; WORD 0 0
+POIN newSpecialAnimationThrowBack; WORD 0 0
+POIN newSpecialAnimationYellFront; WORD 0 0
+POIN newSpecialAnimationYellBack; WORD 0 0
+POIN newSpecialAnimationPrayerFront; WORD 0 0
+POIN newSpecialAnimationPrayerBack; WORD 0 0
+POIN newSpecialAnimationNinjutsuFront; WORD 0 0
+POIN newSpecialAnimationNinjutsuBack; WORD 0 0
+POIN newSpecialAnimationChargedPunchFront; WORD 0 0
+POIN newSpecialAnimationChargedPunchBack; WORD 0 0
+POIN newSpecialAnimationProvokeFront; WORD 0 0
+POIN newSpecialAnimationProvokeBack; WORD 0 0
+POIN newSpecialAnimationDragoonJumpJumpFront; WORD 0 0
+POIN newSpecialAnimationDragoonJumpJumpBack; WORD 0 0
+POIN newSpecialAnimationDragoonJumpFallFront; WORD 0 0
+POIN newSpecialAnimationDragoonJumpFallBack; WORD 0 0
+
+ALIGN 4
+newSpecialAnimationTalkFront:
+WORD 1
+aFrame(talk_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationTalkBack:
+WORD 1
+aFrame(talk_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationMorphedFront:
+WORD 2
+aFrame(morphed_front_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(morphed_front_1,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationMorphedBack:
+WORD 2
+aFrame(morphed_back_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(morphed_back_1,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationStuntFront:
+WORD 2
+aFrame(react_front_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationStuntBack:
+WORD 2
+aFrame(react_back_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationSwingFront:
+WORD 8
+aFrame(react_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_front_0,oam32,0x01,0x08,0x0002,0x0000,0x0008,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x01,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(walk_front_1,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationSwingBack:
+WORD 8
+aFrame(react_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x08,0x0002,0x0000,0x0008,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x08,0x0003,0xFFFE,0x0007,0x0001,0x0000)
+aFrame(walk_back_1,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationConcealFront:
+WORD 1
+aFrame(wave_front_0_shadow,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationConcealBack:
+WORD 1
+aFrame(wave_back_0_shadow,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationSpinFront:
+WORD 20
+aFrame(attack_front_2,oam32,0x02,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x14,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x01,0x08,0x0002,0x0004,0x0006,0x0001,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationSpinBack:
+WORD 20
+aFrame(attack_back_2,oam32,0x02,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x14,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x01,0x08,0x0002,0x0004,0x000A,0x0001,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_1,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0100,0x0000)
+aFrame(attack_front_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x03,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationThrowFront:
+WORD 11
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x04,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(attack_front_0,oam32,0x0C,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(wave_front_0,oam32,0x04,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_front_0,oam32,0x01,0x08,0x0002,0x0000,0x0008,0x0001,0x0000)
+aFrame(wave_front_0,oam32,0x01,0x08,0x0000,0x0000,0x0008,0x0001,0x0000)
+aFrame(attack_front_1,oam32,0x02,0x01,0x0000,0xFFFC,0x000A,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x20,0x01,0x0000,0xFFFC,0x000A,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x04,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationThrowBack:
+WORD 11
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x04,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(attack_back_0,oam32,0x0C,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x04,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x08,0x0002,0x0000,0x0008,0x0001,0x0000)
+aFrame(wave_back_0,oam32,0x01,0x08,0x0000,0x0000,0x0008,0x0001,0x0000)
+aFrame(attack_back_1,oam32,0x02,0x01,0x0000,0xFFFC,0x0006,0x0000,0x0000)
+aFrame(attack_back_2,oam32,0x20,0x01,0x0000,0xFFFC,0x0006,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x06,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x04,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationYellFront:
+WORD 9
+aFrame(idle_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x03,0x01,0x0000,0x0002,0x0007,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x01,0x08,0x0002,0x0002,0x0007,0x0001,0x0000)
+aFrame(react_front_0,oam32,0x18,0x01,0x0000,0x0004,0x0006,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell,oam32,0x02,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell,oam32,0x01,0x01,0x0000,0xFFFE,0x0009,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell,oam32,0x01,0x08,0x0003,0xFFFE,0x0009,0x0001,0x0000)
+aFrame(walk_front_1,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationYellBack:
+WORD 9
+aFrame(idle_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x03,0x01,0x0000,0x0002,0x0009,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x01,0x08,0x0002,0x0002,0x0009,0x0001,0x0000)
+aFrame(react_back_0,oam32,0x18,0x01,0x0000,0x0004,0x000A,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell+640,oam32,0x02,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell+640,oam32,0x01,0x01,0x0000,0xFFFE,0x0007,0x0000,0x0000)
+aFrame(newSpecialAnimationTiles0Yell+640,oam32,0x01,0x08,0x0003,0xFFFE,0x0007,0x0001,0x0000)
+aFrame(walk_back_0,oam32,0x0A,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationPrayerFront:
+WORD 1
+aFrame(summon_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationPrayerBack:
+WORD 1
+aFrame(summon_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationNinjutsuFront:
+WORD 1
+aFrame(ninjutsu_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationNinjutsuBack:
+WORD 1
+aFrame(ninjutsu_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationChargedPunchFront:
+WORD 1
+aFrame(attack_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationChargedPunchBack:
+WORD 1
+aFrame(attack_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationProvokeFront:
+WORD 1
+aFrame(provoke_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationProvokeBack:
+WORD 1
+aFrame(provoke_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationDragoonJumpJumpFront:
+WORD 3
+aFrame(idle_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(jump_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationDragoonJumpJumpBack:
+WORD 3
+aFrame(idle_back_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(react_back_0,oam32,0x0C,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(jump_back_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+ALIGN 4
+newSpecialAnimationDragoonJumpFallFront:
+newSpecialAnimationDragoonJumpFallBack:
+WORD 7
+aFrame(attack_front_2,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(attack_front_2,oam32,0x01,0x08,0x0002,0x0000,0x0008,0x0001,0x0000)
+aFrame(jump_front_0,oam32,0x01,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(jump_front_0,oam32,0x01,0x08,0x0003,0x0000,0x0008,0x0001,0x0000)
+aFrame(critical_front_0_shadow,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
+
+#undef TEMPLATEID
+
+}

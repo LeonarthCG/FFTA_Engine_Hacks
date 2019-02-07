@@ -1,0 +1,48 @@
+PUSH; ORG 0x8ba8e8; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba8fc; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba910; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba924; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba938; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba988; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8ba9d8; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8baa28; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8baa64; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8baa78; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8baa8c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bad54; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bad68; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bad7c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8badcc; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bae1c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bae6c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb108; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb11c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb130; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb144; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb158; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb1a8; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb1f8; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb248; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb284; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb298; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb2ac; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb2e4; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb44c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb49c; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb4ec; WORD newFloateyeOam14-0x852E7C; POP
+PUSH; ORG 0x8bb5a0; WORD newFloateyeOam14-0x852E7C; POP
+
+ALIGN 4
+newFloateyeOam14:
+SHORT 6
+dataOAM(-32,-24+8,rectangleV,0,0)
+dataOAM(-32,-16+8,square,1,2)
+dataOAM(-32,0+8,square,1,6)
+dataOAM(-16,-24+8,rectangleV,0,10)
+dataOAM(-16,-16+8,square,1,12)
+dataOAM(-16,0+8,square,1,16)
+
+PUSH
+ORG 0x160380+0x69B89C
+#incbin "sprites/floateye14.bin"
+POP

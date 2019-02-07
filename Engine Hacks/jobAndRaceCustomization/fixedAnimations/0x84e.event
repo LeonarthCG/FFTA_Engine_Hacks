@@ -1,0 +1,43 @@
+PUSH; ORG 0x8b9fe4; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9434; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9448; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b99a0; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b99b4; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9d54; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9da4; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9db8; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9dcc; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9e1c; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9e30; WORD newMalboroOam2-0x852E7C; POP
+PUSH; ORG 0x8b9e44; WORD newMalboroOam2-0x852E7C; POP
+
+PUSH; ORG 0x8b99c8; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b99dc; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b99f0; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a04; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a18; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a2c; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a40; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a54; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a68; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a7c; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9a90; WORD newMalboroOam3-0x852E7C; POP
+PUSH; ORG 0x8b9aa4; WORD newMalboroOam3-0x852E7C; POP
+
+ALIGN 4
+newMalboroOam2:
+newMalboroOam3:
+SHORT 6
+dataOAM(-40,-16,rectangleH,0,0)
+dataOAM(-40,0,rectangleH,0,2)
+dataOAM(-32,-8-8+3,square,1,4)
+dataOAM(-32,8-8+3,square,1,8)
+dataOAM(-16,-16,square,1,12)
+dataOAM(-16,0,square,1,16)
+
+PUSH
+ORG 0x15a3c0+0x69B89C
+#incbin "sprites/malboro2.bin"
+ORG 0x15ae60+0x69B89C
+#incbin "sprites/malboro3.bin"
+POP
