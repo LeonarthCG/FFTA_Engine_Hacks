@@ -49,6 +49,7 @@ lsl	r0,r1,#1
 add	r0,r1
 lsl	r0,#1
 add	r0,#0xC
+mov	r2,#12
 b	End
 
 goto8021030:
@@ -58,9 +59,17 @@ and	r1,r2
 lsl	r0,r1,#1
 add	r0,r1
 lsl	r0,#1
+mov	r2,#0
 
 End:
 add	r0,r3
+@if no animation, standing animation
+ldr	r1,[r0]
+mov	r1,#0
+cmp	r1,#0
+bne	hasanimation
+add	r0,r3,r2
+hasanimation:
 pop	{r4,r5}
 pop	{r1}
 bx	r1

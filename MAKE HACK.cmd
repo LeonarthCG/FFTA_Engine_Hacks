@@ -8,6 +8,6 @@ Core A FE8 "-output:%~dp0FFTA_hack.gba" "-input:%~dp0ROM Buildfile.event"
 
 cd "%~dp0ups"
 
-ups diff -b "%~dp0FFTA_clean.gba" -m "%~dp0FFTA_hack.gba" -o "%~dp0FFTA_JP_Skill_Purchase.ups"
+ups diff -b "%~dp0FFTA_clean.gba" -m "%~dp0FFTA_hack.gba" -o "%~dp0FFTA_hack.ups"
 
 pause
