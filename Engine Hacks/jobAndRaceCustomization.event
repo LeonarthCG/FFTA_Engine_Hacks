@@ -57,7 +57,7 @@ PUSH; ORG $1030B6; SHORT 0x21F0; POP //0xF0 Conceal (yes, it uses two animations
 	/*might be incomplete*/
 	PUSH; ORG $F621E; SHORT 0x22F1; ORG $F6AE8; SHORT 0x22F1; ORG $F87B0; SHORT 0x22F1; ORG $FC1FC; SHORT 0x22F1; POP //0xF1 Spin (whirlwind, mow down, wild swing, swallowtail)
 PUSH; ORG $FE4A8; SHORT 0x21F2; ORG $1027DE; SHORT 0x22F2; POP //0xF2 Throw (throw, hurl)
-PUSH; ORG $FAE7A; SHORT 0x22F3; ORG $1087C4; SHORT 0x26F3; POP //0xF3 Yell (bangaa cry and breaths)
+PUSH; ORG $FAE7A; SHORT 0x22F3; ORG $1087C4; SHORT 0x26F3; ORG $F9228; SHORT 0x22F3; POP //0xF3 Yell (bangaa cry and breaths, warcry)
 PUSH; ORG $E0F36; SHORT 0x21F4; POP //0xF4 Prayer (summon, spirit magic)
 PUSH; ORG $E140E; SHORT 0x21F5; POP //0xF5 Ninjutsu
 	/*might be incomplete*/
