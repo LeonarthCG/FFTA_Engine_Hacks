@@ -65,7 +65,6 @@ End:
 add	r0,r3
 @if no animation, standing animation
 ldr	r1,[r0]
-mov	r1,#0
 cmp	r1,#0
 bne	hasanimation
 add	r0,r3,r2
