@@ -1,6 +1,6 @@
 .thumb
 
-cmp	r1,#0x54
+cmp	r1,#0x50
 blo	dontset
 cmp	r1,#0x78
 bhi	dontset

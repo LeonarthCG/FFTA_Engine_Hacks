@@ -20,7 +20,7 @@ bhs	special
 b	regular
 custom:
 and	r2,r4
-mov	r4,#0x54
+mov	r4,#0x50
 ldr	r3,weaponAnimationTable
 lsl	r5,#2
 ldr	r3,[r3,r5]
