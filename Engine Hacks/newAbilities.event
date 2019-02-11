@@ -39,7 +39,7 @@ jobDataRoutines:
 WORD 0	//terminator
 
 #ifdef installMovementAbilities
-	PUSH; ORG $CA304; jumpToHack(abilityIgnoreHeightRoutine); POP
+	PUSH; ORG $99EB4; jumpToHack(abilityIgnoreHeightRoutine); POP
 #endif
 
 #ifdef installMovementAbilities
