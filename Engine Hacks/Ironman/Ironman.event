@@ -1,8 +1,5 @@
 //make it always game over, even for non-story missions
-PUSH; ORG $122222; SHORT 0x2004; ORG $122240; SHORT 0; ORG $122258; SHORT 0x2001; POP
-
-//remove judges
-PUSH; ORG $CED86; SHORT 0x2000; ORG $BC7BE; SHORT 0x2000; ORG $BAC5A; SHORT 0x2000; POP
+PUSH; ORG $122222; SHORT 0x2004; ORG $122240; SHORT 0x46C0; ORG $122258; SHORT 0x2001; POP
 
 //always give game overs, even if it would normally be mission/battle failed
 PUSH; ORG $9A8B1A; BYTE 0x19 0x21 0x1; POP

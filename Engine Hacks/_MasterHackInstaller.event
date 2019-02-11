@@ -82,6 +82,7 @@ noLawGraphicsOverworld:
 #ifdef stealShoes
 PUSH; ORG $12D540; SHORT 0x2203; POP //3 types of items to steal
 PUSH; ORG $12D548; POIN StealAccessoryList; POP
+ALIGN 4
 StealAccessoryList:
 SHORT 0x1D 0x1C 0x1B
 PUSH; ORG $133038

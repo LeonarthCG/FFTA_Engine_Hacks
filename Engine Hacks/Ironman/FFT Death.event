@@ -29,14 +29,8 @@ ORG $09DC9C; jumpToHack(starsFFTdeath) //KO stars based on undead rise counter i
 //make it always game over, even for non-story missions
 ORG $122222; SHORT 0x2004; ORG $122240; SHORT 0x46C0; ORG $122258; SHORT 0x2001
 
-//remove judges
-ORG $CED86; SHORT 0x2000; ORG $BC7BE; SHORT 0x2000; ORG $BAC5A; SHORT 0x2000
-
 //always give game overs, even if it would normally be mission/battle failed
 ORG $9A8B1A; BYTE 0x19 0x21 0x1
-
-//remove vanilla jagd death
-ORG $123A1E; SHORT 0x46C0 0x46C0
 
 POP
 
