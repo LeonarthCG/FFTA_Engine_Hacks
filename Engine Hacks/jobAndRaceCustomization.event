@@ -696,3 +696,27 @@ PUSH; ORG $6F5FC; jumpToHack(newWeaponAbilityWindow4); POP //update ability type
 ALIGN 4
 newWeaponAbilityWindow4:
 #incbin "jobAndRaceCustomization/ASM/newWeaponAbilityWindow4.dmp"
+
+PUSH; ORG $1340F8; jumpToHack(getAbilityID); POP //get ability ID given ability data pointer, if possible
+ALIGN 4
+getAbilityID:
+#incbin "jobAndRaceCustomization/ASM/getAbilityID.dmp"
+
+PUSH; ORG $A7BCA; SHORT 0x1C31; jumpToHack(checkAbilityLearning); POP //check if ability is mastered on learning check
+ALIGN 4
+checkAbilityLearning:
+#incbin "jobAndRaceCustomization/ASM/checkAbilityLearning.dmp"
+POIN checkAbility
+
+PUSH; ORG $A7B88; jumpToHack(checkLearningEquipped); POP //check if learning is equipped, or is a passive, also roll learn chance
+ALIGN 4
+checkLearningEquipped:
+#incbin "jobAndRaceCustomization/ASM/checkLearningEquipped.dmp"
+POIN learnJobs
+WORD learnChance
+
+PUSH; ORG $A7BE4; jumpToHack(learningLearn); POP //makes blue mage learning use the new ability mastering routines
+ALIGN 4
+learningLearn:
+#incbin "jobAndRaceCustomization/ASM/learningLearn.dmp"
+POIN masterAbility

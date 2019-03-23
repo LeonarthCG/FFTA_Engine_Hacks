@@ -15,3 +15,18 @@
 
 //this defines what the highest animation ID is, used for macros and similar stuff
 #define highestAnimation 0xF7
+
+//this determines if blue mages get passive learning, you can customize the list of jobs that get this passive in data.event
+#define blueMagePassive 0
+
+//this determines the % of a unit learning an ability when it gets hit by it, the unit still needs to have learning equipped (or as a passive)
+#define learnChance 100
+
+//when checking for compatible jobs, routines will stop here (or start from here and stop after 2)
+//units that have neverShow as their special unlock condition are skipped to prevent lag and for safety
+#define highestJob 0x73
+
+//size of the random name table, must be divisible by highestNameMultiple
+//result is highestName*(2^highestNamePower)
+#define highestNamePower 2 //power of 2, so 2 = 4, 3 = 8 and so on
+#define highestName (0x2D4>>highestNamePower) //result must not be higher than 0xFF

@@ -47,6 +47,7 @@ The source for all of the ASM is included (and precompiled, too).
 * Morphing Morphers morph (Morphs will change aspect when morphing).
 * Manual unit sorting.
 * Job and race customization, this is not optional as it's required for everything to work properly.
+	* Unhardcoding of a bunch of stuff, from job abilities to which races can change jobs.
 	* Includes the missing animations for the original playable jobs.
 	* An animation template that allows for new animations to be inserted.
 	* And many other new options for customizing the data.

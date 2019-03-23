@@ -1,18 +1,6 @@
-//a 0 terminated list of races that should have a page on the lists of jobs that can equip each item
-//that list full of icons that shows if each job can equip a helmet and whatnot
+//this are the jobs that will show up in the "can equip" menu, each one will have its own page
 //each page can have up to 42 icons, I have no plans on increasing that
 //if a job's icon pointer is neverShow it will be skipped
-
-//when checking for compatible jobs, routines will stop here (or start from here and stop after 2)
-//units that have neverShow as their special unlock condition are skipped to prevent lag and for safety
-#define highestJob 0x73
-
-//size of the random name table, must be divisible by highestNameMultiple
-//result is highestName*(2^highestNamePower)
-#define highestNamePower 2 //power of 2, so 2 = 4, 3 = 8 and so on
-#define highestName (0x2D4>>highestNamePower) //result must not be higher than 0xFF
-
-//this are the jobs that will show up in the "can equip" menu, each one will have its own page
 equipRaces:
 BYTE 1 2 3 4 5 0
 
@@ -35,6 +23,16 @@ BYTE 0x00
 newItemJobs:
 BYTE 0x18
 BYTE 0x00
+
+//these jobs can learn abilities as if they had the Learning support ability equipped
+#ifdef blueMagePassive
+	learnJobs:
+	BYTE 0x0A //blue mage
+	BYTE 0x00
+#else
+	learnJobs:
+	BYTE 0x00
+#endif
 
 //these determine the random names used for each race
 //the structure is SHORT race SHORT starting index SHORT size
@@ -137,9 +135,9 @@ BYTE 0x0E 0x20 0x21 0x22 0x23 0x24 0x25 0x26 0x27 //new: remedi
 BYTE 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 //new: check race if there are no matches
 
 #ifndef InvisibleList //this is a list of abilities that will never appear on the ability lists
-#define InvisibleList 0
-invisibleAbilityList: //format is BYTE race abilityNumber
-BYTE 3 0x34 //item, from alchemist
-BYTE 5 0x33 //mythril, from juggler
-BYTE 0 0 //terminator
+	#define InvisibleList 0
+	invisibleAbilityList: //format is BYTE race abilityNumber
+	BYTE 3 0x34 //item, from alchemist
+	BYTE 5 0x33 //mythril, from juggler
+	BYTE 0 0 //terminator
 #endif
