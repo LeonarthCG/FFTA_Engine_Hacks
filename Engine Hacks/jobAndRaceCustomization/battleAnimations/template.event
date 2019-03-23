@@ -438,16 +438,16 @@ ALIGN 4
 spin_counterclockwise_pointer:
 WORD 4
 aFrame(idle_front_0,oam32,4,1,0,0,8,0,0)
-aFrame(idle_front_0,oam32,4,1,0,0,8,1,0)
- aFrame(idle_back_0,oam32,4,1,0,0,8,1,0)
+aFrame(idle_front_0,oam32,4,1,0,0,8,0x0100,0)
+ aFrame(idle_back_0,oam32,4,1,0,0,8,0x0100,0)
  aFrame(idle_back_0,oam32,4,1,0,0,8,0,0)
 
 ALIGN 4
 spin_clockwise_pointer:
 WORD 4
  aFrame(idle_back_0,oam32,4,1,0,0,8,0,0)
- aFrame(idle_back_0,oam32,4,1,0,0,8,1,0)
-aFrame(idle_front_0,oam32,4,1,0,0,8,1,0)
+ aFrame(idle_back_0,oam32,4,1,0,0,8,0x0100,0)
+aFrame(idle_front_0,oam32,4,1,0,0,8,0x0100,0)
 aFrame(idle_front_0,oam32,4,1,0,0,8,0,0)
 
 ALIGN 4
