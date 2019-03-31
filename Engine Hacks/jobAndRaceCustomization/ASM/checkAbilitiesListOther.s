@@ -254,6 +254,14 @@ unlockedLoop:
 cmp	r6,r7
 bhi	unlockedFalse
 
+@check if the job is equipped
+ldrb	r0,[r4,#7]
+cmp	r0,r6
+beq	isunlocked
+ldrb	r0,[r4,#8]
+cmp	r0,r6
+beq	isunlocked
+
 @check if the unit can change into this job
 mov	r0,r4
 mov	r1,r6
@@ -263,6 +271,7 @@ mov	lr,r3
 cmp	r0,#0
 beq	nextUnlockedLoop
 
+isunlocked:
 @check if this job has an ability list or not
 ldr	r0,newJobAbilityTable
 mov	r1,#16
