@@ -156,7 +156,7 @@ mov	r0,#0x34
 ldr	r2,=#0x80C8598
 ldr	r2,[r2]
 add	r2,r0
-ldrh	r0,[r2,#0x10]	@job command id
+ldrb	r0,[r2,#0x10]	@job command id
 strh	r0,[r6,#14]
 strh	r0,[r6,#4]
 mov	r0,#0
@@ -257,7 +257,7 @@ mul	r0,r1
 ldr	r2,=#0x80C8598
 ldr	r2,[r2]
 add	r2,r0
-ldrh	r0,[r2,#0x10]	@job command id
+ldrb	r0,[r2,#0x10]	@job command id
 strh	r0,[r6,#14]
 strh	r0,[r6,#4]
 ldr	r3,=#0x807DA78
