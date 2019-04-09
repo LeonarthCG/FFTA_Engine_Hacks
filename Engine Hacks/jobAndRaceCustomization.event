@@ -720,3 +720,10 @@ ALIGN 4
 learningLearn:
 #incbin "jobAndRaceCustomization/ASM/learningLearn.dmp"
 POIN masterAbility
+
+//change the max ability for all races
+#ifdef install1bitAbilities
+	PUSH; ORG $C9FAA; SHORT 0x20FF 0x46C0; POP
+#else
+	PUSH; ORG $C9FAA; SHORT 0x208E 0x46C0; POP
+#endif
