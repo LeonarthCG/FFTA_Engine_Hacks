@@ -1,0 +1,15 @@
+//MESSAGE Searching for pointers to 0x83AD5F8
+PUSH
+//MESSAGE Pointer changed at 0x31314
+ORG 0x31314
+POIN newJP
+
+//MESSAGE Pointer changed at 0x314a0
+ORG 0x314a0
+POIN newJP
+
+//MESSAGE Pointer changed at 0x57c68
+ORG 0x57c68
+POIN newJP
+
+POP

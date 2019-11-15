@@ -1,4 +1,5 @@
-#inctext PFinder "../FFTA_clean.gba" 0x85567F0 customOthers
+//#inctext PFinder "../FFTA_clean.gba" 0x85567F0 customOthers
+#include "customOthersPointers.event"
 
 //Options:
 	//this is the max new entries you can get, but feel free to lower it for space

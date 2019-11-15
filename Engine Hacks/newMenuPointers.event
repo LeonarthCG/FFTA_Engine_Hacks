@@ -1,0 +1,27 @@
+//MESSAGE Searching for pointers to 0x83B4214
+PUSH
+//MESSAGE Pointer changed at 0x4dd48
+ORG 0x4dd48
+POIN newMenu
+
+//MESSAGE Pointer changed at 0x65758
+ORG 0x65758
+POIN newMenu
+
+//MESSAGE Pointer changed at 0x66d60
+ORG 0x66d60
+POIN newMenu
+
+//MESSAGE Pointer changed at 0x6eab4
+ORG 0x6eab4
+POIN newMenu
+
+//MESSAGE Pointer changed at 0x87460
+ORG 0x87460
+POIN newMenu
+
+//MESSAGE Pointer changed at 0x137fec
+ORG 0x137fec
+POIN newMenu
+
+POP

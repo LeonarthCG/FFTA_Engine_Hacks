@@ -146,14 +146,16 @@ uncompressedLoader:
 #incbin "ASM\uncompressedloader.dmp"
 
 #ifdef install1bitAbilities
-#inctext PFinder "../FFTA_clean.gba" 0x83AD5F8 newJP
+//#inctext PFinder "../FFTA_clean.gba" 0x83AD5F8 newJP
+#include "newJPPointers.event"
 
 ALIGN 4
 newJP:
 SHORT 0xFFFF 792
 #incext png2dmp "Images/jpreward1.png"
 
-#inctext PFinder "../FFTA_clean.gba" 0x83B4214 newMenu
+//#inctext PFinder "../FFTA_clean.gba" 0x83B4214 newMenu
+#include "newMenuPointers.event"
 PUSH; ORG $6EAB4; POIN 0x83B4214; POP
 
 ALIGN 4

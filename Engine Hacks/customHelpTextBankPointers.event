@@ -1,0 +1,7 @@
+//MESSAGE Searching for pointers to 0x84D1C34
+PUSH
+//MESSAGE Pointer changed at 0x36d6c4
+ORG 0x36d6c4
+POIN customHelpTextBank
+
+POP

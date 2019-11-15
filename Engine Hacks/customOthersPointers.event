@@ -1,0 +1,399 @@
+////MESSAGE Searching for pointers to 0x85567F0
+PUSH
+////MESSAGE Pointer changed at 0x9028
+ORG 0x9028
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x912c
+ORG 0x912c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x18d78
+ORG 0x18d78
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x18fec
+ORG 0x18fec
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x19040
+ORG 0x19040
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1911c
+ORG 0x1911c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1914c
+ORG 0x1914c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x191ac
+ORG 0x191ac
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x19394
+ORG 0x19394
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x19524
+ORG 0x19524
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x195b4
+ORG 0x195b4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x19a1c
+ORG 0x19a1c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x23324
+ORG 0x23324
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x236b0
+ORG 0x236b0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x257ec
+ORG 0x257ec
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x257f4
+ORG 0x257f4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x25828
+ORG 0x25828
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2584c
+ORG 0x2584c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26328
+ORG 0x26328
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x263c8
+ORG 0x263c8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26478
+ORG 0x26478
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2665c
+ORG 0x2665c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26700
+ORG 0x26700
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x267cc
+ORG 0x267cc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26ca0
+ORG 0x26ca0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26d40
+ORG 0x26d40
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x26f98
+ORG 0x26f98
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x270c8
+ORG 0x270c8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x27204
+ORG 0x27204
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x27524
+ORG 0x27524
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x28294
+ORG 0x28294
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2c08c
+ORG 0x2c08c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2e26c
+ORG 0x2e26c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2e324
+ORG 0x2e324
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2f1c4
+ORG 0x2f1c4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x2f24c
+ORG 0x2f24c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3c808
+ORG 0x3c808
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3d3c8
+ORG 0x3d3c8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3e3b0
+ORG 0x3e3b0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x41f84
+ORG 0x41f84
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x43e80
+ORG 0x43e80
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x43f54
+ORG 0x43f54
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x45f34
+ORG 0x45f34
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x49348
+ORG 0x49348
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x501c4
+ORG 0x501c4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5069c
+ORG 0x5069c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x50730
+ORG 0x50730
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5170c
+ORG 0x5170c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x54adc
+ORG 0x54adc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x584cc
+ORG 0x584cc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5856c
+ORG 0x5856c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x59004
+ORG 0x59004
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x59b1c
+ORG 0x59b1c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x59e60
+ORG 0x59e60
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5a004
+ORG 0x5a004
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5a384
+ORG 0x5a384
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5ac74
+ORG 0x5ac74
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5ad28
+ORG 0x5ad28
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5fd80
+ORG 0x5fd80
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5fe3c
+ORG 0x5fe3c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x5fe64
+ORG 0x5fe64
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x672b0
+ORG 0x672b0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x677ec
+ORG 0x677ec
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x67808
+ORG 0x67808
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x678c0
+ORG 0x678c0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x69224
+ORG 0x69224
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x692ec
+ORG 0x692ec
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x6d960
+ORG 0x6d960
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x6e7bc
+ORG 0x6e7bc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x6fb4c
+ORG 0x6fb4c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x74c20
+ORG 0x74c20
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7ba28
+ORG 0x7ba28
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7c000
+ORG 0x7c000
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7c3a4
+ORG 0x7c3a4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7da14
+ORG 0x7da14
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7da7c
+ORG 0x7da7c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7dafc
+ORG 0x7dafc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7db78
+ORG 0x7db78
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x7dc14
+ORG 0x7dc14
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x8c8e8
+ORG 0x8c8e8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0xa7a70
+ORG 0xa7a70
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x128f2c
+ORG 0x128f2c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x12908c
+ORG 0x12908c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129100
+ORG 0x129100
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129154
+ORG 0x129154
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129178
+ORG 0x129178
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1291f8
+ORG 0x1291f8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129248
+ORG 0x129248
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1292dc
+ORG 0x1292dc
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1292f0
+ORG 0x1292f0
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1293e4
+ORG 0x1293e4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x1293f8
+ORG 0x1293f8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129428
+ORG 0x129428
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129498
+ORG 0x129498
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x129b7c
+ORG 0x129b7c
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3918ac
+ORG 0x3918ac
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3918c8
+ORG 0x3918c8
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x3918e4
+ORG 0x3918e4
+POIN customOthers
+
+////MESSAGE Pointer changed at 0x391900
+ORG 0x391900
+POIN customOthers
+
+POP

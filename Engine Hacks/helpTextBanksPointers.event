@@ -1,0 +1,7 @@
+////MESSAGE Searching for pointers to 0x836DA1C
+PUSH
+////MESSAGE Pointer changed at 0x19a78
+ORG 0x19a78
+POIN helpTextBanks
+
+POP

@@ -1,7 +1,9 @@
 #include "Extensions/Hack Installation.txt"
-#inctext PFinder "../FFTA_clean.gba" 0x836DA1C helpTextBanks
+//#inctext PFinder "../FFTA_clean.gba" 0x836DA1C helpTextBanks
+#include "helpTextBanksPointers.event"
 #define originalHelpTextBankOffset 0x4D1C34
-#inctext PFinder "../FFTA_clean.gba" 0x84D1C34 customHelpTextBank
+//#inctext PFinder "../FFTA_clean.gba" 0x84D1C34 customHelpTextBank
+#include "customHelpTextBankPointers.event"
 
 //Options:
 	//this is the max new entries you can get, but feel free to lower it for space
