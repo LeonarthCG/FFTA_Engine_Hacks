@@ -1,4 +1,9 @@
 .thumb
+mov	r8,r0
+mov	r6,#1
+lsl	r0,r4,#0x18
+asr	r0,r0,#0x18
+
 cmp	r7,#0xEC
 blo	nevermind
 ldr	r3,=#0x7FFF

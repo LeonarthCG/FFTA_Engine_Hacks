@@ -41,7 +41,7 @@ ALIGN 4
 nameIndexes:
 SHORT 1 0 	0x136	//hume
 SHORT 2 0 	0x136	//bangaa
-SHORT 3 0	0x136	//nu mou
+SHORT 3 0		0x136	//nu mou
 SHORT 4 0x136 	0xBE	//viera
 SHORT 5 0 	0x136	//moogle
 SHORT 0 0x1F4 	0xE1	//everything else

@@ -44,3 +44,6 @@ MESSAGE "Used hax space ends at" currentOffset
 MESSAGE "Used text space ends at" currentOffset
 
 MESSAGE "Used free space ends at" currentOffset
+
+ALIGN 4
+WORD 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 //some padding because the patch making tools sometimes fails otherwise

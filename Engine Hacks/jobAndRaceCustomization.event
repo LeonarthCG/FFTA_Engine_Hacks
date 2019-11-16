@@ -88,7 +88,7 @@ PUSH; ORG $9767C; jumpToHack(newSpecialAnimationGetter1); POP
 ALIGN 4
 newSpecialAnimationGetter1:
 #incbin "jobAndRaceCustomization/ASM/newSpecialAnimationGetter1.dmp"
-PUSH; ORG $9773C; jumpToHack(newSpecialAnimationGetter2); POP
+PUSH; ORG $97734; jumpToHack(newSpecialAnimationGetter2); POP
 ALIGN 4
 newSpecialAnimationGetter2:
 #incbin "jobAndRaceCustomization/ASM/newSpecialAnimationGetter2.dmp"
