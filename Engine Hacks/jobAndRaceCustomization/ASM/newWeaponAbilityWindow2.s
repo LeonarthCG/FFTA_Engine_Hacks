@@ -73,6 +73,18 @@ sub	sp,#4
 mov	r4,r0		@item ID
 mov	r7,r1
 
+@clean the tiles, except for item name and ability type
+ldr	r0,=#0x600E460
+ldr	r1,=#0x600EFA0
+mov	r2,#0
+cleanloop1:
+str	r2,[r0]
+add	r0,#4
+cmp	r0,r1
+bhs	cleanloop1stop
+b	cleanloop1
+cleanloop1stop:
+
 @get pointer to item abilities entry
 mov	r0,r4
 mov	r1,#0x12
@@ -135,18 +147,6 @@ b	abilityNames
 stopabilitiesname:
 add	sp,#4
 pop	{r7}
-
-@clean the tiles, except for item name and ability type
-ldr	r0,=#0x600ECA0
-ldr	r1,=#0x600EFA0
-mov	r2,#0
-cleanloop1:
-str	r2,[r0]
-add	r0,#4
-cmp	r0,r1
-bhs	cleanloop1stop
-b	cleanloop1
-cleanloop1stop:
 
 @erase JP symbol and cost
 ldr	r0,=#0x6006040
