@@ -45,8 +45,6 @@
 //PUSH; ORG $122680; SHORT 0xE00F; POP //opcode 0x13's first argument is treated as 0xFF if 0xFE (allow special characters to talk)
 //PUSH; ORG $122AAA; SHORT 0x46C0; POP //opcode 0x70 never works (never skip events if only special characters present)
 
-//viera looked funky during jump
-
 //setting up special animations
 PUSH; ORG $F496A; SHORT 0x22EC; ORG $100592; SHORT 0x21EC; POP //0xEC Talking (advice, wyrmtamer, parley)
 PUSH; ORG $9764C; SHORT 0x25ED; POP //0xED Morphed idle
@@ -357,6 +355,11 @@ showAbilitiesNewLists:
 #incbin "jobAndRaceCustomization/ASM/showabilitiesnewlists.dmp"
 POIN newJobAbilityTable
 POIN checkAbility
+#ifndef install1bitAbilities
+WORD 0
+#else
+WORD 1
+#endif
 PUSH; ORG $7C4A2; SHORT 0xB408; jumpToHack(showAbilities); POP //always show all abilities in abilities tab while out of combat
 ALIGN 4
 showAbilities:
@@ -669,8 +672,8 @@ POIN newPortraitPaletteTable //custom portrait palettes table
 //making the original routine not drawn certain things
 PUSH; ORG $8C758; SHORT 0x46C0 0x46C0; POP //don't draw ability name
 PUSH; ORG $8C7E6; SHORT 0x46C0 0x46C0; POP //don't draw job icon
-PUSH; ORG $8C87C; SHORT 0x46C0 0x46C0; POP //don't AP/JP icon
-PUSH; ORG $8C8A4; SHORT 0x46C0 0x46C0; POP //don't AP/JP cost
+PUSH; ORG $8C87C; SHORT 0x46C0 0x46C0; POP //don't draw AP/JP icon
+PUSH; ORG $8C8A4; SHORT 0x46C0 0x46C0; POP //don't draw AP/JP cost
 PUSH; ORG $8C630; jumpToHack(newWeaponAbilityWindow1); POP //erase some stuff
 ALIGN 4
 newWeaponAbilityWindow1:
@@ -683,8 +686,8 @@ newWeaponAbilityWindow2:
 //same as above but for the shop menu
 PUSH; ORG $6FB28; SHORT 0x46C0 0x46C0; POP //don't draw ability name
 PUSH; ORG $6FA3E; SHORT 0x46C0 0x46C0; POP //don't draw job icon
-PUSH; ORG $6FCCA; SHORT 0x46C0 0x46C0; POP //don't AP/JP icon
-PUSH; ORG $6FCE6; SHORT 0x46C0 0x46C0; POP //don't AP/JP cost
+PUSH; ORG $6FCCA; SHORT 0x46C0 0x46C0; POP //don't draw AP/JP icon
+PUSH; ORG $6FCE6; SHORT 0x46C0 0x46C0; POP //don't draw AP/JP cost
 //changing some behaviour
 PUSH; ORG $6FA9A; SHORT 0x46C0; POP //stop loop when drawing, I loop on my new routine
 PUSH; ORG $6F9E0; SHORT 0x46C0; POP //draw even when no abilities
@@ -727,3 +730,5 @@ POIN masterAbility
 #else
 	PUSH; ORG $C9FAA; SHORT 0x208E 0x46C0; POP
 #endif
+
+PUSH; ORG $490A2; SHORT 0 0; POP //stop vanilla from tying viera white mage's and viera red mage's cure APs together

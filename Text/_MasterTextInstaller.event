@@ -1,6 +1,7 @@
 #include "Text Character Definitions.event"
 #include "Control Code Definitions.event"
 
+#ifdef installJPLearn
 PUSH
 ORG $4979BC	//got exp popup
 BYTE 0x10 0x00
@@ -23,6 +24,7 @@ notEnoughJP:
 SHORT 0x1828
 _Y _o _u space _d _o space _n _o _t space _h _a _v _e space _e _n _o _u _g _h newline
 _J _P space _t _o space _l _e _a _r _n space _t _h _i _s space _a _b _i _l _i _t _y _period waitbutton clearbox endstring
+#endif
 
 #ifdef installMovementAbilities
 //change combo names and description

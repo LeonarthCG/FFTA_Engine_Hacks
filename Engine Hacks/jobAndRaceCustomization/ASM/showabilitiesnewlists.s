@@ -1,4 +1,5 @@
 .equ checkAbility, newJobAbilityTable+4
+.equ bitMode, checkAbility+4
 .thumb
 
 lsl	r0,#2
@@ -64,6 +65,14 @@ mov	r0,r8
 mov	r2,#0
 ldr	r3,checkAbility
 mov	lr,r3
+mov	r3,#0
+push	{r0-r2}
+.short	0xF800
+cmp	r0,#0
+bne	drawMastered
+pop	{r0-r2}
+ldr	r3,checkAbility
+mov	lr,r3
 mov	r3,#1
 .short	0xF800
 cmp	r0,#0
@@ -84,10 +93,41 @@ beq	nextLoop
 b	drawGrey
 
 drawWhite:
+ldr	r0,bitMode
+cmp	r0,#0
+bne	drawWhiteBit
+@get ap
+ldrb	r1,[r6,r5]
+mov	r3,r8
+add	r3,#0x40
+add	r3,r1
+ldrb	r0,[r3]
+mov	r1,#0x80
+orr	r0,r1
+b	draw
+drawWhiteBit:
+mov	r0,#0x80
+b	draw
+
+drawMastered:
+pop	{r0-r2}
 mov	r0,#0xE4
 b	draw
 
 drawGrey:
+ldr	r0,bitMode
+cmp	r0,#0
+bne	drawGreyBit
+@get ap
+ldrb	r1,[r6,r5]
+mov	r3,r8
+add	r3,#0x40
+add	r3,r1
+ldrb	r0,[r3]
+mov	r1,#0x7F
+and	r0,r1
+b	draw
+drawGreyBit:
 mov	r0,#0
 b	draw
 
@@ -177,3 +217,4 @@ pop	{r0-r3}
 newJobAbilityTable:
 @POIN newJobAbilityTable
 @POIN checkAbility
+@WORD bitMode
