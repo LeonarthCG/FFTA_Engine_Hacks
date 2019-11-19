@@ -1,6 +1,27 @@
 #include "Text Character Definitions.event"
 #include "Control Code Definitions.event"
 
+#ifdef customPub
+PUSH
+#define firstPubName "($554316*((((firstPubOption+2)*(firstPubOption+2))&4)>>2))|($55431E*((((firstPubOption+1)*(firstPubOption+1))&4)>>2))|($554328*((((firstPubOption+0)*(firstPubOption+0))&4)>>2))|($554341*((((firstPubOption+0)*(firstPubOption+0))&8)>>3))"
+#define secondPubName "($554316*((((secondPubOption+2)*(secondPubOption+2))&4)>>2))|($55431E*((((secondPubOption+1)*(secondPubOption+1))&4)>>2))|($554328*((((secondPubOption+0)*(secondPubOption+0))&4)>>2))|($554341*((((secondPubOption+0)*(secondPubOption+0))&8)>>3))"
+#define thirdPubName "($554316*((((thirdPubOption+2)*(thirdPubOption+2))&4)>>2))|($55431E*((((thirdPubOption+1)*(thirdPubOption+1))&4)>>2))|($554328*((((thirdPubOption+0)*(thirdPubOption+0))&4)>>2))|($554341*((((thirdPubOption+0)*(thirdPubOption+0))&8)>>3))"
+#define fourthPubName "($554316*((((fourthPubOption+2)*(fourthPubOption+2))&4)>>2))|($55431E*((((fourthPubOption+1)*(fourthPubOption+1))&4)>>2))|($554328*((((fourthPubOption+0)*(fourthPubOption+0))&4)>>2))|($554341*((((fourthPubOption+0)*(fourthPubOption+0))&8)>>3))"
+ORG customOthers+(4*(pubRumors+0x29));	POIN firstPubName
+ORG customOthers+(4*(pubMissions+0x29));POIN secondPubName
+ORG customOthers+(4*(pubQuit+0x29));	POIN thirdPubName
+ORG customOthers+(4*(publeave+0x29));	POIN fourthPubName
+#define firstPubHelp "($E50*((((firstPubOption+2)*(firstPubOption+2))&4)>>2))|($E90*((((firstPubOption+1)*(firstPubOption+1))&4)>>2))|($EE4*((((firstPubOption+0)*(firstPubOption+0))&4)>>2))|($F44*((((firstPubOption+0)*(firstPubOption+0))&8)>>3))"
+#define secondPubHelp "($E50*((((secondPubOption+2)*(secondPubOption+2))&4)>>2))|($E90*((((secondPubOption+1)*(secondPubOption+1))&4)>>2))|($EE4*((((secondPubOption+0)*(secondPubOption+0))&4)>>2))|($F44*((((secondPubOption+0)*(secondPubOption+0))&8)>>3))"
+#define thirdPubHelp "($E50*((((thirdPubOption+2)*(thirdPubOption+2))&4)>>2))|($E90*((((thirdPubOption+1)*(thirdPubOption+1))&4)>>2))|($EE4*((((thirdPubOption+0)*(thirdPubOption+0))&4)>>2))|($F44*((((thirdPubOption+0)*(thirdPubOption+0))&8)>>3))"
+#define fourthPubHelp "($E50*((((fourthPubOption+2)*(fourthPubOption+2))&4)>>2))|($E90*((((fourthPubOption+1)*(fourthPubOption+1))&4)>>2))|($EE4*((((fourthPubOption+0)*(fourthPubOption+0))&4)>>2))|($F44*((((fourthPubOption+0)*(fourthPubOption+0))&8)>>3))"
+ORG $4C5170+(2*pubRumors); SHORT firstPubHelp
+ORG $4C5170+(2*pubMissions); SHORT secondPubHelp
+ORG $4C5170+(2*pubQuit); SHORT thirdPubHelp
+ORG $4C5170+(2*publeave); SHORT fourthPubHelp
+POP
+#endif
+
 #ifdef installJPLearn
 PUSH
 ORG $4979BC	//got exp popup

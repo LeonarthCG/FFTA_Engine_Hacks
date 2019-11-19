@@ -21,6 +21,20 @@ ORG FreeSpace
 
 #define quickStart 0 //makes the game start at the world map, skipping the snowball and lizard fights
 
+#define customPub //change hte order of pub options
+#ifdef customPub
+//these are just the values for the definitions, do not edit these
+#define pubRumors	0
+#define pubMissions	1
+#define pubQuit	2
+#define publeave	3
+//swap the second value of these definitions to change the options (for example, you can swap pubQuit with pubRumors)
+#define firstPubOption	pubMissions
+#define secondPubOption	pubQuit
+#define thirdPubOption	pubRumors
+#define fourthPubOption	publeave
+#endif
+
 //#define installFFTDeath 0 //units die after 3 turns of being KOed, undead have a chance to revive, should be able to be combined with Ironman
 
 //#define installIronman 0 //all maps have jagd death, should be able to be combined with FFT-like Death
