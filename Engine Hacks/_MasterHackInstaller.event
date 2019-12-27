@@ -14,6 +14,7 @@ PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
 PUSH; ORG $43E28; SHORT 0x46C0 0x2001; POP //start with clan option
 PUSH; ORG $97A0; jumpToHack(quickStartFlags); POP //set some flags so the game works properly
 PUSH; ORG $9A5E4C; WORD quickStartEvent-0x9A5E4C; POP //change the events
+PUSH; ORG $99CC; SHORT 0x2103; POP //fix laws
 ALIGN 4
 quickStartFlags:
 #incbin "ASM/quickStartFlags.dmp"

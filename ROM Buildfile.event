@@ -21,7 +21,7 @@ ORG FreeSpace
 
 #define quickStart 0 //makes the game start at the world map, skipping the snowball and lizard fights
 
-#define customPub //change hte order of pub options
+#define customPub //change the order of pub options
 #ifdef customPub
 //these are just the values for the definitions, do not edit these
 #define pubRumors	0
