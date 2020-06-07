@@ -1,6 +1,5 @@
 .thumb
 
-pop	{r3}
 @get the jp prize
 ldrb	r3,[r2,#4]
 sub	r1,r3
@@ -12,6 +11,7 @@ cmp	r1,r0
 blo	np
 mov	r1,r0
 np:
+pop	{r3}
 strh	r1,[r3]
 ldr	r0,=#0x80BBB34
 mov	lr,r0
