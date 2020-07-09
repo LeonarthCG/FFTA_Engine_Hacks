@@ -113,9 +113,15 @@ lsl	r0,r7,#1
 add	r0,r6
 ldrb	r2,[r0]
 cmp	r2,#0
-bne	notnextabilitiesname
+beq	nextabilitiesnametrampoline
+cmp	r2,#1
+beq	nextabilitiesnametrampoline
+cmp	r2,#0xFF
+beq	nextabilitiesnametrampoline
+b	skipnextabilitiesnametrampoline
+nextabilitiesnametrampoline:
 b	nextabilitiesname
-notnextabilitiesname:
+skipnextabilitiesnametrampoline:
 bl	getAbility
 ldrh	r0,[r0]		@name id
 lsl	r0,#2
@@ -191,9 +197,15 @@ lsl	r1,r7,#1
 add	r1,r6
 ldrb	r1,[r1]
 cmp	r1,#0
-bne	notnextabilities
+beq	nextabilitiestrampoline
+cmp	r1,#1
+beq	nextabilitiestrampoline
+cmp	r1,#0xFF
+beq	nextabilitiestrampoline
+b	skipnextabilitiestrampoline
+nextabilitiestrampoline:
 b	nextabilities
-notnextabilities:
+skipnextabilitiestrampoline:
 ldr	r3,=#0x80CB9E0
 mov	lr,r3
 .short	0xF800

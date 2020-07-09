@@ -123,9 +123,15 @@ lsl	r0,r7,#1
 add	r0,r6
 ldrb	r2,[r0]
 cmp	r2,#0
-bne	notnextabilities
+beq	nextabilitiestrampoline
+cmp	r2,#1
+beq	nextabilitiestrampoline
+cmp	r2,#0xFF
+beq	nextabilitiestrampoline
+b	skipnextabilitiestrampoline
+nextabilitiestrampoline:
 b	nextabilities
-notnextabilities:
+skipnextabilitiestrampoline:
 bl	getAbility
 ldrh	r0,[r0]		@name id
 lsl	r0,#2
