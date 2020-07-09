@@ -16,6 +16,7 @@ ORG FreeSpace
 #endif
 
 #define installMorphingMorphersMorph 0 //morphers change aspect after morphing
+#define fixMorpherAnimations 0 //force morphers to use standing animations (if you don't know what you are doing, keep this on)
 
 #define installManualSorting 0 //allows the player to switch party member's unit numbers around
 

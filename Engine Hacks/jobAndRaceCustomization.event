@@ -47,7 +47,9 @@
 
 //setting up special animations
 PUSH; ORG $F496A; SHORT 0x22EC; ORG $100592; SHORT 0x21EC; POP //0xEC Talking (advice, wyrmtamer, parley)
-PUSH; ORG $9764C; SHORT 0x25ED; POP //0xED Morphed idle
+#ifndef fixMorpherAnimations
+	PUSH; ORG $9764C; SHORT 0x25ED; POP //0xED Morphed idle
+#endif
 PUSH; ORG $101500; SHORT 0x21EE; ORG $102724; SHORT 0x21EE; ORG $103078; SHORT 0x21EE; POP //0xEE Raised arm (stunts, conceal)
 	/*might be incomplete*/
 	PUSH; ORG $F4F26; SHORT 0x22EF; ORG $F595A; SHORT 0x22EF; ORG $FA6AA; SHORT 0x22EF; ORG $F7C34; SHORT 0x24EF; POP //0xEF Swing (saint cross, tremor, lancet, far fist)

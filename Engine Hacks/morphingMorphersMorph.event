@@ -5,7 +5,11 @@
 
 #define installMorphers 0
 
-PUSH; ORG $981F2; SHORT 0x46C0 0x2000; POP //remove the weird morphed status standing animation
+#ifdef fixMorpherAnimations
+	PUSH; ORG $9764C; SHORT 0x2500; POP //morphed status animation is always normal standing animation
+#else
+	PUSH; ORG $981F2; SHORT 0x46C0 0x2000; POP //remove the weird morphed status standing animation
+#endif
 PUSH; ORG $975F2; SHORT 0x46C0; jumpToHack(checkIfMorphedSize); POP //change the size of the morpher's sprite if needed
 PUSH; ORG $C817C; jumpToHack(checkIfMorphed); POP //count as generic while morphed
 ALIGN 4
