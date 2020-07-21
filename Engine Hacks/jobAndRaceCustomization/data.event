@@ -1,4 +1,4 @@
-//this are the jobs that will show up in the "can equip" menu, each one will have its own page
+//these are the races that will show up in the "can equip" menu, each one will have its own page
 //each page can have up to 42 icons, I have no plans on increasing that
 //if a job's icon pointer is neverShow it will be skipped
 equipRaces:

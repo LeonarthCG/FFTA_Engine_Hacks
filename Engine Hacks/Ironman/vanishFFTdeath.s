@@ -17,6 +17,17 @@ and	r2,r1
 cmp	r2,#0
 beq	End
 
+@set unfielded, unset fielded
+ldr	r0,[r7]
+ldr	r0,[r0]
+add	r0,#0x28
+ldrb	r1,[r0]
+mov	r2,#0xFE
+and	r1,r2
+mov	r2,#0x20
+orr	r1,r2
+strb	r1,[r0]
+
 @get the pointer to the unit in the list so we can remove them
 ldr	r0,=#0x201F508
 ldr	r0,[r0,#4]
