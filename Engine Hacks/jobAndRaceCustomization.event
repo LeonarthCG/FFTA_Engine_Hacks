@@ -693,6 +693,7 @@ PUSH; ORG $6FCE6; SHORT 0x46C0 0x46C0; POP //don't draw AP/JP cost
 //changing some behaviour
 PUSH; ORG $6FA9A; SHORT 0x46C0; POP //stop loop when drawing, I loop on my new routine
 PUSH; ORG $6F9E0; SHORT 0x46C0; POP //draw even when no abilities
+PUSH; ORG $6F9B4; SHORT 0xE006; POP //don't assume boots have no abilities
 PUSH; ORG $6FA68; jumpToHack(newWeaponAbilityWindow3); POP //draw our own way
 ALIGN 4
 newWeaponAbilityWindow3:
