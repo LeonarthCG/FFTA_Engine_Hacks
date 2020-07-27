@@ -2,6 +2,8 @@
 .thumb
 
 ldr	r0,movementButtonShop
+cmp	r0,#0
+beq	noloop1
 ldr	r1,=#0x2005810
 mov	r2,#0
 loop1:

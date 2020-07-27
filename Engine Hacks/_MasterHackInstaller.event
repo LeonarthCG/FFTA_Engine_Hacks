@@ -133,6 +133,10 @@ POP
 	#include "Ironman/Ironman.event"
 #endif
 
+#ifdef customNames
+	#include "customNames/installer.event"
+#endif
+
 ////////////////////////////////TEXT CHANGES
 
 ALIGN 4
@@ -161,51 +165,71 @@ uncompressedLoader:
 #incbin "ASM\uncompressedloader.dmp"
 
 #ifdef install1bitAbilities
-//#inctext PFinder "../FFTA_clean.gba" 0x83AD5F8 newJP
-#include "newJPPointers.event"
+	#include "newJPPointers.event"
+	ALIGN 4
+	JPIconShop:
+	#incext png2dmp "Images\JPIconShop.png"
 
-ALIGN 4
-newJP:
-SHORT 0xFFFF 792
-#incext png2dmp "Images/jpreward1.png"
-
-//#inctext PFinder "../FFTA_clean.gba" 0x83B4214 newMenu
-#include "newMenuPointers.event"
-PUSH; ORG $6EAB4; POIN 0x83B4214; POP
-
-ALIGN 4
-newMenu:
-SHORT 0xFFFF 1600
-#incext png2dmp "Images\menumove1.png"
-
-ALIGN 4
-JPIconShop:
-#incext png2dmp "Images\JPIconShop.png"
+	ALIGN 4
+	newJP:
+	SHORT 0xFFFF 792
+	#incext png2dmp "Images/jpreward1.png"
 #endif
 
-ALIGN 4
-movementButton:
-BYTE 0xFF
-#incext png2dmp "Images\movementButton1.png"
-BYTE 0xFF
-#incext png2dmp "Images\movementButton2.png"
-BYTE 0xFF
-#incext png2dmp "Images\movementButton3.png"
+#ifdef installMovementAbilities
+	#include "newMenuPointers.event"
+	PUSH; ORG $6EAB4; POIN 0x83B4214; POP
+	#ifdef install1bitAbilities
+		ALIGN 4
+		newMenu:
+		SHORT 0xFFFF 1600
+		#incext png2dmp "Images\menumove1.png"
+	#else
+		ALIGN 4
+		newMenu:
+		SHORT 0xFFFF 1600
+		#incext png2dmp "Images\menumove3.png"
+	#endif
 
-ALIGN 4
-movementButtonShop:
-#incext png2dmp "Images\movementButton4.png"
+	ALIGN 4
+	movementButton:
+	BYTE 0xFF
+	#incext png2dmp "Images\movementButton1.png"
+	BYTE 0xFF
+	#incext png2dmp "Images\movementButton2.png"
+	BYTE 0xFF
+	#incext png2dmp "Images\movementButton3.png"
+
+	ALIGN 4
+	movementButtonShop:
+	#incext png2dmp "Images\movementButton4.png"
+#else
+	#ifdef install1bitAbilities
+		#include "newMenuPointers.event"
+		PUSH; ORG $6EAB4; POIN 0x83B4214; POP
+	
+		ALIGN 4
+		newMenu:
+		SHORT 0xFFFF 1600
+		#incext png2dmp "Images\menumove2.png"
+	#endif
+#endif
+
 
 PUSH; ORG $6E96C; jumpToHack(movementButtonShopLoad); POP //load the movement button for the shop
 
 ALIGN 4
 movementButtonShopLoad:
 #incbin "ASM\movementbuttonshopload.dmp"
-POIN movementButtonShop
-#ifdef install1bitAbilities
-POIN JPIconShop
+#ifdef installMovementAbilities
+	POIN movementButtonShop
 #else
-WORD 0
+	WORD 0
+#endif
+#ifdef install1bitAbilities
+	POIN JPIconShop
+#else
+	WORD 0
 #endif
 
 PUSH; ORG $539E; SHORT 0xB408; jumpToHack(loadAbilityButtons); POP //load whatever palette we want for portraits
@@ -218,4 +242,8 @@ AbilityButtons:
 POIN $3C575C //action
 POIN $3C589F //reaction
 POIN $3C59E2 //support
-POIN movementButton //$3C5B25 //combo
+#ifdef installMovementAbilities
+	POIN movementButton //$3C5B25 //combo
+#else
+	POIN $3C5B25 //combo
+#endif
