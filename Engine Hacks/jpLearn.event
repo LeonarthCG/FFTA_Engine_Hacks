@@ -149,6 +149,12 @@ judgeFix:
 #incbin "jpLearn\judgefix.dmp"
 WORD judgeReward
 
+PUSH; ORG $BBB6A; SHORT 0xB408; jumpToHack(judgeFix2); POP //making judges not cap jp at 10 when rewards off
+ALIGN 4
+judgeFix2:
+#incbin "jpLearn\judgefix2.dmp"
+WORD judgeReward
+
 #ifdef install1bitAbilities
 PUSH; ORG $48FE6; SHORT 0xB408; jumpToHack(jpReward); POP //mission completion gives JP instead of AP
 ALIGN 4
