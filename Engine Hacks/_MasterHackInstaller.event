@@ -9,6 +9,7 @@
 ////////////////////////////////FIXES & CHANGES
 
 PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
+PUSH; ORG $50C40; SHORT 0x2504; POP //hide support clan
 
 #ifdef quickStart
 PUSH; ORG $43E28; SHORT 0x46C0 0x2001; POP //start with clan option
