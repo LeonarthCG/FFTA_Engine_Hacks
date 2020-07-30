@@ -8,21 +8,49 @@
 
 ////////////////////////////////FIXES & CHANGES
 
+//remove link related options
 PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
 PUSH; ORG $50C40; SHORT 0x2504; POP //hide support clan
+
+//set the character portraits to use for main character and clan name entry screens
+//this option is only recommended if using quickStart or custom events
+#ifdef quickStart
+	#define mcNameScreenCharacter 0x02 //default for quickStart: normal Marche (0x02)
+	#define clanNameScreenCharacter 0x08 //default for quickStart: Montblanc (0x08)
+#else
+	#define mcNameScreenCharacter 0x0F //vanilla: Winter Marche (0x0F)
+	#define clanNameScreenCharacter 0x08 //vanilla: Montblanc (0x08)
+#endif
+PUSH; ORG $12A12C; BYTE mcNameScreenCharacter; POP
+PUSH; ORG $52D080; BYTE mcNameScreenCharacter; POP
+PUSH; ORG $12A144; BYTE clanNameScreenCharacter; POP
 
 #ifdef quickStart
 PUSH; ORG $43E28; SHORT 0x46C0 0x2001; POP //start with clan option
 PUSH; ORG $97A0; jumpToHack(quickStartFlags); POP //set some flags so the game works properly
 PUSH; ORG $9A5E4C; WORD quickStartEvent-0x9A5E4C; POP //change the events
 PUSH; ORG $99CC; SHORT 0x2103; POP //fix laws
+PUSH; ORG $52CFC0; BYTE mcNameScreenCharacter; POP
+PUSH; ORG $52CFF0; BYTE clanNameScreenCharacter; POP
+//change enemies to load in snowball fight
 ALIGN 4
 quickStartFlags:
 #incbin "ASM/quickStartFlags.dmp"
 quickStartEvent:
-BYTE 0x53 0x01 0x00 0x0C 0x00 0x48 0x01 0x4E 0x20 0x0F 0x53 0x00 0x01 0x4B 0x16 0x4D
-BYTE 0x64 0x01 0x00 0x01 0x47 0x98 0x00 0x00 0x00 0x01 0x00 0x06 0x13 0x3C 0x64
-BYTE 0x18 0x0A 0x18 0x0B 0x06 0x31 0x3C 0x00 0x17 0x05
+BYTE 0x53 0x01 0x00
+BYTE 0x0C 0x00
+BYTE 0x48 0x01
+BYTE 0x4E
+BYTE 0x20 mcNameScreenCharacter 0x53 0x00 0x01
+BYTE 0x20 clanNameScreenCharacter 0x54 0x00 0x01
+BYTE 0x4B /*->*/ 0x16 /*<- song id*/
+BYTE 0x4D 0x64 0x01 0x00 0x01
+BYTE 0x47 0x98 0x00 0x00 0x00 0x01 0x00
+BYTE 0x06 0x13 0x3C 0x64
+BYTE 0x18 0x0A
+BYTE 0x18 0x0B
+BYTE 0x06 0x31 0x3C 0x00
+BYTE 0x17 0x05
 #endif
 
 #ifdef customPub
