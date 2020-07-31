@@ -1,0 +1,36 @@
+//makes the game able to handle negative stats coming from items in the stat screen
+//the game already handles negative stats in battle just fine, these fixes are just for the stat screen
+
+//stop this absurd 0xFF cap... you just casted to signed why are you doing this
+PUSH; ORG $CA8D2; SHORT 0xE000; POP
+
+//these routines add the stats together for display, making sure they handle negatives and also don't go below 0
+PUSH; ORG $CA3D6; SHORT 0 0 0x19C0; ORG $CA3E0; SHORT 0x2000 0 0; POP //fix move
+PUSH; ORG $CA378; SHORT 0x1824 0x2C00 0xDC00 0x2400 0x35FC 0x702F 0x706E 0x70AC 0x43E1 0x70E9; POP //fix jump
+PUSH; ORG $CA5AC; SHORT 0 0 0x19C0; ORG $CA5B6; SHORT 0x2000 0 0; POP //fix speed
+//the evade one is found around $CA5FC but it doesn't need fixing
+PUSH; ORG $CA64C; SHORT 0x19F0 0x2800 0xDC00 0x2000 0 0 0; POP //fix attack
+PUSH; ORG $CA694; SHORT 0x19F0 0x2800 0xDC00 0x2000 0 0 0; POP //fix magic
+PUSH; ORG $CA6DC; SHORT 0x19F0 0x2800 0xDC00 0x2000 0 0 0; POP //fix defense
+PUSH; ORG $CA724; SHORT 0x19F0 0x2800 0xDC00 0x2000 0 0 0; POP //fix resistance
+
+//routine that draws the numbers for the items in the inventory, we are making them red if negative
+PUSH; ORG $899BE; SHORT 0xB408; jumpToHack(negativeRedInventory); POP
+ALIGN 4
+negativeRedInventory:
+#incbin "ASM/negativeRedInventory.dmp"
+
+//same as above but for the shop
+PUSH; ORG $6F576; SHORT 0xB408; jumpToHack(negativeRedShop1); POP
+ALIGN 4
+negativeRedShop1:
+#incbin "ASM/negativeRedShop1.dmp"
+PUSH; ORG $6F5D0; jumpToHack(negativeRedShop2); POP
+ALIGN 4
+negativeRedShop2:
+#incbin "ASM/negativeRedShop2.dmp"
+POIN redNumbersShopOAM
+
+ALIGN 4
+redNumbersShopOAM:
+SHORT 2 0 0 0x32C0 8 0 0x32C1

@@ -276,3 +276,5 @@ POIN $3C59E2 //support
 #else
 	POIN $3C5B25 //combo
 #endif
+
+#include "negativeNumbers.event"
