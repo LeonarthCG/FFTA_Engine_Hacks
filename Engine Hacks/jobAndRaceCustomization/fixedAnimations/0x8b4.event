@@ -1,9 +1,9 @@
 PUSH
 ORG 0x8b4+0x852E7C
 SHORT 7
-dataOAM(-40,+8-3,rectangleH,0,0)
+dataOAM(-40,0+8-3,rectangleH,0,0)
 dataOAM(-32,-8-3,rectangleH,0,2)
-dataOAM(-32,+8-3,rectangleH,0,4)
+dataOAM(-32,0+8-3,rectangleH,0,4)
 dataOAM(-24,-16-3,square,1,6)
 dataOAM(-24,0-3,square,1,10)
 dataOAM(-16,-24-3,square,0,14)

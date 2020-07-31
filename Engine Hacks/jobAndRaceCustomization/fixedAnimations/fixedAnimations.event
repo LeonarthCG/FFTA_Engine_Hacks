@@ -64,20 +64,30 @@ ORG FreeSpace
 #endif
 
 #ifdef fixSmall
-	#undef smallSize
+	#ifdef smallSize
+		#undef smallSize
+	#endif
 	#define smallSize 12
 #else
-	#undef smallSize
+	#ifdef smallSize
+		#undef smallSize
+	#endif
 	#define smallSize 16
 #endif
 
 #ifdef fixBig
-	#undef bigSize
-	#undef smallSize
+	#ifdef bigSize
+		#undef bigSize
+	#endif
+	#ifdef smallSize
+		#undef smallSize
+	#endif
 	#define bigSize 20
 	#define smallSize bigSize
 #else
-	#undef bigSize
+	#ifdef bigSize
+		#undef bigSize
+	#endif
 	#define bigSize 24
 #endif
 

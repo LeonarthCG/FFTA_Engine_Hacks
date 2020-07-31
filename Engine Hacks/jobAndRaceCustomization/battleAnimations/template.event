@@ -4,7 +4,9 @@
 
 //I recommend to just make a folder for each animation and name them after ther ID
 
-#undef	TEMPLATEID
+#ifdef	TEMPLATEID
+	#undef	TEMPLATEID
+#endif
 #define TEMPLATEID x //switch x for your desired battle animation ID value!
 
 {
@@ -113,137 +115,269 @@ POIN shake_head_back_pointer; WORD 0 0
 	WORD 0 0 0 //race specific, unsuported yet
 	WORD 0 0 0 //race specific, unsuported yet
 
-#undef  idle_front_0_shadow
+#ifdef idle_front_0_shadow
+	#undef  idle_front_0_shadow
+#endif
 #define idle_front_0_shadow sprite_sheet+(640*0)
-#undef  walk_front_0_shadow
+#ifdef walk_front_0_shadow
+	#undef  walk_front_0_shadow
+#endif
 #define walk_front_0_shadow sprite_sheet+(640*1)
-#undef  walk_front_1_shadow
+#ifdef walk_front_1_shadow
+	#undef  walk_front_1_shadow
+#endif
 #define walk_front_1_shadow sprite_sheet+(640*2)
-#undef  idle_back_0_shadow
+#ifdef idle_back_0_shadow
+	#undef  idle_back_0_shadow
+#endif
 #define idle_back_0_shadow sprite_sheet+(640*3)
-#undef  walk_back_0_shadow
+#ifdef walk_back_0_shadow
+	#undef  walk_back_0_shadow
+#endif
 #define walk_back_0_shadow sprite_sheet+(640*4)
-#undef  walk_back_1_shadow
+#ifdef walk_back_1_shadow
+	#undef  walk_back_1_shadow
+#endif
 #define walk_back_1_shadow sprite_sheet+(640*5)
-#undef  idle_front_0
+#ifdef idle_front_0
+	#undef  idle_front_0
+#endif
 #define idle_front_0 sprite_sheet+(640*6)
-#undef  walk_front_0
+#ifdef walk_front_0
+	#undef  walk_front_0
+#endif
 #define walk_front_0 sprite_sheet+(640*7)
-#undef  walk_front_1
+#ifdef walk_front_1
+	#undef  walk_front_1
+#endif
 #define walk_front_1 sprite_sheet+(640*8)
-#undef  idle_back_0
+#ifdef idle_back_0
+	#undef  idle_back_0
+#endif
 #define idle_back_0 sprite_sheet+(640*9)
-#undef  walk_back_0
+#ifdef walk_back_0
+	#undef  walk_back_0
+#endif
 #define walk_back_0 sprite_sheet+(640*10)
-#undef  walk_back_1
+#ifdef walk_back_1
+	#undef  walk_back_1
+#endif
 #define walk_back_1 sprite_sheet+(640*11)
-#undef  idle_front_1
+#ifdef idle_front_1
+	#undef  idle_front_1
+#endif
 #define idle_front_1 sprite_sheet+(640*12)
-#undef  idle_back_1
+#ifdef idle_back_1
+	#undef  idle_back_1
+#endif
 #define idle_back_1 sprite_sheet+(640*13)
-#undef  hurt_front_0
+#ifdef hurt_front_0
+	#undef  hurt_front_0
+#endif
 #define hurt_front_0 sprite_sheet+(640*14)
-#undef  hurt_back_0
+#ifdef hurt_back_0
+	#undef  hurt_back_0
+#endif
 #define hurt_back_0 sprite_sheet+(640*15)
-#undef  critical_front_0_shadow
+#ifdef critical_front_0_shadow
+	#undef  critical_front_0_shadow
+#endif
 #define critical_front_0_shadow sprite_sheet+(640*16)
-#undef  critical_back_0_shadow
+#ifdef critical_back_0_shadow
+	#undef  critical_back_0_shadow
+#endif
 #define critical_back_0_shadow sprite_sheet+(640*17)
-#undef  critical_front_1_shadow
+#ifdef critical_front_1_shadow
+	#undef  critical_front_1_shadow
+#endif
 #define critical_front_1_shadow sprite_sheet+(640*18)
-#undef  critical_back_1_shadow
+#ifdef critical_back_1_shadow
+	#undef  critical_back_1_shadow
+#endif
 #define critical_back_1_shadow sprite_sheet+(640*19)
-#undef  downed_front_0_shadow
+#ifdef downed_front_0_shadow
+	#undef  downed_front_0_shadow
+#endif
 #define downed_front_0_shadow sprite_sheet+(640*20)
-#undef  downed_back_0_shadow
+#ifdef downed_back_0_shadow
+	#undef  downed_back_0_shadow
+#endif
 #define downed_back_0_shadow sprite_sheet+(640*21)
-#undef  downed_front_1_shadow
+#ifdef downed_front_1_shadow
+	#undef  downed_front_1_shadow
+#endif
 #define downed_front_1_shadow sprite_sheet+(640*22)
-#undef  downed_back_1_shadow
+#ifdef downed_back_1_shadow
+	#undef  downed_back_1_shadow
+#endif
 #define downed_back_1_shadow sprite_sheet+(640*23)
-#undef  jump_front_0
+#ifdef jump_front_0
+	#undef  jump_front_0
+#endif
 #define jump_front_0 sprite_sheet+(640*24)
-#undef  jump_back_0
+#ifdef jump_back_0
+	#undef  jump_back_0
+#endif
 #define jump_back_0 sprite_sheet+(640*25)
-#undef  react_front_0
+#ifdef react_front_0
+	#undef  react_front_0
+#endif
 #define react_front_0 sprite_sheet+(640*26)
-#undef  react_back_0
+#ifdef react_back_0
+	#undef  react_back_0
+#endif
 #define react_back_0 sprite_sheet+(640*27)
-#undef  wave_front_0
+#ifdef wave_front_0
+	#undef  wave_front_0
+#endif
 #define wave_front_0 sprite_sheet+(640*28)
-#undef  wave_back_0
+#ifdef wave_back_0
+	#undef  wave_back_0
+#endif
 #define wave_back_0 sprite_sheet+(640*29)
-#undef  attack_front_0
+#ifdef attack_front_0
+	#undef  attack_front_0
+#endif
 #define attack_front_0 sprite_sheet+(640*30)
-#undef  attack_front_1
+#ifdef attack_front_1
+	#undef  attack_front_1
+#endif
 #define attack_front_1 sprite_sheet+(640*31)
-#undef  attack_front_2
+#ifdef attack_front_2
+	#undef  attack_front_2
+#endif
 #define attack_front_2 sprite_sheet+(640*32)
-#undef  attack_back_0
+#ifdef attack_back_0
+	#undef  attack_back_0
+#endif
 #define attack_back_0 sprite_sheet+(640*33)
-#undef  attack_back_1
+#ifdef attack_back_1
+	#undef  attack_back_1
+#endif
 #define attack_back_1 sprite_sheet+(640*34)
-#undef  attack_back_2
+#ifdef attack_back_2
+	#undef  attack_back_2
+#endif
 #define attack_back_2 sprite_sheet+(640*35)
-#undef  shake_front_0
+#ifdef shake_front_0
+	#undef  shake_front_0
+#endif
 #define shake_front_0 sprite_sheet+(640*36)
-#undef  shake_front_1
+#ifdef shake_front_1
+	#undef  shake_front_1
+#endif
 #define shake_front_1 sprite_sheet+(640*37)
-#undef  shake_front_2
+#ifdef shake_front_2
+	#undef  shake_front_2
+#endif
 #define shake_front_2 sprite_sheet+(640*38)
-#undef  shake_back_0
+#ifdef shake_back_0
+	#undef  shake_back_0
+#endif
 #define shake_back_0 sprite_sheet+(640*39)
-#undef  shake_back_1
+#ifdef shake_back_1
+	#undef  shake_back_1
+#endif
 #define shake_back_1 sprite_sheet+(640*40)
-#undef  shake_back_2
+#ifdef shake_back_2
+	#undef  shake_back_2
+#endif
 #define shake_back_2 sprite_sheet+(640*41)
-#undef  react_front_0_shadow
+#ifdef react_front_0_shadow
+	#undef  react_front_0_shadow
+#endif
 #define react_front_0_shadow sprite_sheet+(640*42)
-#undef  react_back_0_shadow
+#ifdef react_back_0_shadow
+	#undef  react_back_0_shadow
+#endif
 #define react_back_0_shadow sprite_sheet+(640*43)
-#undef  ninjutsu_front_0
+#ifdef ninjutsu_front_0
+	#undef  ninjutsu_front_0
+#endif
 #define ninjutsu_front_0 sprite_sheet+(640*44)
-#undef  ninjutsu_back_0
+#ifdef ninjutsu_back_0
+	#undef  ninjutsu_back_0
+#endif
 #define ninjutsu_back_0 sprite_sheet+(640*45)
-#undef  provoke_front_0
+#ifdef provoke_front_0
+	#undef  provoke_front_0
+#endif
 #define provoke_front_0 sprite_sheet+(640*46)
-#undef  provoke_back_0
+#ifdef provoke_back_0
+	#undef  provoke_back_0
+#endif
 #define provoke_back_0 sprite_sheet+(640*47)
-#undef  talk_front_0
+#ifdef talk_front_0
+	#undef  talk_front_0
+#endif
 #define talk_front_0 sprite_sheet+(640*48)
-#undef  talk_back_0
+#ifdef talk_back_0
+	#undef  talk_back_0
+#endif
 #define talk_back_0 sprite_sheet+(640*49)
-#undef  breath_front_0
+#ifdef breath_front_0
+	#undef  breath_front_0
+#endif
 #define breath_front_0 sprite_sheet+(640*50)
-#undef  breath_back_0
+#ifdef breath_back_0
+	#undef  breath_back_0
+#endif
 #define breath_back_0 sprite_sheet+(640*51)
-#undef  morphed_front_0
+#ifdef morphed_front_0
+	#undef  morphed_front_0
+#endif
 #define morphed_front_0 sprite_sheet+(640*52)
-#undef  morphed_front_1
+#ifdef morphed_front_1
+	#undef  morphed_front_1
+#endif
 #define morphed_front_1 sprite_sheet+(640*53)
-#undef  morphed_back_0
+#ifdef morphed_back_0
+	#undef  morphed_back_0
+#endif
 #define morphed_back_0 sprite_sheet+(640*54)
-#undef  morphed_back_1
+#ifdef morphed_back_1
+	#undef  morphed_back_1
+#endif
 #define morphed_back_1 sprite_sheet+(640*55)
-#undef  summon_front_0
+#ifdef summon_front_0
+	#undef  summon_front_0
+#endif
 #define summon_front_0 sprite_sheet+(640*56)
-#undef  summon_back_0
+#ifdef summon_back_0
+	#undef  summon_back_0
+#endif
 #define summon_back_0 sprite_sheet+(640*57)
-#undef  wave_front_0_shadow
+#ifdef wave_front_0_shadow
+	#undef  wave_front_0_shadow
+#endif
 #define wave_front_0_shadow sprite_sheet+(640*58)
-#undef  wave_back_0_shadow
+#ifdef wave_back_0_shadow
+	#undef  wave_back_0_shadow
+#endif
 #define wave_back_0_shadow sprite_sheet+(640*59)
-#undef  fly_front_0
+#ifdef fly_front_0
+	#undef  fly_front_0
+#endif
 #define fly_front_0 sprite_sheet+(640*60)
-#undef  fly_front_1
+#ifdef fly_front_1
+	#undef  fly_front_1
+#endif
 #define fly_front_1 sprite_sheet+(640*61)
-#undef  fly_front_2
+#ifdef fly_front_2
+	#undef  fly_front_2
+#endif
 #define fly_front_2 sprite_sheet+(640*62)
-#undef  fly_back_0
+#ifdef fly_back_0
+	#undef  fly_back_0
+#endif
 #define fly_back_0 sprite_sheet+(640*63)
-#undef  fly_back_1
+#ifdef fly_back_1
+	#undef  fly_back_1
+#endif
 #define fly_back_1 sprite_sheet+(640*64)
-#undef  fly_back_2
+#ifdef fly_back_2
+	#undef  fly_back_2
+#endif
 #define fly_back_2 sprite_sheet+(640*65)
 
 ALIGN 4
@@ -1156,6 +1290,8 @@ aFrame(critical_front_0_shadow,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x000
 aFrame(react_front_0,oam32,0x06,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
 aFrame(idle_front_0,oam32,0x08,0x01,0x0000,0x0000,0x0008,0x0000,0x0000)
 
-#undef TEMPLATEID
+#ifdef TEMPLATEID
+	#undef TEMPLATEID
+#endif
 
 }

@@ -14,8 +14,8 @@
 #define flipH 0x1000
 #define flipV 0x2000
 #define flipVH 0x3000
-#define 4bppMode 0x0000
-#define 8bppMode 0x2000
+#define mode4bpp 0x0000
+#define mode8bpp 0x2000
 #define dataOAM(Y,X,Shape,Size,Tile) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14) 0|(Tile&0x3FF)"
 #define dataOAM(Y,X,Shape,Size,Tile,Flip) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)"
 #define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
