@@ -12,6 +12,18 @@
 PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
 PUSH; ORG $50C40; SHORT 0x2504; POP //hide support clan
 
+//increase display for move and jump in unit stats and shop; also evade in shop and inventory
+PUSH; ORG $7580E; SHORT 0x2205; ORG $75820; SHORT 0x2202; ORG $7584A; SHORT 0x2205; POP //increase digits of move and jump in unit stats, and shift them to the left
+PUSH; ORG $6F3F8; SHORT 0x2202; ORG $6F42C; SHORT 0x2202; ORG $6F460; SHORT 0x2203; POP //increase digits of move, jump and evade in store
+PUSH; ORG $6F3D8; SHORT 0x20A0; ORG $6F404; SHORT 0x20A0; ORG $6F438; SHORT 0x20B0; POP //shift the new store numbers to the left
+PUSH; ORG $8792E; SHORT 0x2403; POP //increase display for move/jump/evade in inventory (they all use the same number)
+PUSH //move stuff around in the inventory so it matches the shop
+ORG $8791E; SHORT 0x2212; ORG $8794C; SHORT 0x2213
+ORG $94F978; SHORT 0xF001 0xF002 0xF003 0xF004 0
+ORG $94F9B0; SHORT 0xF005 0xF006 0xF007 0xF008 0
+ORG $94F9E8; SHORT 0xF00D 0xF00E 0xF00F 0xF010 0
+POP
+
 //set the character portraits to use for main character and clan name entry screens
 //this option is only recommended if using quickStart or custom events
 #ifdef quickStart
