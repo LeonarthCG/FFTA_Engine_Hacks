@@ -18,18 +18,16 @@ lsr	r0,#0x1B
 ldr	r0,[r1,r0]
 ldr	r1,=#0x140
 add	r0,r1	@our palette!
-@ldr	r1,=#0x3002818
-@ldr	r1,[r1]
-@add	r1,#0x28
-@ldr	r2,=#0x260
-@add	r1,r2
-@mov	r2,#16
-@loop1:
-@ldrh	r3,[r0,r2]
-@strh	r3,[r1,r2]
-@sub	r2,#2
-@cmp	r2,#0
-@bne	loop1
+ldr	r1,=#0x3003860
+ldr	r2,=#0x260
+add	r1,r2
+mov	r2,#16
+loop1:
+ldrh	r3,[r0,r2]
+strh	r3,[r1,r2]
+sub	r2,#2
+cmp	r2,#0
+bne	loop1
 ldr	r1,=#0x5000260
 mov	r2,#16
 loop2:
