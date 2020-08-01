@@ -57,7 +57,7 @@ PUSH; ORG $C8088; SHORT 0x2000; POP //disable combos and totema summoning
 PUSH; ORG $75768; SHORT 0x2104; POP //draw 4 digits for jp
 	PUSH; ORG $75E12; SHORT 0x46C0; POP //prevent the game from erasing one of the digits
 	PUSH; ORG $75750; jumpToHack(jpMax1); POP //max at 9999 in status screen
-PUSH; ORG $2CD4C; jumpToHack(jpMax2); SHORT 0xF7FF 0xFBF4; POP //draw 4 digits for jp in battle screen
+PUSH; ORG $2CD4C; jumpToHack(jpMax2); POP //draw 4 digits for jp in battle screen
 PUSH; ORG $744D0; jumpToHack(jpMax3); POP //draw 4 digits for jp in party screen
 PUSH; ORG $72B34; jumpToHack(jpSort); POP //during sorting, move jp to the right only when it's over 99 so it behaves like hp and mp, additionally, support 4 digits
 
@@ -72,6 +72,7 @@ jpMax1:
 ALIGN 4
 jpMax2:
 #incbin "jpLearn\jpmax2.dmp"
+WORD 0x4D //tile offset
 
 ALIGN 4
 jpMax3:
