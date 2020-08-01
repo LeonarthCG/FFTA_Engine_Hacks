@@ -10,11 +10,13 @@
 //reduce tile count of vanilla animations to 20
 #include "jobAndRaceCustomization/fixedAnimations/fixedAnimations.event"
 
+#ifdef newSpecialAndWeaponAnimations
 //give playable jobs animations for all weapons
 #include "jobAndRaceCustomization/weaponAnimations/weaponAnimations.event"
 
 //give playable jobs animations for all abilities
 #include "jobAndRaceCustomization/specialAnimations/specialAnimations.event"
+#endif
 
 //include new battle animations
 #include "jobAndRaceCustomization/battleAnimations/battleAnimationsInstaller.event"
@@ -46,6 +48,7 @@
 //PUSH; ORG $122AAA; SHORT 0x46C0; POP //opcode 0x70 never works (never skip events if only special characters present)
 
 //setting up special animations
+#ifdef newSpecialAndWeaponAnimations
 PUSH; ORG $F496A; SHORT 0x22EC; ORG $100592; SHORT 0x21EC; POP //0xEC Talking (advice, wyrmtamer, parley)
 #ifndef fixMorpherAnimations
 	PUSH; ORG $9764C; SHORT 0x25ED; POP //0xED Morphed idle
@@ -92,6 +95,7 @@ PUSH; ORG $97734; jumpToHack(newSpecialAnimationGetter2); POP
 ALIGN 4
 newSpecialAnimationGetter2:
 #incbin "jobAndRaceCustomization/ASM/newSpecialAnimationGetter2.dmp"
+#endif
 
 //never register as special character for the original dismiss message routine
 PUSH; ORG $86A6E; SHORT 0x42B6; POP

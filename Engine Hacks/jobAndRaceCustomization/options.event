@@ -4,20 +4,24 @@
 	//I just think it's a nice change
 	//it will also hide character specific jobs until unlocked which I think makes a lot of sense
 //each page can have up to 42 icons, I have no plans on increasing that
-#define newCanEquipDisplay 0
+#define newCanEquipDisplay
+
+//if this is defined, a new system to handle some animations, as well as the animations themselves, will be installed
+//this gives all vanilla playable classes all animations for all weapons and abilities
+#define newSpecialAndWeaponAnimations
 
 //this changes red mage's cure to be the same index as white mage's
 //it changes the index of fleuret's cure too
-#define fixRedMages 0
+#define fixRedMages
 
 //this changes undead monster icons from Monster to Undead, as well as Expert icons to a specific different one for each expert job
-#define newUndeadAndExpertIcons 0
+#define newUndeadAndExpertIcons
 
 //this defines what the highest animation ID is, used for macros and similar stuff
 #define highestAnimation 0xF7
 
 //this determines if blue mages get passive learning, you can customize the list of jobs that get this passive in data.event
-#define blueMagePassive 0
+#define blueMagePassive
 
 //this determines the % of a unit learning an ability when it gets hit by it, the unit still needs to have learning equipped (or as a passive)
 #define learnChance 100
