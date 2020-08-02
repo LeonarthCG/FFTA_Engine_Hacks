@@ -1,0 +1,76 @@
+//increase size of HP and MP display to 4 digits, this does not change the stat cap, use newLevelUP for that
+
+PUSH //unit stat menu; max hp only
+ORG $756C4; SHORT 0 0 //do not draw curr hp
+ORG $75706; SHORT 0 0 //do not draw curr mp
+ORG $756CC; SHORT 0x2217 //move max hp
+ORG $756D8; SHORT 0x2104 //increase max hp digits
+ORG $75720; SHORT 0x2217 //move max mp
+ORG $75728; SHORT 0x2104 //increase max mp digits
+POP
+
+PUSH //battle hud 1 (selected/active unit)
+ORG $2CD14; jumpToHack(battlehud1curHP)
+ORG $2CD24; jumpToHack(battlehud1maxHP)
+ORG $2CD30; jumpToHack(battlehud1curMP)
+ORG $2CD40; jumpToHack(battlehud1maxMP)
+POP
+
+PUSH //battle hud 2 (target unit); current hp only
+ORG $2C1BC; jumpToHack(battlehud2curHP)
+ORG $2C1CC; jumpToHack(battlehud2curMP)
+ORG $2C34C; SHORT 0 0 //remove the dash after the curr hp
+ORG $2C356; SHORT 0 0 //remove the dash after the curr mp
+ORG $2C36C; SHORT 0 0 //remove max hp
+ORG $2C386; SHORT 0 0 //remove max mp
+POP
+
+ALIGN 4
+battlehud1curHP:
+#incbin "ASM/bigHud1.dmp"
+WORD 0x2A
+POIN draw4digits
+POIN $2CD1E
+WORD 1
+
+ALIGN 4
+battlehud1maxHP:
+#incbin "ASM/bigHud1.dmp"
+WORD 0x2F
+POIN draw4digits
+POIN $2CD2C
+WORD 0
+
+ALIGN 4
+battlehud1curMP:
+#incbin "ASM/bigHud1.dmp"
+WORD 0x3B
+POIN draw4digits
+POIN $2CD3A
+WORD 1
+
+ALIGN 4
+battlehud1maxMP:
+#incbin "ASM/bigHud1.dmp"
+WORD 0x40
+POIN draw4digits
+POIN $2CD48
+WORD 0
+
+ALIGN 4
+battlehud2curHP:
+#incbin "ASM/bigHud2.dmp"
+WORD 0x18
+WORD 0x40
+WORD 1
+POIN $2C1C6
+WORD 0x6013960
+
+ALIGN 4
+battlehud2curMP:
+#incbin "ASM/bigHud2.dmp"
+WORD 0x1C
+WORD 0x140
+WORD 0
+POIN $2C1D8
+WORD 0x6013A60

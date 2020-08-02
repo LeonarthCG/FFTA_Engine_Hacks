@@ -42,7 +42,9 @@
 
 //#define noMovementUndoing //makes movement impossible to be undone by pressing b after moving, it can still be undone while selecting a facing, and now units will select a facing direction as confirmation after moving even if it isn't the end of their turn
 
-//#define newLevelUp //make units always spawn with the same stats, change max level, etc, look at "Engine Hacks/newLevelup.event" for more options
+//#define morePointDigits //makes HP and MP display go up to 4 digits, for the stats to actually go this high check the newLevelUp options
+
+//#define newLevelUp //make units always spawn with the same stats, change max level, max stats, etc, look at "Engine Hacks/newLevelup.event" for more options
 
 //#define stealShoes //allow shows to be stolen by the steal accessory ability
 

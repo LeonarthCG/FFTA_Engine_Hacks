@@ -73,7 +73,12 @@ jpMax1:
 ALIGN 4
 jpMax2:
 #incbin "jpLearn\jpmax2.dmp"
-WORD 0x4D //tile offset
+#ifdef morePointDigits
+	WORD 0x4C //tile offset
+#else
+	WORD 0x4D //tile offset
+#endif
+POIN draw4digits
 
 ALIGN 4
 jpMax3:

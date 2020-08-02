@@ -166,6 +166,10 @@ POP
 	#include "newLevelUp.event" //makes units always spawn with the same stats
 #endif
 
+#ifdef morePointDigits
+	#include "bigHP.event"
+#endif
+
 #ifdef installFFTDeath
 	#include "Ironman/FFT Death.event"
 #endif
@@ -290,3 +294,7 @@ POIN $3C59E2 //support
 #endif
 
 #include "negativeNumbers.event"
+
+ALIGN 4
+draw4digits:
+#incbin "ASM/draw4digits.dmp"

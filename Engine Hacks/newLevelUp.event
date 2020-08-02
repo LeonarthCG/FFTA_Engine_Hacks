@@ -17,15 +17,24 @@
 	#define newMaxStat  999
 #endif
 
-//if true, units will be healed when leveling up, set to 0 to deactivate it
+//same as above but for hp and mp
+#ifndef newMaxPoints
+	#ifdef morePointDigits
+		#define newMaxPoints 9999
+	#else
+		#define newMaxPoints 999
+	#endif
+#endif
+
+//if true, units will be healed when leveling up
 //they will heal by the same ammount that their hp and mp went up by, like in other rpgs
 #ifndef	newLevelHeal
-	#define newLevelHeal 1
+	#define newLevelHeal
 #endif
 
 //this removes base stat variance, comment out if you wish to keep base stat variance
 #ifndef	noStatVariance
-	#define noStatVariance 1
+	#define noStatVariance
 #endif
 
 //this makes it so level ups are NOT affected, comment out if you wish them to be affected
@@ -35,8 +44,8 @@
 //When a Ninja (HP growth 5.8) goes form level 4 to 5, they will gain 5 points in HP (0,8*4 = 0,8*5, dropping decimals)
 //this can cause units to lose on several stat points if they keep changing jobs and leveling up
 //it could also lead to people calculating very specific sequences of level ups on different jobs for optimal stats
-//I think both of these cases are worse than vanilla level ups so I personally recommend setting it to 1
-#define levelUpUnaffected 1
+//I think both of these cases are worse than vanilla level ups so I personally recommend leaving it on
+#define levelUpUnaffected
 
 //remove base stat variance
 #ifdef noStatVariance
@@ -58,27 +67,41 @@ newLevelsMin1HP:
 #incbin "ASM/newlevelsmin1hp.dmp"
 
 #ifndef levelUpUnaffected
-PUSH; ORG $C9B8C
-#incbin "ASM/newspawning.dmp"
-WORD newMaxLevel
-WORD newMaxStat
-WORD newLevelHeal
-POP
+	PUSH; ORG $C9B8C
+	#incbin "ASM/newspawning.dmp"
+	WORD newMaxLevel
+	WORD newMaxStat
+	#ifdef newLevelHeal
+		WORD 1
+	#else
+		WORD 0
+	#endif
+	WORD newMaxPoints
+	POP
 #endif
 
 #ifdef levelUpUnaffected
-PUSH; ORG $C9B8C //only affected if r0 = r7
-SHORT 0xB500 0x46C0
-jumpToHack(newLevels)
-POP
-ALIGN 4
-newLevels:
-#incbin "ASM/newspawningnolevelup.dmp"
-POIN newSpawning
-ALIGN 4
-newSpawning:
-#incbin "ASM/newspawning.dmp"
-WORD newMaxLevel
-WORD newMaxStat
-WORD 1
+	PUSH; ORG $C9B8C; SHORT 0xB500 0x46C0; jumpToHack(newLevels); POP //only affected if r0 = r7, spawning
+	ALIGN 4
+	newLevels:
+	#incbin "ASM/newspawningnolevelup.dmp"
+	POIN newSpawning
+	WORD newMaxPoints
+	ALIGN 4
+	newSpawning:
+	#incbin "ASM/newspawning.dmp"
+	WORD newMaxLevel
+	WORD newMaxStat
+	#ifdef newLevelHeal
+		WORD 1
+	#else
+		WORD 0
+	#endif
+	WORD newMaxPoints
+	PUSH //make the new max stuff still affect level up
+	ORG $C9DFC; WORD newMaxStat
+	ORG $C9DF6; SHORT 0xBCF0
+	ORG $C9C02; SHORT 0x1C39
+	ORG $C9C52; SHORT 0x1C39
+	POP
 #endif

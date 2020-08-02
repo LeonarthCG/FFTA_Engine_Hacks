@@ -1,5 +1,6 @@
 .equ maxStats, maxLevel+4
 .equ levelHeal, maxStats+4
+.equ maxPoints, levelHeal+4
 .thumb
 push	{lr}
 push	{r4-r7}
@@ -93,7 +94,7 @@ add	r4,#2
 dontheal2:
 noincreasehpmp:
 ldrh	r0,[r5,r4]
-ldr	r1,maxStats
+ldr	r1,maxPoints
 cmp	r0,r1
 blo	nomaxedhpmp
 mov	r0,r1
@@ -101,7 +102,7 @@ nomaxedhpmp:
 strh	r0,[r5,r4]
 sub	r4,#2
 ldrh	r0,[r5,r4]
-ldr	r1,maxStats
+ldr	r1,maxPoints
 cmp	r0,r1
 blo	nomaxedcurrenthpmp
 mov	r0,r1
