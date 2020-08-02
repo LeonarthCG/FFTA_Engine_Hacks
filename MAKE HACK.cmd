@@ -4,7 +4,7 @@ copy FFTA_clean.gba FFTA_hack.gba
 
 cd "%~dp0Event Assembler"
 
-Core A FE8 "-output:%~dp0FFTA_hack.gba" "-input:%~dp0ROM Buildfile.event"
+Core A FE8 "-output:%~dp0FFTA_hack.gba" "-input:%~dp0ROM Buildfile.event" "--nocash-sym:%~dp0FFTA_hack.sym"
 
 cd "%~dp0ups"
 

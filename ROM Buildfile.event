@@ -12,7 +12,10 @@
 
 #define install1bitAbilities //comment out to remove AP and make abilities take up 1 bit, freeing up save space and increasing the limit to 0xFF abilities
 #ifndef installJPLearn
-	#undef install1bitAbilities //turns itself off if jp learn is not defined
+	#ifdef install1bitAbilities
+		#undef install1bitAbilities //turns itself off if jp learn is not defined
+	#endif
+#endif
 #endif
 
 #define installMorphingMorphersMorph //morphers change aspect after morphing
