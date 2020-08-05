@@ -1,0 +1,22 @@
+//-- these are the safest options to change --
+//#define neverPrefillName //if defined, the name field will always start as blank
+//#define prioritizeNicknamePrefill //if defined, if a nickname exists it will be used for the initial prefill
+
+//NOTE: even with prioritizeNicknamePrefill selected, the autocomplete for empty names will use the original name, never the nickname
+
+//-- these are the safe to change --
+#define canRenameMain //if defined, the main character (as defined in defaultUnit) can be renamed
+//#define canRenameSpecial //if defined, special characters (such as Ritz) can be renamed
+//#define canRenameUniques //if defined, generic units with unique names (such as Eldena) can be nicknamed
+#define canRenameGenerics //if defined, generic units with generic names can be nicknamed
+#define autofillName //if defined, the name field will start filled with the unit's default name, autofillNickname has priority over this
+#define autofillNickname //if defined, the name field will start filled with the unit's last nickname, if any, if there's none it will either use the regular name (if autofillName is enabled) or just start blank
+
+//-- these are only recommended to be changed if you know what you are doing --
+#define defaultUnit 2 //Marche
+#define defaultName 2 //Marche
+
+//-- these are not recommended to be changed unless you seriously know what you are doing --
+#define nameCharacterLimit 10 //9 in vanilla, 10 by default in this hack, keep at 10 or lower for compatibility with the future monster taming engine hack, it also can't be lower than 4 (why would you do that?)
+#define nameOffset (0x40 + 0x20) //offset inside of unit data the name will stored at, by default 0x60, so after 0x100 bits for abilities
+#define newNameBuffer 0x203F000

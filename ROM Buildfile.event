@@ -16,6 +16,12 @@
 		#undef install1bitAbilities //turns itself off if jp learn is not defined
 	#endif
 #endif
+
+#define customNames //comment out to remove customizable nicknames, requires 1bitabilities
+#ifndef install1bitAbilities
+	#ifdef customNames
+		#undef customNames //turns itself off if 1bitabilities is not defined
+	#endif
 #endif
 
 #define installMorphingMorphersMorph //morphers change aspect after morphing

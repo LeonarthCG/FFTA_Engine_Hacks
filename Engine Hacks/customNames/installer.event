@@ -1,0 +1,263 @@
+#include "options.event"
+
+/*
+this hack works by taking advantage of the name input screen and requires 1bit abilities in order to save the names
+this hack will be compatible with my future monster taming and breeding engine hack
+it should be compatible with already existing saves, as long as they were made with 1bit abilities installed
+
+the custom names are stored in a new, smaller format, based on the name entry keyboard
+1 character takes up a byte, the hack reserves 10 bytes so the max name length would be 10 characters
+apparently there are 3 names in vanilla that are longer than 9 characters, all of which are 10 characters long: Grisanbela, Clementina and Francheska
+keep in mind that there is also a width limit for name entry (just like in vanilla)
+for example, while "Mr. Mellowy" now fits, "WWWWWWWWWW" does not, even though it's 1 character shorter. It's generally not an issue for conventional names.
+
+the name for the units are stored in the unit data, which is why 1bit abilities is needed (Marche's name is also stored in the original location)
+the hack uses the end of ram as a buffer, which I hope goes unused (like it does in most games) otherwise, let me know if this completely destroys anything
+
+both marche's name and the name for the clan are stored to the usual place, with a leading identifier (0xFF 0xFF)
+only if the identifier is found these name will be read with the new format
+for other units it will check if there's any data in the space reserved for the nicknames, if there is then it will decode that
+this should mean that if they are changed by the game, they should still work perfectly fine
+
+by default, the name entry screen will always by prefilled with last nickname, or the original name if the unit was never nicknames
+the options can be used to remove nickname filling (so that it always uses original name) or to remove autofilling entirely
+when trying to enter an empty name, the original name will be used to autocomplete if there are no autofilling settings active
+
+since the new format uses the name input character table as a list of characters, changing this list will change which characters are valid in custom names (which will affect existing saves, changing the name of the characters)
+this table is found at $4C3D50 in vanilla, it has 8 leading bytes (which are probably text opcodes) and then just a list of characters to use, including line breaks (so you can easily change the shape of it if you want, probably)
+the hack will skip any characters that aren't 0x40 0x73 (space) or don't start with 0x80 when checking for characters
+
+please note that using characters not present in the name entry screen when making character names will result in stuff just not working as intended
+*/
+
+//-- repoint the name input buffer --
+PUSH
+ORG $12A134; WORD (newNameBuffer - 0x20163DC)
+ORG $12A218; WORD (newNameBuffer - 0x20163DC)
+ORG $12A644; WORD (newNameBuffer - 0x20163DC) //enter
+ORG $12A6D0; WORD (newNameBuffer - 0x20163DC) //enter for clan
+ORG $12A8C0; WORD (newNameBuffer - 0x20163DC) //enter
+ORG $12AB54; WORD (newNameBuffer - 0x20163DC)
+ORG $12ABC4; WORD (newNameBuffer - 0x20163DC)
+ORG $12AC04; WORD (newNameBuffer - 0x20163DC)
+ORG $12AE3C; WORD (newNameBuffer - 0x20163DC)
+ORG $12AE80; WORD (newNameBuffer - 0x20163DC) (newNameBuffer + 1 - 0x20163DC)
+ORG $12AF10; WORD (newNameBuffer - 0x20163DC)
+ORG $12B1B8; WORD (newNameBuffer - 0x20163DC)
+ORG $12B1F8; WORD (newNameBuffer - 0x20163DC) (newNameBuffer + 1 - 0x20163DC)
+POP
+
+#ifdef autofillName
+	PUSH; ORG $12A1F0; SHORT 0 0; POP //do not clean name
+#endif
+
+//repoint the buffer for the character tiles, also clean the name and tile buffers
+PUSH; ORG $12A176; SHORT 0xB408; jumpToHack(newCharacterTileBuffer); POP
+ALIGN 4
+newCharacterTileBuffer:
+#incbin "ASM/newCharacterTileBuffer.dmp"
+WORD newNameBuffer
+WORD newNameBuffer + 0x100
+#ifdef autofillName
+	WORD 1
+#else
+	WORD 0
+#endif
+WORD defaultName
+WORD newNameBuffer + 0x80
+WORD newNameBuffer + 0x40
+WORD nameOffset
+#ifdef autofillName
+	WORD 1
+#else
+	WORD 0
+#endif
+#ifdef autofillNickname
+	WORD 1
+#else
+	WORD 0
+#endif
+
+//pass original pointer back to it at the end to avoid issues
+PUSH; ORG $12A372; SHORT 0xB408; jumpToHack(oldCharacterTileBuffer); POP
+ALIGN 4
+oldCharacterTileBuffer:
+#incbin "ASM/oldCharacterTileBuffer.dmp"
+
+//-- change max character limit --
+PUSH
+ORG $12B5AC; SHORT 0x2000 + nameCharacterLimit
+//ORG $12A618; SHORT 0x2200 + nameCharacterLimit + 1
+//ORG $12A6A0; SHORT 0x2200 + nameCharacterLimit + 1
+ORG $12A87A; SHORT 0xB0A0
+//ORG $12A90E; SHORT 0x2200 + nameCharacterLimit + 1
+ORG $12A8CE; SHORT 0x2B00 + nameCharacterLimit - 1
+ORG $12A8D2; SHORT 0x2300 + nameCharacterLimit - 1
+ORG $12A914; SHORT 0xB020
+ORG $12AACA; SHORT 0xB0A0
+//ORG $12AAEE; SHORT 0x2200 + nameCharacterLimit + 1
+//ORG $12AB48; SHORT 0x2200 + nameCharacterLimit + 1
+ORG $12AB68; SHORT 0x2800 + nameCharacterLimit - 2
+ORG $12AB90; SHORT 0x2800 + nameCharacterLimit - 1
+ORG $12ABF6; SHORT 0xB020
+ORG $12AE6C; SHORT 0x2E00 + nameCharacterLimit - 1
+ORG $12AEFE; SHORT 0x2360 0x009B
+ORG $12AEEA; SHORT 0x2C00 + nameCharacterLimit - 1
+POP
+
+//-- handle new name saving --
+PUSH
+ORG $12B570; jumpToHack(checkIfNameBlank) //new routine to check the name for autofilling
+ORG $12A634; jumpToHack(saveUnitNameBlank) //jump back to normal name save routine after filling blank name
+ORG $12A608; jumpToHack(saveUnitNameOriginal) //get the original unit's name for units other than the default
+ORG $12A658; jumpToHack(saveUnitName)//save the name to the correct character's data, or the main character name spot
+ORG $12A674; SHORT 0x46C0 0x46C0 //don't use the regular name saving
+ORG $12A6CE; SHORT 0xE009 //jump back to normal name save routine after filling blank name
+ORG $12A6E4; jumpToHack(saveClanName) //save the name to the clan data, with the identifier, also set level to 1 if 0
+POP
+
+ALIGN 4
+checkIfNameBlank:
+#incbin "ASM/checkIfNameBlank.dmp"
+WORD nameCharacterLimit
+
+ALIGN 4
+saveUnitNameBlank:
+#incbin "ASM/saveUnitNameBlank.dmp"
+
+ALIGN 4
+saveUnitNameOriginal:
+#incbin "ASM/saveUnitNameOriginal.dmp"
+WORD newNameBuffer
+WORD defaultUnit
+WORD defaultName
+#ifdef autofillNickname
+	WORD 1
+#else
+	WORD 0
+#endif
+WORD newNameBuffer + 0x40
+
+ALIGN 4
+saveUnitName:
+#incbin "ASM/saveUnitName.dmp"
+POIN OldToNewName
+WORD nameOffset
+
+ALIGN 4
+saveClanName:
+#incbin "ASM/saveClanName.dmp"
+POIN OldToNewName
+WORD newNameBuffer
+
+//-- handle new name reading --
+PUSH
+ORG $15110; SHORT 0 0xB408; jumpToHack(newNamesSaveLoad) //save/load menu and probably other things (main character and clan, probably support clan)
+ORG $18C24; jumpToHack(newNamesDialogue) //dialogue (main character and clan, probably support clan)
+ORG $C7EC0; POIN getUnitNewName|1 //unit name getter
+POP
+
+ALIGN 4
+newNamesSaveLoad:
+#incbin "ASM/newNamesSaveLoad.dmp"
+WORD newNameBuffer
+POIN NewToOldName
+
+ALIGN 4
+newNamesDialogue:
+#incbin "ASM/newNamesDialogue.dmp"
+WORD newNameBuffer
+POIN NewToOldName
+
+ALIGN 4
+getUnitNewName:
+#incbin "ASM/getUnitNewName.dmp"
+POIN NewToOldName
+WORD nameOffset
+WORD newNameBuffer
+
+//-- Nicknaming --
+PUSH
+ORG $73704; SHORT 0 0xB408; jumpToHack(nicknameControl) //handle transition from party menu to nicknaming
+ORG $C83CC; jumpToHack(getNicknameUnit) //grab the offset of the unit to be named
+ORG $97F2; SHORT 0x2507 //don't set the clan level to 1 when making a new game, it will instead be set when naming the clan as a marker
+ORG $12A3AA; SHORT 0; jumpToHack(checkClanNamed) //don't rerandomize any unit if the clan has been named before
+ORG $9A5E4C+(4*(3-1)); WORD nicknameEvent-0x9A5E4C //nickname event, replaces repeated unused event
+ORG $31FD4; jumpToHack(returnToPartyNickname) //immediately boot party menu after nicknaming
+POP
+
+ALIGN 4
+nicknameControl:
+#incbin "ASM/nicknameControl.dmp"
+POIN nicknameButton
+#ifdef canRenameMain
+	WORD 1
+#else
+	WORD 0
+#endif
+#ifdef canRenameSpecial
+	WORD 1
+#else
+	WORD 0
+#endif
+#ifdef canRenameUniques
+	WORD 1
+#else
+	WORD 0
+#endif
+#ifdef canRenameGenerics
+	WORD 1
+#else
+	WORD 0
+#endif
+WORD defaultUnit
+WORD newNameBuffer + 0x80
+WORD newNameBuffer
+
+ALIGN 4
+nicknameButton:
+#incext png2dmp "nickname.png"
+
+ALIGN 4
+getNicknameUnit:
+#incbin "ASM/getNicknameUnit.dmp"
+WORD newNameBuffer + 0x80
+WORD newNameBuffer + 0x40
+WORD nameOffset
+WORD nameCharacterLimit
+
+ALIGN 4
+checkClanNamed:
+#incbin "ASM/checkClanNamed.dmp"
+
+ALIGN 4
+nicknameEvent:
+BYTE 0x53 0x01 0x00
+BYTE 0x0C 0x00
+BYTE 0x48 0x01
+BYTE 0x4E
+BYTE 0x4B /*->*/ 0x16 /*<- song id*/
+BYTE 0x4D 0x64 0x01 0x00 0x01
+BYTE 0x53 0x00 0x01
+BYTE 0x47 0x98 0x00 0x00 0x00 0x01 0x00
+BYTE 0x06 0x13 0x3C 0x64
+BYTE 0x18 0x0A
+BYTE 0x06 0x31 0x3C 0x00
+BYTE 0x17 0x05
+
+ALIGN 4
+returnToPartyNickname:
+#incbin "ASM/returnToPartyNickname.dmp"
+WORD newNameBuffer
+WORD newNameBuffer + 0x80
+
+//-- format converting routines --
+ALIGN 4
+OldToNewName:
+#incbin "ASM/OldToNewName.dmp"
+WORD nameCharacterLimit
+
+ALIGN 4
+NewToOldName:
+#incbin "ASM/NewToOldName.dmp"
+WORD nameCharacterLimit

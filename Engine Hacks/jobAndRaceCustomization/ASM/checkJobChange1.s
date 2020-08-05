@@ -56,12 +56,17 @@ strb	r1,[r0,#2]
 
 @clear some tiles
 ldr	r0,=#0x6006210
+ldrh	r2,[r0]
+ldr	r3,=#0xD0DD
+cmp	r2,r3
+bne	dontclear
 mov	r1,#0
 str	r1,[r0]
 str	r1,[r0,#4]
 str	r1,[r0,#8]
 str	r1,[r0,#12]
 str	r1,[r0,#16]
+dontclear:
 
 @just in case, check the party for new jobs
 ldr	r0,checkForUnlocks
