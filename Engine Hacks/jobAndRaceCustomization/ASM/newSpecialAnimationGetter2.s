@@ -6,7 +6,7 @@ asr	r0,r0,#0x18
 
 cmp	r7,#0xEC
 blo	nevermind
-ldr	r3,=#0x7FFF
+ldr	r3,=#0x1FFF
 cmp	r7,r3
 bhi	nevermind
 sub	r7,#0xEC

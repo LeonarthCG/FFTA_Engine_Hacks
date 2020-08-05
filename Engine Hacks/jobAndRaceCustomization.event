@@ -69,6 +69,13 @@ PUSH; ORG $F3616; SHORT 0x22F7; POP //0xF7 Provoke
 PUSH; ORG $F9CB2; SHORT 0x21F8; POP //0xF8 Jump (taking off)
 PUSH; ORG $F9F2E; SHORT 0x22F9; POP //0xF9 Jump (landing)
 
+//Fire/Bolt/Ice Sword, use weapon animation
+PUSH; ORG $F8F24; jumpToHack(fixGladiatorSwords); POP
+ALIGN 4
+fixGladiatorSwords:
+#incbin "jobAndRaceCustomization/ASM/fixGladiatorSwords.dmp"
+WORD (0x54|0x2000) //animation id
+
 //fixing the jump animation somewhat
 PUSH; ORG $DC386; SHORT 0x46C0; jumpToHack(fixJumpAnimation); POP
 ALIGN 4

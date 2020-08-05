@@ -1,7 +1,7 @@
 .thumb
 cmp	r5,#0xEC
 blo	nevermind
-ldr	r3,=#0x7FFF
+ldr	r3,=#0x1FFF
 cmp	r5,r3
 bhi	nevermind
 sub	r5,#0xEC

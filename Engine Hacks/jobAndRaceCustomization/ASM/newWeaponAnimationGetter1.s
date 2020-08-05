@@ -6,8 +6,8 @@ cmp	r1,#0x78
 bhi	dontset
 push	{r4}
 mov	r4,#1
-lsl	r4,#0xF
-orr	r1,r4	@animation ID | 0x8000
+lsl	r4,#0xD
+orr	r1,r4	@animation ID | 0x2000
 pop	{r4}
 dontset:
 

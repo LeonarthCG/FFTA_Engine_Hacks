@@ -12,7 +12,7 @@ add	r0,r1
 ldr	r3,[r0]
 mov	r0,#3
 
-ldr	r4,=#0x7FF
+ldr	r4,=#0x1FFF
 cmp	r2,r4
 bhi	custom
 cmp	r2,#0xEC
