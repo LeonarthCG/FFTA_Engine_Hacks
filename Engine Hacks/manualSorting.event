@@ -26,7 +26,7 @@ ORG FreeSpace
 //be warned, the bulk of this thing was written in a single day, there are barely any comments and the code is made of spaghetti and jello
 //it really was pretty much a 1 day job, leaving only polish (sounds mostly) for the second day
 	//about a week after that I went through this and patched up some bugs, made it a bit nicer
-
+#ifdef installManualSorting
 ALIGN 4
 manualSortingTiles:
 #incext png2dmp "manualSorting/manualsorting.png"
@@ -78,15 +78,22 @@ ALIGN 4
 RManualSorting:
 #incbin "manualSorting/rmanualsorting.dmp"
 POIN starLocationsManualSorting
+#endif
 
 PUSH; ORG $122630; jumpToHack(marchebug1); POP //make events not assume marche is the first character
 ALIGN 4
 marchebug1:
 #incbin "manualSorting/marchebug1.dmp"
 
-#ifndef genericSaveLevel
+#ifdef genericSaveLevel
+	PUSH; ORG $13BB10; jumpToHack(getGenericName); POP //when getting the level save, use the name getter on the first unit
+	ALIGN 4
+	getGenericName:
+	#incbin "manualSorting/getGenericName.dmp"
+#else
 	PUSH; ORG $13BB1C; jumpToHack(marchebug2); POP //when getting marche's level for saves, do not assume he is the first character
 	ALIGN 4
 	marchebug2:
 	#incbin "manualSorting/marchebug2.dmp"
 #endif
+

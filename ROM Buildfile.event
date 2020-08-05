@@ -59,7 +59,7 @@
 
 //#define noJudges //remove judges from the game, which also removes laws, this does NOT turn on permadeath
 
-//#define genericSaveLevel //makes the file's level be based on the first unit instead of marche
+//#define genericSaveLevel //makes the file's level and name be based on the first unit instead of marche
 
 //Engine Hacks
 #include "Engine Hacks/_MasterHackInstaller.event"

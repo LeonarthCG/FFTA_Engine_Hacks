@@ -165,9 +165,7 @@ POP
 
 #include "newAbilities.event" //installs a loop that modifies job base stats and other things, allowing for some new abilities and morphing morphers
 
-#ifdef installManualSorting
-	#include "manualSorting.event" //allows for units to be swapped around for custom party orders
-#endif
+#include "manualSorting.event" //allows for units to be swapped around for custom party orders
 
 #ifdef newLevelUp
 	#include "newLevelUp.event" //makes units always spawn with the same stats
