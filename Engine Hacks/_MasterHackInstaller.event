@@ -24,6 +24,31 @@ PUSH; ORG $A54B2; SHORT 0x46C0; POP //do not erase exorcised units
 	//PUSH; ORG $92584; SHORT 0xE001; POP //control judge
 #else
 
+//fixes a bug in vanilla: the game tries to keep item effects from stacking, however it only manages to do so for the first 16 effects
+#define fixItemEffectStacking
+#ifdef fixItemEffectStacking
+	//#define itemEffectStackAlways
+	#ifdef itemEffectStackAlways
+		PUSH; ORG $12FB34; SHORT 0x46C0; POP //make item effects always stack
+	#else
+		PUSH; ORG $12FAFC; SHORT 0xB408 0x46C0; jumpToHack(itemNoStackStart); POP //allocate stack for item effect tracking
+		PUSH; ORG $12FB32; SHORT 0xB408; jumpToHack(itemNoStackCheck); POP //make item effects never stack
+		PUSH; ORG $12FC66; SHORT 0x46C0; jumpToHack(itemNoStackEnd); POP //exit properly
+		
+		ALIGN 4
+		itemNoStackStart:
+		#incbin "ASM/itemNoStackStart.dmp"
+		
+		ALIGN 4
+		itemNoStackCheck:
+		#incbin "ASM/itemNoStackCheck.dmp"
+		
+		ALIGN 4
+		itemNoStackEnd:
+		#incbin "ASM/itemNoStackEnd.dmp"
+	#endif
+#endif
+
 PUSH; ORG $12D334; SHORT 0xE001; POP //make beneficial status effects always hit (unless immune to status flag is set)
 
 //remove link related options
