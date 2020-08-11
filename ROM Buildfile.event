@@ -67,7 +67,7 @@
 #include "Engine Hacks/_MasterHackInstaller.event"
 MESSAGE "Used hax space ends at" currentOffset
 
-//Text
+//Text (must go after Engine Hacks)
 #include "Text/_MasterTextInstaller.event"
 MESSAGE "Used text space ends at" currentOffset
 

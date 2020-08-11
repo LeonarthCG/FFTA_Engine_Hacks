@@ -7,6 +7,8 @@
 	ORG FreeSpace
 #endif
 
+#define expGrantsJP //if defined, an equal ammount of JP is granted when a unit gets JP
+
 #ifndef ForbiddenList //this is a list of abilities that can't be purchased, these will also not show learning progress (meant for blue magic)
 	#define ForbiddenList
 	purchaseForbiddenList: //format is BYTE race abilityNumber
@@ -111,10 +113,12 @@ POIN masterAbility
 	WORD 0
 #endif
 
-PUSH; ORG $A7198; jumpToHack(grantJP); POP //when granting the exp, also grant JP
-ALIGN 4
-grantJP:
-#incbin "jpLearn\grantjp.dmp"
+#ifdef expGrantsJP
+	PUSH; ORG $A7198; jumpToHack(grantJP); POP //when granting the exp, also grant JP
+	ALIGN 4
+	grantJP:
+	#incbin "jpLearn\grantjp.dmp"
+#endif
 
 PUSH; ORG $83760; SHORT 0x46C0 0x46C0; POP //don't draw current ap for ability
 PUSH; ORG $83BBC; SHORT 0x46C0 0x46C0; POP //don't draw current ap for ability
