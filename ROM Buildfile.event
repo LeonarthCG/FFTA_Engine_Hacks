@@ -31,6 +31,8 @@
 
 #define quickStart //makes the game start at the world map, skipping the snowball and lizard fights
 
+#define skipIntroCutscene //makes the game jump straight to the push start screen
+
 #define customPub //change the order of pub options
 #ifdef customPub
 //these are just the values for the definitions, do not edit these
