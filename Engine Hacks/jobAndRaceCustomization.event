@@ -335,7 +335,14 @@ POIN checkJobShow
 POIN newJobAbilityTable
 POIN newItemJobs
 
-//unlock default + current jobs when entering party menu, also check for job unlocking
+//unlock default jobs on new game
+PUSH; ORG $9794; jumpToHack(unlockDefaultJobs); POP
+ALIGN 4
+unlockDefaultJobs:
+#incbin "jobAndRaceCustomization/ASM/unlockDefaultJobs.dmp"
+POIN newDefaultJobs
+
+//unlock current jobs when entering party menu, also check for job unlocking
 PUSH; ORG $72C44; SHORT 0x46C0 0xB408; jumpToHack(unlockJobsPartyMenu); POP
 ALIGN 4
 unlockJobsPartyMenu:
