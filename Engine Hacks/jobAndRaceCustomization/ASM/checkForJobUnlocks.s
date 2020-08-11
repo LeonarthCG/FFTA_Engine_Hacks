@@ -8,8 +8,7 @@ push	{r0-r7}
 
 @unlock default jobs
 ldr	r0,newDefaultJobs
-ldr	r7,=#0x2001F70
-add	r7,#0x10
+ldr	r7,=#0x2002AD0
 defaultLoop:
 ldrb	r1,[r0]		@job id
 cmp	r1,#0
@@ -35,8 +34,7 @@ endDefaultLoop:
 ldr	r0,=#0x2000080
 ldr	r5,=#0x108	@size of entry
 ldr	r6,=#0x2001838	@last unit
-ldr	r7,=#0x2001F70
-add	r7,#0x10
+ldr	r7,=#0x2002AD0
 partyLoop:
 ldrb	r1,[r0,#7]		@job id
 cmp	r1,#0
@@ -72,8 +70,7 @@ allJobsLoop:
 mov	r0,r6
 mov	r1,#8
 swi	#6
-ldr	r2,=#0x2001F70
-add	r2,#0x10
+ldr	r2,=#0x2002AD0
 ldrb	r0,[r2,r0]
 mov	r3,#1
 lsl	r3,r1
@@ -109,8 +106,7 @@ allJobsLoopUnlock:
 mov	r0,r6
 mov	r1,#8
 swi	#6
-ldr	r2,=#0x2001F70
-add	r2,#0x10
+ldr	r2,=#0x2002AD0
 add	r0,r2
 ldrb	r2,[r0]
 mov	r3,#1

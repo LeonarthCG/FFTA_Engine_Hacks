@@ -3,7 +3,7 @@ pop	{r3}
 push	{r0-r3}
 
 @if only one wheel, do nothing
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r1,[r0,#2]
 cmp	r1,#0
 beq	End
@@ -24,7 +24,7 @@ b	End
 
 @increase index
 moveRight:
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r1,[r0,#1]
 ldrb	r2,[r0,#2]
 cmp	r1,r2
@@ -36,7 +36,7 @@ add	r1,#1
 b	EndRefresh
 
 moveLeft:
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r1,[r0,#1]
 ldrb	r2,[r0,#2]
 cmp	r1,#0

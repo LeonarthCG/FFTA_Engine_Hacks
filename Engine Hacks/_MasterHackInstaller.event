@@ -51,9 +51,9 @@ PUSH; ORG $A54B2; SHORT 0x46C0; POP //do not erase exorcised units
 
 PUSH; ORG $12D334; SHORT 0xE001; POP //make beneficial status effects always hit (unless immune to status flag is set)
 
-//remove link related options
+//remove link related options, as they break easily and don't really add anything to a romhack
 PUSH; ORG $43E3C; SHORT 0x46C0 0x2000; POP //hide link option
-PUSH; ORG $50C40; SHORT 0x2504; POP //hide support clan
+PUSH; ORG $50C40; SHORT 0x2504; POP //hide support clan, this is 100% needed as the space freed is used by other things
 
 //increase display for move and jump in unit stats and shop; also evade in shop and inventory
 PUSH; ORG $7580E; SHORT 0x2205; ORG $75820; SHORT 0x2202; ORG $7584A; SHORT 0x2205; POP //increase digits of move and jump in unit stats, and shift them to the left

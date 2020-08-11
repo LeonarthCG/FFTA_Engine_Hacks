@@ -70,14 +70,14 @@ beq	noRemainderWheel
 add	r0,#1
 noRemainderWheel:
 sub	r0,#1
-ldr	r2,=#0x2001F70
+ldr	r2,=#0x203FFF0
 strb	r0,[r2,#2]
 mov	r6,r0	@number of wheels
 
 @if bigger than 1, draw the thing
 cmp	r0,#0
 bls	noDrawing
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldr	r3,=#0x6006210
 ldr	r2,=#0xD0DD
 strh	r2,[r3]
@@ -117,7 +117,7 @@ mov	r1,r6
 add	r1,#1
 swi	#6
 @r0 is now number of jobs on this wheel
-ldr	r2,=#0x2001F70
+ldr	r2,=#0x203FFF0
 ldrb	r2,[r2,#1]
 cmp	r1,r2		@check if there is a remainder
 bls	noRemainderAgain
@@ -139,7 +139,7 @@ mov	r0,#0
 @mov	r1,r6
 @add	r1,#1
 @swi	#6
-@ldr	r2,=#0x2001F70
+@ldr	r2,=#0x203FFF0
 @ldrb	r2,[r2,#1]
 @mul	r0,r2
 @cmp	r1,#0
@@ -156,7 +156,7 @@ mov	r0,r7		@number of jobs
 mov	r1,r6
 add	r1,#1
 swi	#6
-ldr	r2,=#0x2001F70
+ldr	r2,=#0x203FFF0
 ldrb	r2,[r2,#1]
 mul	r0,r2
 cmp	r2,r1

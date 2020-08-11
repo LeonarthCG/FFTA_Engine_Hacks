@@ -1,5 +1,5 @@
 .thumb
-ldr	r3,=#0x2001F70
+ldr	r3,=#0x203FFF0
 mov	r2,#0
 strb	r2,[r3,#1]
 mov	r2,#0xFF

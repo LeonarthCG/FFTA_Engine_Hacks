@@ -53,8 +53,7 @@ beq	notPlayer
 @mov	r0,r5
 @mov	r1,#8
 @swi	#6
-@ldr	r3,=#0x2001F70
-@add	r3,#0x10
+@ldr	r3,=#0x2002AD0
 @ldrb	r0,[r3,r0]
 @mov	r2,#1
 @lsl	r2,r1

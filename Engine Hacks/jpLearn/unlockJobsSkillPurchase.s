@@ -10,8 +10,7 @@ push	{r4-r7}
 @for every job, check if it has been unlocked yet, then check if it has neverShow
 @if not for each unit check if they have unlocked it
 mov	r4,r0			@unit in ram
-ldr	r5,=#0x2001F70		@unlocked jobs bitfield location
-add	r5,#0x10
+ldr	r5,=#0x2002AD0		@unlocked jobs bitfield location
 ldr	r6,highestJob		@last job
 ldr	r7,neverShow
 allJobsLoop:

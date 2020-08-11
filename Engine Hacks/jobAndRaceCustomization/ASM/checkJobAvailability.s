@@ -29,8 +29,7 @@ mov	r1,#8
 swi	#6
 mov	r6,r0
 mov	r7,r1
-ldr	r0,=#0x2001F70
-add	r0,#0x10
+ldr	r0,=#0x2002AD0
 ldrb	r0,[r0,r6]
 mov	r1,#1
 lsl	r1,r7
@@ -103,8 +102,7 @@ Unlock:
 @swi	#6
 @mov	r6,r0
 @mov	r7,r1
-@ldr	r0,=#0x2001F70
-@add	r0,#0x10
+@ldr	r0,=#0x2002AD0
 @ldrb	r2,[r0,r6]
 @mov	r1,#1
 @lsl	r1,r7

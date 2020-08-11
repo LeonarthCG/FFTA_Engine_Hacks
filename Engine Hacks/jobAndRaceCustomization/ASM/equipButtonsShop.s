@@ -12,13 +12,13 @@ cmp	r1,#0
 beq	End
 
 @check if this is the first time we draw the list
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r1,[r0,#2]
 cmp	r1,#0
 beq	notFirst
 
 @mark that we did this
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 mov	r1,#0
 strb	r1,[r0,#2]
 
@@ -76,7 +76,7 @@ strh	r1,[r0,#4]
 bl	eraseEverything
 
 @now get the race to draw the list for
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r0,[r0,#1]
 @now draw the list
 b	drawList
@@ -97,7 +97,7 @@ b	End
 
 LPress:
 bl	eraseEverything
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r0,[r0,#1]
 cmp	r0,#0
 bne	noIssueL
@@ -111,7 +111,7 @@ RPress:
 bl	eraseEverything
 bl	getListSize
 mov	r1,r0
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 ldrb	r0,[r0,#1]
 cmp	r1,r0
 bne	noIssueR
@@ -123,7 +123,7 @@ b	drawList
 
 drawList:
 @first set the new page
-ldr	r1,=#0x2001F70
+ldr	r1,=#0x203FFF0
 strb	r0,[r1,#1]
 @get the race corresponding to the index
 ldr	r1,equipRaces

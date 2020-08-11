@@ -8,7 +8,7 @@ ldr	r6,highestJob
 ldr	r7,checkJobShow
 
 @reset a byte for the job change wheel
-ldr	r0,=#0x2001F70
+ldr	r0,=#0x203FFF0
 mov	r1,#0
 strb	r1,[r0,#1]
 strb	r1,[r0,#2]
