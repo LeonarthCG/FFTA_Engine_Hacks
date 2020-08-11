@@ -61,6 +61,8 @@
 
 //#define genericSaveLevel //makes the file's level and name be based on the first unit instead of marche
 
+//#define DEBUG_unitControl //makes all units player controlled
+
 //Engine Hacks
 #include "Engine Hacks/_MasterHackInstaller.event"
 MESSAGE "Used hax space ends at" currentOffset
