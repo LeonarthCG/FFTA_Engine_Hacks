@@ -3,50 +3,50 @@
 //if you are patching a modified rom, you will need to change this number
 //(unless FreeSpace has already been defined)
 #ifndef FreeSpace
-#define FreeSpace 0xA39920
-ORG FreeSpace
+	#define FreeSpace 0xA39920
+	ORG FreeSpace
 #endif
 
 #ifndef ForbiddenList //this is a list of abilities that can't be purchased, these will also not show learning progress (meant for blue magic)
-#define ForbiddenList 0
-purchaseForbiddenList: //format is BYTE race abilityNumber
-BYTE 1 0x5C 1 0x5D 1 0x5E 1 0x5F //blue magic
-BYTE 1 0x60 1 0x61 1 0x62 1 0x63 1 0x64 1 0x65 1 0x66 1 0x67 1 0x68 1 0x69 1 0x60 1 0x6A 1 0x6B 1 0x6C 1 0x6D 1 0x6E 1 0x6F //more blue magic
-BYTE 1 0x70 1 0x71 //even more blue magic
-BYTE 3 0x34 //item, from alchemist
-BYTE 5 0x33 //mythril, from juggler
-BYTE 0 0 //terminator
+	#define ForbiddenList
+	purchaseForbiddenList: //format is BYTE race abilityNumber
+	BYTE 1 0x5C 1 0x5D 1 0x5E 1 0x5F //blue magic
+	BYTE 1 0x60 1 0x61 1 0x62 1 0x63 1 0x64 1 0x65 1 0x66 1 0x67 1 0x68 1 0x69 1 0x60 1 0x6A 1 0x6B 1 0x6C 1 0x6D 1 0x6E 1 0x6F //more blue magic
+	BYTE 1 0x70 1 0x71 //even more blue magic
+	BYTE 3 0x34 //item, from alchemist
+	BYTE 5 0x33 //mythril, from juggler
+	BYTE 0 0 //terminator
 #endif
 
 //please note that this is also defined in jobAndRaceCustomization.event
 //if you want to modify this you'll have to do it there
 #ifndef InvisibleList //this is a list of abilities that will never appear on the ability lists
-#define InvisibleList 0
-invisibleAbilityList: //format is BYTE race abilityNumber
-BYTE 3 0x34 //item, from alchemist
-BYTE 5 0x33 //mythril, from juggler
-BYTE 0 0 //terminator
+	#define InvisibleList
+	invisibleAbilityList: //format is BYTE race abilityNumber
+	BYTE 3 0x34 //item, from alchemist
+	BYTE 5 0x33 //mythril, from juggler
+	BYTE 0 0 //terminator
 #endif
 
 //Steal: JP will deal damage between stealJPAmmount-stealJPVarianceDown and stealJPAmmount+stealJPVarianceUp
 //It will never do 0 if it hits (min 1) and will never steal more JP than the enemy has so don't worry about that
 #ifndef JPnumbers
-#define JPnumbers 0
-#define stealJPAmmount 20 //change steal:JP "damage"
-#define stealJPVarianceUp 10
-#define stealJPVarianceDown 10
-#define steal2JPAmmount 50 //change "damage" of the bishop Judge and Judge Sword abilities
-#define steal2JPVarianceUp 10
-#define steal2JPVarianceDown 10
-#define judgeReward 20 //change judge JP reward, Hunting skill will be this * 10
+	#define JPnumbers
+	#define stealJPAmmount 20 //change steal:JP "damage"
+	#define stealJPVarianceUp 10
+	#define stealJPVarianceDown 10
+	#define steal2JPAmmount 50 //change "damage" of the bishop Judge and Judge Sword abilities
+	#define steal2JPVarianceUp 10
+	#define steal2JPVarianceDown 10
+	#define judgeReward 20 //change judge JP reward, Hunting skill will be this * 10
 #endif
 
 PUSH; ORG $490A2; SHORT 0 0; POP //stop vanilla from tying viera white mage's and viera red mage's cure APs together
 #ifdef install1bitAbilities
-PUSH; ORG $4909A; SHORT 0x46C0 0x46C0; POP //remove AP reward for completing a mission
-PUSH; ORG $4904C; SHORT 0xE025; POP //remove ability learnt messages
-PUSH; ORG $8C900; SHORT 0xD14C; POP //change AP icon palette so that the JP that replaced it is green
-PUSH; ORG $6FCC6; SHORT 0x220D; POP //same thing except the game has a differnt routine for the shop for some reason
+	PUSH; ORG $4909A; SHORT 0x46C0 0x46C0; POP //remove AP reward for completing a mission
+	PUSH; ORG $4904C; SHORT 0xE025; POP //remove ability learnt messages
+	PUSH; ORG $8C900; SHORT 0xD14C; POP //change AP icon palette so that the JP that replaced it is green
+	PUSH; ORG $6FCC6; SHORT 0x220D; POP //same thing except the game has a differnt routine for the shop for some reason
 #endif
 
 // reworking what jp is used for
@@ -95,9 +95,9 @@ POIN checkJobUnit
 POIN purchaseForbiddenList
 POIN checkAbility
 #ifdef install1bitAbilities
-WORD 1
+	WORD 1
 #else
-WORD 0
+	WORD 0
 #endif
 PUSH; ORG $84524; jumpToHack(learnAbilityFromPrompt); POP //check if "yes" was selected and do the learning if so
 ALIGN 4
@@ -106,9 +106,9 @@ learnAbilityFromPrompt:
 POIN unlockJobsSkillPurchase
 POIN masterAbility
 #ifdef install1bitAbilities
-WORD 1
+	WORD 1
 #else
-WORD 0
+	WORD 0
 #endif
 
 PUSH; ORG $A7198; jumpToHack(grantJP); POP //when granting the exp, also grant JP
@@ -129,21 +129,21 @@ drawCostJP:
 POIN purchaseForbiddenList
 POIN checkAbility
 #ifdef install1bitAbilities
-WORD 1
+	WORD 1
 #else
-WORD 0
+	WORD 0
 #endif
 ALIGN 4
 resetDrawCostJPCounter:
 #incbin "jpLearn\resetdrawcostjpcounter.dmp"
 
 #ifdef install1bitAbilities
-//handle white names when 1 bit
-PUSH; ORG $7C4D8; jumpToHack(isWhite1bit); POP
-ALIGN 4
-isWhite1bit:
-#incbin "jpLearn\isWhite1bit.dmp"
-POIN checkAbility
+	//handle white names when 1 bit
+	PUSH; ORG $7C4D8; jumpToHack(isWhite1bit); POP
+	ALIGN 4
+	isWhite1bit:
+	#incbin "jpLearn\isWhite1bit.dmp"
+	POIN checkAbility
 #endif
 
 PUSH; ORG $83B9E; SHORT 0x46C0 0x46C0 0x46C0; POP //fix numbers getting cut off on screen refresh
@@ -163,10 +163,10 @@ judgeFix2:
 WORD judgeReward
 
 #ifdef install1bitAbilities
-PUSH; ORG $48FE6; SHORT 0xB408; jumpToHack(jpReward); POP //mission completion gives JP instead of AP
-ALIGN 4
-jpReward:
-#incbin "jpLearn\jpreward.dmp"
+	PUSH; ORG $48FE6; SHORT 0xB408; jumpToHack(jpReward); POP //mission completion gives JP instead of AP
+	ALIGN 4
+	jpReward:
+	#incbin "jpLearn\jpreward.dmp"
 #endif
 
 PUSH; ORG $12D57A; SHORT 0x30D6 0x8800; POP //fix steal: jp check
