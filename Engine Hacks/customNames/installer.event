@@ -155,6 +155,8 @@ PUSH
 ORG $15110; SHORT 0 0xB408; jumpToHack(newNamesSaveLoad) //save/load menu and probably other things (main character and clan, probably support clan)
 ORG $18C24; jumpToHack(newNamesDialogue) //dialogue (main character and clan, probably support clan)
 ORG $C7EC0; POIN getUnitNewName|1 //unit name getter
+ORG $5FDF8; jumpToHack(newNamesPub) //get name for the dispatch mission menu
+ORG $57D22; SHORT 0xB408; jumpToHack(newNamesJail) //get name for the jail menus
 POP
 
 ALIGN 4
@@ -175,6 +177,14 @@ getUnitNewName:
 POIN NewToOldName
 WORD nameOffset
 WORD newNameBuffer
+
+ALIGN 4
+newNamesPub:
+#incbin "ASM/newNamesPub.dmp"
+
+ALIGN 4
+newNamesJail:
+#incbin "ASM/newNamesJail.dmp"
 
 //-- Nicknaming --
 PUSH
