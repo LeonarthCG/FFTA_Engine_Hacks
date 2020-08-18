@@ -1,0 +1,87 @@
+//this table determines the starting inventory items of the player, it is set to match vanilla by default
+//format is SHORT itemID ammount
+ALIGN 4
+startingItems:
+SHORT 0x016A 10 /*Potion*/
+SHORT 0x016F 04 /*Antidote*/
+SHORT 0x0175 04 /*Bandage*/
+SHORT 0x0177 02 /*Phoenix Down*/
+SHORT 0 0 //terminator
+
+//this table determines which inventory tab each item type is under
+#define tabHelmet 0
+#define tabArmors 1
+#define tabWeapon 2
+#define tabShield 3
+#define tabOthers 4
+#define tabPotion 5
+ALIGN 4
+itemTabs:
+BYTE 0xFF /*0x00 None*/
+BYTE tabWeapon /*0x01 Sword*/
+BYTE tabWeapon /*0x02 Blade*/
+BYTE tabWeapon /*0x03 Saber*/
+BYTE tabWeapon /*0x04 Knight Sword*/
+BYTE tabWeapon /*0x05 Great Sword*/
+BYTE tabWeapon /*0x06 Broad Sword*/
+BYTE tabWeapon /*0x07 Knife*/
+BYTE tabWeapon /*0x08 Rapier*/
+BYTE tabWeapon /*0x09 Katana*/
+BYTE tabWeapon /*0x0A Staff*/
+BYTE tabWeapon /*0x0B Rod*/
+BYTE tabWeapon /*0x0C Mace*/
+BYTE tabWeapon /*0x0D Bow*/
+BYTE tabWeapon /*0x0E Great Bow*/
+BYTE tabWeapon /*0x0F Spear*/
+BYTE tabWeapon /*0x10 Instrument*/
+BYTE tabWeapon /*0x11 Knuckles*/
+BYTE tabWeapon /*0x12 Soul*/
+BYTE tabWeapon /*0x13 Gun*/
+BYTE tabShield /*0x14 Shield*/
+BYTE tabHelmet /*0x15 Helmet*/
+BYTE tabHelmet /*0x16 Ribbon*/
+BYTE tabHelmet /*0x17 Hat*/
+BYTE tabArmors /*0x18 Armor*/
+BYTE tabArmors /*0x19 Clothing*/
+BYTE tabArmors /*0x1A Robe*/
+BYTE tabOthers /*0x1B Shoes*/
+BYTE tabOthers /*0x1C Armlets*/
+BYTE tabOthers /*0x1D Accesory*/
+BYTE tabPotion /*0x1E Item*/
+//from what I've seen, vanilla should be able to handle two more item types without further changes
+BYTE 0xFF /*0x1F None*/
+BYTE 0xFF /*0x20 None*/
+
+//this table determines which item is needed for each ability in the Item job/race
+ALIGN 4
+itemCommands:
+//SHORT itemID chanceToConsume; POIN routine to determine extra usability conditions
+//0xFFFF works as a terminator, and any number higher than maxItem (other than 0xFFFF) can be used for the entry to be ignored
+SHORT 0xFFFE 000; WORD 0 /*First entry goes unused in vanilla, but is usable now*/
+SHORT 0x016A 100; WORD 0 /*Potion*/
+SHORT 0x016B 100; WORD 0 /*Hi-Potion*/
+SHORT 0x016C 100; WORD 0 /*X-Potion*/
+SHORT 0x016D 100; WORD 0 /*Ether*/
+SHORT 0x016E 100; WORD 0 /*Elixir*/
+SHORT 0x0177 100; WORD 0 /*Phoenix Down*/
+SHORT 0x0171 100; WORD 0 /*Echo Screen*/
+SHORT 0x0172 100; WORD 0 /*Maiden Kiss*/
+SHORT 0x0173 100; WORD 0 /*Soft*/
+SHORT 0x0175 100; WORD 0 /*Bandage*/
+SHORT 0x0174 100; WORD 0 /*Holy Water*/
+SHORT 0x016F 100; WORD 0 /*Antidote*/
+SHORT 0x0176 100; WORD 0 /*Cureall*/
+SHORT 0x0170 100; WORD 0 /*Eye Drops*/
+SHORT 0x0000 000; POIN canDrawWeapon /*Draw Weapon*/
+SHORT 0xFFFF 0xFFFF 0xFFFF 0xFFFF //terminator
+
+ALIGN 4
+canDrawWeapon:
+#incbin "ASM/canDrawWeapon.dmp"
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif

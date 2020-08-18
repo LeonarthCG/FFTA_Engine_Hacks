@@ -346,6 +346,8 @@ POIN $3C59E2 //support
 
 #include "negativeNumbers.event"
 
+#include "newInventory/installer.event"
+
 ALIGN 4
 draw4digits:
 #incbin "ASM/draw4digits.dmp"

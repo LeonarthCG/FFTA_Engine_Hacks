@@ -1,0 +1,19 @@
+/*
+if this is defined, the shop sell menu will show even items that can't be sold (because they are all equipped)
+so, if defined, the behaviour will be vanilla, if undefined items that can't be sold won't be drawn
+this will also apply to some other menus, such as the draw weapon menu or the throw menu
+*/
+//#define listUselessEntries
+
+/*
+this is the max item ID that will be checked for
+*/
+#define maxItem 0x177
+
+/*
+there are some other things that can be changed, which are found in data.event:
+first, there's the itemTabs table, which control which inventory tab each item type goes into
+	this also controls which items can be thrown, only items in item tab 2 (weapons) can be thrown
+then there is the itemCommands list, which controls which item is needed in order to use each Item ability
+	a chance for the item to be consumed can also be set, as well as an extra asm condition
+*/

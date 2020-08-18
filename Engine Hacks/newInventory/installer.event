@@ -1,0 +1,264 @@
+/*
+This reworks the inventory, both expanding it and reducing how much memory it takes
+In vanilla, items are stored with the following format: SHORT itemID; BYTE ownedAmmount equippedAmmount
+There are two inventories, one for equipment and another for cosumables
+Both inventories have exactly enough space to allow the player to own all items at the same time
+
+So, what's the issue?
+The issue is this system is very wasteful.
+If the inventory has enough space to hold all items, the need for the itemID does not exist, as it could be deduced by the location of the ownedAmmount byte
+Furthermore, the equippedAmmount is also not necessary, as this can be checked on the fly
+
+The solution?
+Unifying both inventories into a single, smaller in ram yet higher capacity one
+The player will still be limited to owning 99 of every item, but the max item ID can be raised*
+In order to do this, only one byte will be held for every item, the owned ammount, and which item it is for will be decided by the position in memory
+Additionally, as explained before, the equippedAmmount will also be removed
+The result is that items go from taking 4 bytes in the inventory to just a single byte
+This will decrease the size of the inventory from 0x5DC down to just 0x177*, freeing a big block of saved memory
+
+*[although it is set to 0x177 anyway, other hacks using this freed memory will assume max item ID is 0x1FF and the space taken is 0x200]
+
+There is a downside to this, however: sorting (both manual and automatic) is no longer possible
+All items will appear by order of item ID, as if they were always automatically sorted
+
+New options were added:
+The option to show or hide useless entries in item related lists (stopping the game from listing items you can't equip, for example)
+The option to set the max item ID, which can be set to any number up to 0x1FF
+All of the options above are found in options.event
+
+Some other changes are introduced as well:
+There is now a table that can be edited in order to set which inventory tab each item type belongs to
+There is now a list that can be edited to change the player's starting inventory items
+There is now a list that can be edited in order to change which item is needed for each Item ability
+It can  also be used to extend it with new items (of type 0x1E or otherwise!) and setting if they are consumed upon use or not (or a chance for them to do so)
+	For example, one could make a shield that can be used from the item menu to cast Reflect, with a 25% chance of breaking upon use
+	Keep in mind the changes to this list will NOT be reflected in the ability list for Item in the unit menu, that has to be edited separately
+	An ability should first be added to the Item race, then a new item for this ability can be defined
+All of the lists and tables are found in data.event
+*/
+
+#include "options.event"
+#include "data.event"
+
+// -- GENERAL ROUTINES --
+//given item ID, checks how many copies of this item are being held by party units
+ALIGN 4
+checkEquippedAmmount:
+#incbin "ASM/checkEquippedAmmount.dmp"
+
+PUSH; ORG $CAB24; SHORT 0x4770; POP //never update unequipped count
+
+PUSH; ORG $82458; SHORT 0xE000; POP //disable item sorting
+
+//replace the item giving routine
+PUSH; ORG $CA900; jumpToHack(giveItem); POP
+ALIGN 4
+giveItem:
+#incbin "ASM/giveItem.dmp"
+
+//replace the item losing routine
+PUSH; ORG $CA9E8; jumpToHack(loseItem); POP
+ALIGN 4
+loseItem:
+#incbin "ASM/loseItem.dmp"
+
+//replace the item removing routine
+PUSH; ORG $6C942; SHORT 0x46C0; jumpToHack(removeItem); POP
+ALIGN 4
+removeItem:
+#incbin "ASM/removeItem.dmp"
+
+// -- STARTING ITEMS --
+PUSH; ORG $09810; jumpToHack(giveStartingItems); POP
+ALIGN 4
+giveStartingItems:
+#incbin "ASM/giveStartingItems.dmp"
+POIN startingItems
+WORD maxItem
+
+// -- PARTY MENU --
+//repoint the item buffer for the party menu
+PUSH; ORG $71228; WORD (0x2030000-0x200F3B8); POP
+
+//always remake the list, in case something writes to the buffers (which is very likely)
+PUSH; ORG $7A8CE; SHORT 0xE000; POP
+
+//replace the original list-making for the item equip menu
+PUSH; ORG $799C0; jumpToHack(itemEquipList); POP
+ALIGN 4
+itemEquipList:
+#incbin "ASM/itemEquipList.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif
+
+//same as above, but for the party inventory menu
+PUSH; ORG $8CBDC; jumpToHack(partyItemList); POP
+ALIGN 4
+partyItemList:
+#incbin "ASM/partyItemList.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+
+// -- SHOP MENU --
+//repoint the item buffer for the shop buy and sell menu (0x2027460 in vanilla)
+PUSH
+ORG $6A03C; WORD (0x2030000-0x2022F5C+0); ORG $6A1CC; WORD (0x2030000-0x2022F5C+0); ORG $6A3D4; WORD (0x2030000-0x2022F5C+0)
+ORG $6B2F0; WORD (0x2030000-0x2022F5C+0); ORG $6B3D0; WORD (0x2030000-0x2022F5C+0); ORG $6B458; WORD (0x2030000-0x2022F5C+0)
+ORG $6B580; WORD (0x2030000-0x2022F5C+0); ORG $6C130; WORD (0x2030000-0x2022F5C+0); ORG $6C2B4; WORD (0x2030000-0x2022F5C+0)
+ORG $6C490; WORD (0x2030000-0x2022F5C+0); ORG $6D398; WORD (0x2030000-0x2022F5C+0); ORG $6D420; WORD (0x2030000-0x2022F5C+0)
+ORG $6D528; WORD (0x2030000-0x2022F5C+0); ORG $6E27C; WORD (0x2030000-0x2022F5C+0); ORG $6E35C; WORD (0x2030000-0x2022F5C+0)
+ORG $6E434; WORD (0x2030000-0x2022F5C+0); ORG $BDB14; WORD (0x2030000-0x2022F5C+0); ORG $BDBC0; WORD (0x2030000-0x2022F5C+0)
+ORG $6A4CC; WORD (0x2030000-0x2022F5C+2); ORG $6C548; WORD (0x2030000-0x2022F5C+2); ORG $6D540; WORD (0x2030000-0x2022F5C+2)
+ORG $6B3D4; WORD (0x2030000-0x2022F5C+3); ORG $6B45C; WORD (0x2030000-0x2022F5C+3); ORG $6C54C; WORD (0x2030000-0x2022F5C+3)
+ORG $6D39C; WORD (0x2030000-0x2022F5C+3); ORG $6D424; WORD (0x2030000-0x2022F5C+3); ORG $6E284; WORD (0x2030000-0x2022F5C+3)
+POP
+
+//properly get tabs, ammount owned and ammount equipped for shop buy menu
+PUSH; ORG $CBE28; jumpToHack(shopBuyList); POP
+ALIGN 4
+shopBuyList:
+#incbin "ASM/shopBuyList.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+
+//check if we can't buy any more of a given item
+PUSH; ORG $6B554; SHORT 0x4901 0x5C0C 0xE023 0; WORD 0x2001940; POP
+
+//properly get ammount owned and ammount equipped for shop sell menu
+PUSH; ORG $CC7F8; jumpToHack(shopSellList); POP
+ALIGN 4
+shopSellList:
+#incbin "ASM/shopSellList.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+
+//check if the player has anything to sell
+PUSH; ORG $6D5F4; jumpToHack(shopCanSell); POP
+ALIGN 4
+shopCanSell:
+#incbin "ASM/shopCanSell.dmp"
+POIN checkEquippedAmmount
+WORD maxItem
+
+//check which items types the player can sell
+PUSH; ORG $6EC84; jumpToHack(shopMakeTabs); POP
+ALIGN 4
+shopMakeTabs:
+#incbin "ASM/shopMakeTabs.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif
+
+// -- ITEM ACTION --
+PUSH; ORG $26B90; jumpToHack(itemCommandUsability); POP
+ALIGN 4
+itemCommandUsability:
+#incbin "ASM/itemCommandUsability.dmp"
+POIN itemCommands
+POIN checkEquippedAmmount
+WORD maxItem
+
+PUSH; ORG $259A4; jumpToHack(itemCommandDraw); POP
+ALIGN 4
+itemCommandDraw:
+#incbin "ASM/itemCommandDraw.dmp"
+POIN itemCommands
+POIN checkEquippedAmmount
+WORD maxItem
+
+//this is necessary for the item consumption routine
+PUSH; ORG $28A86; SHORT 0xB408; jumpToHack(saveJobWhenCasting1); POP
+ALIGN 4
+saveJobWhenCasting1:
+#incbin "ASM/saveJobWhenCasting1.dmp"
+
+PUSH; ORG $A39F8; SHORT 0x46C0 0xB408; jumpToHack(saveJobWhenCasting2); POP
+ALIGN 4
+saveJobWhenCasting2:
+#incbin "ASM/saveJobWhenCasting2.dmp"
+
+PUSH; ORG $A2EB0; jumpToHack(itemCommandConsume); POP
+ALIGN 4
+itemCommandConsume:
+#incbin "ASM/itemCommandConsume.dmp"
+POIN itemCommands
+WORD maxItem
+
+PUSH; ORG $27800; jumpToHack(drawCommandList); POP
+ALIGN 4
+drawCommandList:
+#incbin "ASM/drawCommandList.dmp"
+POIN itemCommands
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif
+
+PUSH; ORG $25A6E; SHORT 0 0 0 0x1C26; POP //kep item id
+
+PUSH; ORG $25AF0; jumpToHack(drawCommandOwned); POP
+ALIGN 4
+drawCommandOwned:
+#incbin "ASM/drawCommandOwned.dmp"
+
+PUSH; ORG $25A78; jumpToHack(drawCommandEquipped); POP
+ALIGN 4
+drawCommandEquipped:
+#incbin "ASM/drawCommandEquipped.dmp"
+POIN checkEquippedAmmount
+
+//-- Monster Bank --
+PUSH; ORG $58C0C; jumpToHack(checkMonsterFood); POP
+ALIGN 4
+checkMonsterFood:
+#incbin "ASM/checkMonsterFood.dmp"
+
+PUSH; ORG $5B860; jumpToHack(removeMonsterFood); POP
+ALIGN 4
+removeMonsterFood:
+#incbin "ASM/removeMonsterFood.dmp"
+
+//-- Throw/Hurl --
+PUSH; ORG $26A7C; jumpToHack(throwUsability); POP
+ALIGN 4
+throwUsability:
+#incbin "ASM/throwUsability.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif
+
+PUSH; ORG $27750; jumpToHack(throwMakeList); POP
+ALIGN 4
+throwMakeList:
+#incbin "ASM/throwMakeList.dmp"
+POIN itemTabs
+POIN checkEquippedAmmount
+WORD maxItem
+#ifdef listUselessEntries
+	WORD 1
+#else
+	WORD 0
+#endif

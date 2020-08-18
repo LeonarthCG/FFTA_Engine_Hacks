@@ -38,7 +38,7 @@
 //these are just the values for the definitions, do not edit these
 #define pubRumors	0
 #define pubMissions	1
-#define pubQuit	2
+#define pubQuit		2
 #define publeave	3
 //swap the second value of these definitions to change the options (for example, you can swap pubQuit with pubRumors)
 #define firstPubOption	pubMissions
@@ -56,6 +56,8 @@
 //#define morePointDigits //makes HP and MP display go up to 4 digits, for the stats to actually go this high check the newLevelUp options
 
 //#define newLevelUp //make units always spawn with the same stats, change max level, max stats, etc, look at "Engine Hacks/newLevelup.event" for more options
+
+//#define noStatVariance //makes units always spawn with the same stats, look at "Engine Hacks/newLevelup.event" for more options
 
 //#define stealShoes //allow shows to be stolen by the steal accessory ability
 
@@ -75,5 +77,5 @@ MESSAGE "Used text space ends at" currentOffset
 
 MESSAGE "Used free space ends at" currentOffset
 
-ALIGN 4
-WORD 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 //some padding because the patch making tools sometimes fails otherwise
+ALIGN 16
+WORD 0 0 0 0 //some padding because the patch making tools sometimes fails otherwise
