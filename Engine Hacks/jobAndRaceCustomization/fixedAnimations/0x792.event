@@ -8,13 +8,13 @@ PUSH; ORG 0x8b4a9c; WORD newSpiderOam2-0x852E7C; POP
 ALIGN 4
 newSpiderOam2:
 SHORT 7
-dataOAM(-40,-16,rectangleH,0,0)
-dataOAM(-32,-24,square,0,2)
-dataOAM(-32,-16,square,1,3)
-dataOAM(-32,0,square,0,7)
-dataOAM(-24,0,rectangleH,0,8)
-dataOAM(-16,-16,square,1,10)
-dataOAM(-16,0,square,1,14)
+dataOAM(0-40,0-16,rectangleH,0,0)
+dataOAM(0-32,0-24,square,0,2)
+dataOAM(0-32,0-16,square,1,3)
+dataOAM(0-32,0,square,0,7)
+dataOAM(0-24,0,rectangleH,0,8)
+dataOAM(0-16,0-16,square,1,10)
+dataOAM(0-16,0,square,1,14)
 
 PUSH
 ORG 0x13cd60+0x69B89C

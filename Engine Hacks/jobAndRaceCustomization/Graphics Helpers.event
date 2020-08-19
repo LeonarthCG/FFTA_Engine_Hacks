@@ -16,10 +16,10 @@
 #define flipVH 0x3000
 #define mode4bpp 0x0000
 #define mode8bpp 0x2000
-#define dataOAM(Y,X,Shape,Size,Tile) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14) 0|(Tile&0x3FF)"
-#define dataOAM(Y,X,Shape,Size,Tile,Flip) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)"
-#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority) "SHORT 0|(Y&0xFF)|(Shape) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
-#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority,ColorMode) "SHORT 0|(Y&0xFF)|(Shape)|(ColorMode) 0|(X&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
+#define dataOAM(Y,X,Shape,Size,Tile) "SHORT 0|((Y)&0xFF)|(Shape) 0|((X)&0x1FF)|((Size&3)<<14) 0|(Tile&0x3FF)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip) "SHORT 0|((Y)&0xFF)|(Shape) 0|((X)&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority) "SHORT 0|((Y)&0xFF)|(Shape) 0|((X)&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
+#define dataOAM(Y,X,Shape,Size,Tile,Flip,Priority,ColorMode) "SHORT 0|((Y)&0xFF)|(Shape)|(ColorMode) 0|((X)&0x1FF)|((Size&3)<<14)|(Flip) 0|(Tile&0x3FF)|((Priority&3)<<10)"
 #endif
 
 #define setAnimation(ID,location) "PUSH; ORG (animationTable+(ID*4)); POIN location; POP"

@@ -1,14 +1,14 @@
 PUSH
 ORG 0xc4e+0x852E7C
 SHORT 8
-dataOAM(-40,-16,rectangleH,0,0)
-dataOAM(-40,0,square,0,2)
-dataOAM(-32-1,-24,rectangleV,0,3)
-dataOAM(-32,-16,square,1,5)
-dataOAM(-32,0,rectangleV,0,9)
-dataOAM(-32-4,8,rectangleV,1,11)
-dataOAM(-16,-16,square,1,15)
-dataOAM(-16,0,square,0,19)
+dataOAM(0-40,0-16,rectangleH,0,0)
+dataOAM(0-40,0,square,0,2)
+dataOAM(0-32-1,0-24,rectangleV,0,3)
+dataOAM(0-32,0-16,square,1,5)
+dataOAM(0-32,0,rectangleV,0,9)
+dataOAM(0-32-4,8,rectangleV,1,11)
+dataOAM(0-16,0-16,square,1,15)
+dataOAM(0-16,0,square,0,19)
 
 ORG 0x1980a0+0x69B89C
 #incbin "sprites/adrammelech3.bin"

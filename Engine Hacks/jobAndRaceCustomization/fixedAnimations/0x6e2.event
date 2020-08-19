@@ -8,13 +8,13 @@ ALIGN 4
 newLamiaOam5:
 newLamiaOam6:
 SHORT 7
-dataOAM(-48,0,rectangleH,0,0)
-dataOAM(-40,-16,square,1,2)
-dataOAM(-40,0,square,1,6)
-dataOAM(-24,-16+5,rectangleH,0,10)
-dataOAM(-24,0+5,rectangleH,0,12)
-dataOAM(-16,-16+5,square,1,14)
-dataOAM(-16,0+5,rectangleV,0,18)
+dataOAM(0-48,0,rectangleH,0,0)
+dataOAM(0-40,0-16,square,1,2)
+dataOAM(0-40,0,square,1,6)
+dataOAM(0-24,0-16+5,rectangleH,0,10)
+dataOAM(0-24,0+5,rectangleH,0,12)
+dataOAM(0-16,0-16+5,square,1,14)
+dataOAM(0-16,0+5,rectangleV,0,18)
 
 PUSH
 ORG 0x1353e0+0x69B89C
@@ -61,13 +61,13 @@ newFloateyeOam11:
 newFloateyeOam12:
 newFloateyeOam13:
 SHORT 7
-dataOAM(-48,0-1,rectangleH,0,0)
-dataOAM(-40,-16-1,rectangleH,0,2)
-dataOAM(-40,0-1,rectangleH,0,4)
-dataOAM(-32,-16-1,square,1,6)
-dataOAM(-32,0-1,square,1,10)
-dataOAM(-16,-8-1,rectangleV,0,14)
-dataOAM(-16,0-1,square,1,16)
+dataOAM(0-48,0-1,rectangleH,0,0)
+dataOAM(0-40,0-16-1,rectangleH,0,2)
+dataOAM(0-40,0-1,rectangleH,0,4)
+dataOAM(0-32,0-16-1,square,1,6)
+dataOAM(0-32,0-1,square,1,10)
+dataOAM(0-16,0-8-1,rectangleV,0,14)
+dataOAM(0-16,0-1,square,1,16)
 
 PUSH
 ORG 0x160620+0x69B89C

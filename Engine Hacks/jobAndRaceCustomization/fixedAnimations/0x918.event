@@ -35,12 +35,12 @@ PUSH; ORG 0x8bb5a0; WORD newFloateyeOam14-0x852E7C; POP
 ALIGN 4
 newFloateyeOam14:
 SHORT 6
-dataOAM(-32,-24+8,rectangleV,0,0)
-dataOAM(-32,-16+8,square,1,2)
-dataOAM(-32,0+8,square,1,6)
-dataOAM(-16,-24+8,rectangleV,0,10)
-dataOAM(-16,-16+8,square,1,12)
-dataOAM(-16,0+8,square,1,16)
+dataOAM(0-32,0-24+8,rectangleV,0,0)
+dataOAM(0-32,0-16+8,square,1,2)
+dataOAM(0-32,0+8,square,1,6)
+dataOAM(0-16,0-24+8,rectangleV,0,10)
+dataOAM(0-16,0-16+8,square,1,12)
+dataOAM(0-16,0+8,square,1,16)
 
 PUSH
 ORG 0x160380+0x69B89C

@@ -15,26 +15,26 @@ PUSH; ORG $8c320c; WORD newFamfritOam2-0x852E7C; POP
 ALIGN 4
 newFamfritOam1:
 SHORT 8
-dataOAM(-48,-16+3,square,1,0)
-dataOAM(-48,0+3,square,1,4)
-dataOAM(-32,0+6,square,0,10)
-dataOAM(-32,-16+6,rectangleH,0,8)
-dataOAM(-24,-16+3,square,1,11)
-dataOAM(-24,0+3,rectangleV,0,15)
-dataOAM(-8,-16+3,rectangleH,0,17)
-dataOAM(-8,0+3,square,0,19)
+dataOAM(0-48,0-16+3,square,1,0)
+dataOAM(0-48,0+3,square,1,4)
+dataOAM(0-32,0+6,square,0,10)
+dataOAM(0-32,0-16+6,rectangleH,0,8)
+dataOAM(0-24,0-16+3,square,1,11)
+dataOAM(0-24,0+3,rectangleV,0,15)
+dataOAM(0-8,0-16+3,rectangleH,0,17)
+dataOAM(0-8,0+3,square,0,19)
 
 ALIGN 4
 newFamfritOam2:
 SHORT 8
-dataOAM(-48+4,-16+2,rectangleH,0,0)
-dataOAM(-48,0+2,rectangleH,0,2)
-dataOAM(-40+4,-16+2,rectangleV,0,4)
-dataOAM(-40+4,-8+2,rectangleV,0,6)
-dataOAM(-40,0+2,square,1,8)
-dataOAM(-24,-8+2,rectangleH,0,12)
-dataOAM(-16,-16+2+2,square,1,14)
-dataOAM(-16-5,0+2+2,rectangleV,0,18)
+dataOAM(0-48+4,0-16+2,rectangleH,0,0)
+dataOAM(0-48,0+2,rectangleH,0,2)
+dataOAM(0-40+4,0-16+2,rectangleV,0,4)
+dataOAM(0-40+4,0-8+2,rectangleV,0,6)
+dataOAM(0-40,0+2,square,1,8)
+dataOAM(0-24,0-8+2,rectangleH,0,12)
+dataOAM(0-16,0-16+2+2,square,1,14)
+dataOAM(0-16-5,0+2+2,rectangleV,0,18)
 
 PUSH
 ORG 0x19d780+0x69B89C

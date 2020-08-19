@@ -5,13 +5,13 @@ PUSH; ORG 0x8b3adc; WORD newLamiaOam7-0x852E7C; POP
 ALIGN 4
 newLamiaOam7:
 SHORT 7
-dataOAM(-40,-16-1,rectangleH,0,0)
-dataOAM(-40,0-1,rectangleH,0,2)
-dataOAM(-32,-24-1,square,1,4)
-dataOAM(-32,-8-1,square,1,8)
-dataOAM(-32,8-1,rectangleV,0,12)
-dataOAM(-16,-8-1,square,1,14)
-dataOAM(-16,8-1,rectangleV,0,18)
+dataOAM(0-40,0-16-1,rectangleH,0,0)
+dataOAM(0-40,0-1,rectangleH,0,2)
+dataOAM(0-32,0-24-1,square,1,4)
+dataOAM(0-32,0-8-1,square,1,8)
+dataOAM(0-32,8-1,rectangleV,0,12)
+dataOAM(0-16,0-8-1,square,1,14)
+dataOAM(0-16,8-1,rectangleV,0,18)
 
 PUSH
 ORG 0x135960+0x69B89C
@@ -30,12 +30,12 @@ PUSH; ORG 0x8b5fdc; WORD newTurtleOam2-0x852E7C; POP
 ALIGN 4
 newTurtleOam2:
 SHORT 6
-dataOAM(-32,-24,rectangleV,0,0)
-dataOAM(-32,-16,square,1,2)
-dataOAM(-32,0,square,1,6)
-dataOAM(-16,-24,rectangleV,0,10)
-dataOAM(-16,-16,square,1,12)
-dataOAM(-16,0,square,1,16)
+dataOAM(0-32,0-24,rectangleV,0,0)
+dataOAM(0-32,0-16,square,1,2)
+dataOAM(0-32,0,square,1,6)
+dataOAM(0-16,0-24,rectangleV,0,10)
+dataOAM(0-16,0-16,square,1,12)
+dataOAM(0-16,0,square,1,16)
 
 PUSH
 ORG 0x144380+0x69B89C
@@ -51,12 +51,12 @@ PUSH; ORG 0x8bc578; WORD newZombieOam4-0x852E7C; POP
 ALIGN 4
 newZombieOam4:
 SHORT 6
-dataOAM(-40,-16-8,rectangleH,0,0)
-dataOAM(-40,0-8,rectangleH,0,2)
-dataOAM(-32,-16-8,square,1,4)
-dataOAM(-32,0-8,square,1,8)
-dataOAM(-16,-16-8,square,1,12)
-dataOAM(-16,0-8,square,1,16)
+dataOAM(0-40,0-16-8,rectangleH,0,0)
+dataOAM(0-40,0-8,rectangleH,0,2)
+dataOAM(0-32,0-16-8,square,1,4)
+dataOAM(0-32,0-8,square,1,8)
+dataOAM(0-16,0-16-8,square,1,12)
+dataOAM(0-16,0-8,square,1,16)
 
 PUSH
 ORG 0x167600+0x69B89C
@@ -73,12 +73,12 @@ ALIGN 4
 newExodusOam3:
 newExodusOam4:
 SHORT 6
-dataOAM(-40,-16-8,rectangleH,0,0)
-dataOAM(-40,0-8,rectangleH,0,2)
-dataOAM(-32,-16-8,square,1,4)
-dataOAM(-32,0-8,square,1,8)
-dataOAM(-16,-16-8,square,1,12)
-dataOAM(-16,0-8,square,1,16)
+dataOAM(0-40,0-16-8,rectangleH,0,0)
+dataOAM(0-40,0-8,rectangleH,0,2)
+dataOAM(0-32,0-16-8,square,1,4)
+dataOAM(0-32,0-8,square,1,8)
+dataOAM(0-16,0-16-8,square,1,12)
+dataOAM(0-16,0-8,square,1,16)
 
 PUSH
 ORG 0x1afb20+0x69B89C

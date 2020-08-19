@@ -28,12 +28,12 @@ ALIGN 4
 newMalboroOam2:
 newMalboroOam3:
 SHORT 6
-dataOAM(-40,-16,rectangleH,0,0)
-dataOAM(-40,0,rectangleH,0,2)
-dataOAM(-32,-8-8+3,square,1,4)
-dataOAM(-32,8-8+3,square,1,8)
-dataOAM(-16,-16,square,1,12)
-dataOAM(-16,0,square,1,16)
+dataOAM(0-40,0-16,rectangleH,0,0)
+dataOAM(0-40,0,rectangleH,0,2)
+dataOAM(0-32,0-8-8+3,square,1,4)
+dataOAM(0-32,8-8+3,square,1,8)
+dataOAM(0-16,0-16,square,1,12)
+dataOAM(0-16,0,square,1,16)
 
 PUSH
 ORG 0x15a3c0+0x69B89C

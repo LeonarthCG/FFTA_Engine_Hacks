@@ -3,13 +3,13 @@ PUSH; ORG $8c2e24; WORD newFamfritOam5-0x852E7C; POP
 ALIGN 4
 newFamfritOam5:
 SHORT 7
-dataOAM(-40-1,-16+2,square,1,0)
-dataOAM(-40,0+2,rectangleV,1,4)
-dataOAM(-40-1,8,rectangleV,1,8)
-dataOAM(-24-1,-16+2,square,1,12)
-dataOAM(-8-1,-16+2,rectangleH,0,16)
-dataOAM(-8,0+2,square,0,18)
-dataOAM(-8-1,8,square,0,19)
+dataOAM(0-40-1,0-16+2,square,1,0)
+dataOAM(0-40,0+2,rectangleV,1,4)
+dataOAM(0-40-1,8,rectangleV,1,8)
+dataOAM(0-24-1,0-16+2,square,1,12)
+dataOAM(0-8-1,0-16+2,rectangleH,0,16)
+dataOAM(0-8,0+2,square,0,18)
+dataOAM(0-8-1,8,square,0,19)
 
 PUSH
 ORG 0x19b2a0+0x69B89C
@@ -26,7 +26,7 @@ POP
 ALIGN 4
 newUltimaOam1:
 SHORT 4
-dataOAM(-48,-8,rectangleH,0,0)
-dataOAM(-48+1,8,rectangleV,0,2)
-dataOAM(-40,-8,square,1,4)
-dataOAM(-24,-8,square,1,8)
+dataOAM(0-48,0-8,rectangleH,0,0)
+dataOAM(0-48+1,8,rectangleV,0,2)
+dataOAM(0-40,0-8,square,1,4)
+dataOAM(0-24,0-8,square,1,8)

@@ -1,12 +1,12 @@
 PUSH
 ORG 0xda6+0x852E7C
 SHORT 6
-dataOAM(-40,-16+4,rectangleH,0,0)
-dataOAM(-40,0+4,rectangleH,0,2)
-dataOAM(-32,-16+4,square,1,4)
-dataOAM(-32,0+4,square,1,8)
-dataOAM(-16,-16+4,square,1,12)
-dataOAM(-16,0+4,square,1,16)
+dataOAM(0-40,0-16+4,rectangleH,0,0)
+dataOAM(0-40,0+4,rectangleH,0,2)
+dataOAM(0-32,0-16+4,square,1,4)
+dataOAM(0-32,0+4,square,1,8)
+dataOAM(0-16,0-16+4,square,1,12)
+dataOAM(0-16,0+4,square,1,16)
 
 ORG 0x19dd40+0x69B89C
 #incbin "sprites/famfrit4.bin"
