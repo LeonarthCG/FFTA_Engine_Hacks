@@ -29,6 +29,11 @@ ORG $2C304; SHORT 0 0 //don't clear lowest hp digit
 ORG $2C312; SHORT 0 0 //don't clear lowest mp digit
 POP
 
+PUSH //move the boss badge icon over to the left of the big battle hud
+ORG $2C7F4; SHORT 0x314E
+ORG $2C80A; SHORT 0
+POP
+
 ALIGN 4
 battlehud1curHP:
 #incbin "ASM/bigHud1.dmp"
