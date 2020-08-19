@@ -7,7 +7,7 @@
 	ORG FreeSpace
 #endif
 
-#define expGrantsJP //if defined, an equal ammount of JP is granted when a unit gets JP
+#define expGrantsJP //if defined, an equal ammount of JP is granted when a unit gets EXP
 
 #ifndef ForbiddenList //this is a list of abilities that can't be purchased, these will also not show learning progress (meant for blue magic)
 	#define ForbiddenList

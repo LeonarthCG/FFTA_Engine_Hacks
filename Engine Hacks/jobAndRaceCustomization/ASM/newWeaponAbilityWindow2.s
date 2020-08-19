@@ -293,16 +293,16 @@ ldrb	r1,[r0,#7]
 lsl	r0,r1,#2
 add	r0,r1
 lsl	r0,#1
-ldr	r1,=#999
+ldr	r1,=#1000
 cmp	r0,r1
 bne	not999
-mov	r0,r1
+ldr	r0,=#999
 not999:
-ldr	r1,=#9999
-cmp	r0,r1
-blo	not9999
-mov	r0,r1
-not9999:
+@ldr	r1,=#10000
+@cmp	r0,r1
+@blo	not9999
+@ldr	r0,=#9999
+@not9999:
 push	{r4-r7}
 mov	r7,r0		@cost
 
