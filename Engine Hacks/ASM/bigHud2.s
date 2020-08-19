@@ -36,8 +36,8 @@ endcleargarbage:
 pop	{r0-r7}
 
 @draw the thing
-push	{r3}
 mov	r3,r8
+push	{r3}
 push	{r4-r7}
 ldr	r4,destination
 lsl	r1,#0x10
