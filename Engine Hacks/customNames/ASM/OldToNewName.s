@@ -15,10 +15,12 @@ ldr	r3,=#0x7340
 mov	r0,#0
 clearloop:
 ldrh	r2,[r1]
-cmp	r3,r2
-bne	stopclear
-cmp	r3,#0
-beq	stopclear
+cmp	r2,#0
+beq	clear
+cmp	r2,r3
+beq	clear
+b	stopclear
+clear:
 strh	r0,[r1]
 sub	r1,#2
 b	clearloop
