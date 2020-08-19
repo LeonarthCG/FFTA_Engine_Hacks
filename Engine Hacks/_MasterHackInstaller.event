@@ -18,7 +18,7 @@ POP
 PUSH; ORG $A54B2; SHORT 0x46C0; POP //do not erase exorcised units
 
 #ifdef skipIntroCutscene
-	PUSH; ORG $13D3BE; SHORT 0xE04F; ORG $13D470; SHORT 0x46C0; POP
+	PUSH; ORG $13D3CA; SHORT 0x46C0; ORG $13D470; SHORT 0x46C0; ORG $13C2D4; SHORT 0x2802; POP
 #endif
 
 //makes all units player controlled
