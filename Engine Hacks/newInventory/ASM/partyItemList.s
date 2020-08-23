@@ -73,7 +73,7 @@ strh	r0,[r5,#0x00]	@always white
 str	r6,[r5,#0x04]	@item id
 ldrh	r0,[r2,#0x00]	@load name ID
 strh	r0,[r5,#0x08]	@name ID
-ldrh	r0,[r2,#0x00]	@load description ID
+ldrh	r0,[r2,#0x02]	@load description ID
 strh	r0,[r5,#0x0C]	@description ID
 ldr	r0,=#0x2001940	@inventory data
 ldrb	r0,[r0,r6]	@count for this item

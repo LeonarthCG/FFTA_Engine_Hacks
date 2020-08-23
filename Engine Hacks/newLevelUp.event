@@ -32,9 +32,9 @@
 	#define newLevelHeal
 #endif
 
-//this removes base stat variance, comment out if you wish to keep base stat variance
+//this removes base stat variance, comment out if you wish to keep base stat variance, moved to ROM Buildfile.event
 #ifndef	noStatVariance
-	#define noStatVariance
+	//#define noStatVariance
 #endif
 
 //this makes it so level ups are NOT affected, comment out if you wish them to be affected

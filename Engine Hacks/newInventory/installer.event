@@ -212,7 +212,7 @@ WORD maxItem
 	WORD 0
 #endif
 
-PUSH; ORG $25A6E; SHORT 0 0 0 0x1C26; POP //kep item id
+PUSH; ORG $25A6E; SHORT 0 0 0 0x1C26; POP //keep item id
 
 PUSH; ORG $25AF0; jumpToHack(drawCommandOwned); POP
 ALIGN 4
