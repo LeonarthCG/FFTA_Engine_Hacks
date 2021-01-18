@@ -68,7 +68,10 @@ ldr	r1,=#0x1D0C
 add	r0,r1
 ldr	r0,[r0]		@unit data offset
 mov	r1,r6		@item ID
-mov	r2,#0		@check can equip
+ldr r2,=#0x3002818
+ldr r2,[r2]
+ldr r3,=#0xC1F
+ldrb r2,[r2,r3] @inventory slot
 ldr	r3,=#0x80CB48C
 mov	lr,r3
 .short	0xF800
@@ -120,7 +123,10 @@ ldr	r1,=#0x1D0C
 add	r0,r1
 ldr	r0,[r0]		@unit data offset
 mov	r1,r6		@item ID
-mov	r2,#0		@check can equip
+ldr r2,=#0x3002818
+ldr r2,[r2]
+ldr r3,=#0xC1F
+ldrb r2,[r2,r3] @inventory slot
 ldr	r3,=#0x80CB48C
 mov	lr,r3
 .short	0xF800

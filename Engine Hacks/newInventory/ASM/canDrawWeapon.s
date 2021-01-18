@@ -27,7 +27,10 @@ cmp	r0,#0
 beq	nextequip
 mov	r0,r4		@unit data offset
 mov	r1,r7		@item ID
-mov	r2,#0		@check can equip
+ldr r2,=#0x3002818
+ldr r2,[r2]
+ldr r3,=#0xC1F
+ldrb r2,[r2,r3] @inventory slot
 ldr	r3,=#0x80CB48C
 mov	lr,r3
 .short	0xF800
