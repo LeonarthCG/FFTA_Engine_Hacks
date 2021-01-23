@@ -34,6 +34,8 @@ ldrb r2,[r2,r3] @inventory slot
 ldr	r3,=#0x80CB48C
 mov	lr,r3
 .short	0xF800
+mov	r1,#1
+and r0,r1
 cmp	r0,#0
 beq	match
 nextequip:
