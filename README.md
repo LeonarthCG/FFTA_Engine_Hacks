@@ -26,12 +26,13 @@ The source for all of the ASM is included (and precompiled, too).
 
 1) Download the project folder
 2) Download [Event Assembler](http://feuniverse.us/t/event-assembler/1749), which includes the EA Formatting Suite, and extract it in the "Event Assembler" directory.
-3) Optionally, get [ups] (https://github.com/rameshvarun/ups/releases) and extract the "ups" folder to the root directory.
-4) Place your US FFTA clean ROM in the root directory, it must be named "FFTA_clean.gba".
-5) Modify "ROM Buildfile.event" to customize, enable or disable features as you wish.
+3) Download [ColorzCore](https://github.com/FireEmblemUniverse/ColorzCore/blob/master/ColorzCore/bin/Release/ColorzCore.exe), rename it to "Core.exe" and use it to replace the "Core.exe" in the "Event Assembler" folder.
+4) Optionally, get [ups] (https://github.com/rameshvarun/ups/releases) and extract the "ups" folder to the root directory.
+5) Place your US FFTA clean ROM in the root directory, it must be named "FFTA_clean.gba".
+6) Modify "ROM Buildfile.event" to customize, enable or disable features as you wish.
 	* If you are not using a clean ROM you will likely want to change the FreeSpace definition.
 	* If you want to customize the features further, look for their respective installer in "Engine Hacks"
-6) Run MAKE_HACK.cmd, which will run EA to generate "FFTA_hack.gba" using "ROM Buildfile.event"
+7) Run MAKE_HACK.cmd, which will run EA to generate "FFTA_hack.gba" using "ROM Buildfile.event"
 
 # Feature Summmary
 
