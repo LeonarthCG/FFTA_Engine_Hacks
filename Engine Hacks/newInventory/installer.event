@@ -173,6 +173,12 @@ POIN itemCommands
 POIN checkEquippedAmmount
 WORD maxItem
 
+//needed to make the item box properly become unused when closing it
+PUSH; ORG $7170; jumpToHack(itemCommandBuffer); POP
+ALIGN 4
+itemCommandBuffer:
+#incbin "ASM/itemCommandBuffer.dmp"
+
 PUSH; ORG $259A4; jumpToHack(itemCommandDraw); POP
 ALIGN 4
 itemCommandDraw:

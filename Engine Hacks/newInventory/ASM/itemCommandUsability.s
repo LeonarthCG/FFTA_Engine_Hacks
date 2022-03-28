@@ -16,8 +16,10 @@ mov	r7,#0		@count
 @set the new buffers
 mov	r1,r8
 add	r1,#0x94
+ldr	r2,[r1,#0x00] @ original ability ids list destination
 ldr	r0,=#0x203F000	@new ability ids list destination
 str	r0,[r1,#0x00]
+ldr	r3,[r1,#0x04] @ original usability destination
 ldr	r0,=#0x203F800	@new usability destination
 str	r0,[r1,#0x04]
 mov	r1,r8
@@ -29,6 +31,15 @@ strb	r0,[r1,#0x0D]
 mov	r0,r9
 mov	r1,#0x02
 strb	r1,[r0,#0x08]
+
+@save the original buffer locations
+ldr	r0,=#0x203F000
+sub	r0, #0x10
+str r2, [r0, #0x00]
+
+ldr	r0,=#0x203F800
+sub	r0, #0x10
+str r3, [r0, #0x00]
 
 @for every ability
 loop:
