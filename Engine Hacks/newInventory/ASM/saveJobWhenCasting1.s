@@ -18,6 +18,12 @@ add	r4,#0xB0
 strb	r5,[r4,#0x00]
 strb	r6,[r4,#0x01]
 
+push	{r0}
+ldr	r0,=#0x203FFFE
+strb	r5,[r0,#0]
+strb	r6,[r0,#1]
+pop		{r0}
+
 end:
 pop	{r4-r7}
 push	{r3}

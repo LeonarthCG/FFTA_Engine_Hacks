@@ -1,9 +1,11 @@
 .equ maxItem, newItemItems+4
 .thumb
-ldrb	r0,[r2,#0x1E]
+ldr	r0,=#0x203FFFE
+ldrb	r0,[r0,#0]
 cmp	r0,#1
 bne	false
-ldrb	r3,[r2,#0x1F]
+ldr	r0,=#0x203FFFE
+ldrb	r3,[r0,#1]
 ldr	r1,newItemItems
 lsl	r3,#0x03
 add	r3,r1
