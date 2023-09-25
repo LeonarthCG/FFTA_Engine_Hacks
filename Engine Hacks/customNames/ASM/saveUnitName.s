@@ -34,7 +34,7 @@ mov	lr,r3
 @return
 end:
 mov	r0,#0 @prevent "erase all save data" message
-ldr	r3,=#0x812A65C
+ldr	r3,=#0x812A662
 mov	lr,r3
 .short	0xF800
 .align
