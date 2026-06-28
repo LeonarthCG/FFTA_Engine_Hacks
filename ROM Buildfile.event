@@ -59,7 +59,7 @@
 
 //#define noStatVariance //makes units always spawn with the same stats, look at "Engine Hacks/newLevelup.event" for more options
 
-//#define stealShoes //allow shows to be stolen by the steal accessory ability
+//#define stealShoes //allow shoes to be stolen by the steal accessory ability
 
 //#define noJudges //remove judges from the game, which also removes laws, this does NOT turn on permadeath
 
